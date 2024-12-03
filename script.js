@@ -15,6 +15,7 @@ if (!('webkitSpeechRecognition' in window)) {
   startBtn.addEventListener('click', () => {
     recognition.start(); // Inicia el reconocimiento de voz cuando el usuario presiona el botón
     console.log("Iniciando reconocimiento de voz...");
+    Hola;
   });
 
   recognition.onresult = function(event) {
