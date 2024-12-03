@@ -20,7 +20,7 @@ if (!('webkitSpeechRecognition' in window)) {
   recognition.onresult = function(event) {
     // La transcripción resultante se obtiene en event.results
     const transcript = event.results[0][0].transcript;
-    textOutput.textContent = "Texto reconocido: " + transcript ; // Mostramos el texto transcrito
+    textOutput.textContent = "Texto reconocido: " + transcript ; // Mostramos el texto transcritoç
   };
 
   recognition.onerror = function(event) {
