@@ -7,7 +7,7 @@ if (!('webkitSpeechRecognition' in window)) {
   alert("Lo siento, tu navegador no soporta la función de reconocimiento de voz.");
 } else {
   const recognition = new webkitSpeechRecognition(); // Creación de la instancia de la API
-  recognition.continuous = false; // El reconocimiento se detendrá automáticamente después de un segmento de habla
+  recognition.continuous = true; // El reconocimiento se detendrá automáticamente después de un segmento de habla
   recognition.interimResults = false; // No mostrará resultados intermedios
   recognition.lang = "es-ES"; // Establecemos el idioma a español
   recognition.maxAlternatives = 1; // Solo tomamos una alternativa de texto
