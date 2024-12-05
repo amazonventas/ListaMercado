@@ -1,3 +1,12 @@
+
+
+window.addEventListener("load", function() {
+
+  document.getElementById("BtnAceptar").hidden = true;
+
+});
+
+
 // Verificamos que el navegador soporte la Web Speech API
 
 const startBtn = document.getElementById('start-btn');
@@ -37,40 +46,52 @@ if (!('webkitSpeechRecognition' in window)) {
       agregarFila(Separadas[i],i, Cantidad);
     }
 
-    console.log(Cantidad);
-
     var botones = document.querySelectorAll("button");
 
-    botones.forEach(function(boton) {
-      boton.addEventListener("click", function(event) {
-          // El objeto event.target es el elemento que fue clicado
-          //console.log("Se ha clicado el elemento:", event.target);
-          //console.log("ID del elemento clicado:", event.target.id);
+
+     var Cantidad = botones.length - 1;
+
+    if (Cantidad > 0) {
+      document.getElementById("BtnAceptar").hidden = false;
+    }
 
 
-        });
+//    botones.forEach(function(boton) {
+//      boton.addEventListener("click", function(event) {
+//          // El objeto event.target es el elemento que fue clicado
+//          //console.log("Se ha clicado el elemento:", event.target);
+//          //console.log("ID del elemento clicado:", event.target.id);
+//
+//      });
+//
+//    });
+
+
+    // Obtener todas las filas con el botón "Eliminar"
+    var botonesEliminar = document.querySelectorAll('.Eliminar');
+    
+    // Iterar sobre cada botón y agregar un evento de clic
+    
+    botonesEliminar.forEach(boton => {
+      boton.addEventListener('click', function() {
+
+      let respuesta = confirm("¿Estás seguro que quieres Borrar?");
+    
+       if (respuesta) {
+         // Obtener la fila en la que se hizo clic
+         const fila = this.parentNode.parentNode.parentNode; // el botón está dentro de una celda <td>, que a su vez está dentro de una fila <tr>
+         fila.remove(); // Eliminar la fila
+
+         var Eliminar = document.querySelectorAll('.Eliminar');
+
+         if (Eliminar.length == 0) { document.getElementById("BtnAceptar").hidden = true;}
+
+        }
+       
+      });
     });
 
 
-      // Obtener todas las filas con el botón "Eliminar"
-      const botonesEliminar = document.querySelectorAll('.Eliminar');
-  
-      console.log(botonesEliminar);
-  
-      // Iterar sobre cada botón y agregar un evento de clic
-      botonesEliminar.forEach(boton => {
-        boton.addEventListener('click', function() {
-
-          let respuesta = confirm("¿Estás seguro que quieres Borrar?");
-          if (respuesta) {
-           // Obtener la fila en la que se hizo clic
-           const fila = this.parentNode.parentNode.parentNode; // el botón está dentro de una celda <td>, que a su vez está dentro de una fila <tr>
-           fila.remove(); // Eliminar la fila
-          }
-          
-        });
-      });
-    
   };
 
   recognition.onerror = function(event) {
@@ -81,6 +102,7 @@ if (!('webkitSpeechRecognition' in window)) {
   recognition.onend = function() {
     console.log("El reconocimiento de voz ha terminado.");
   };
+
 
 };
 
@@ -105,7 +127,12 @@ function agregarFila(Articulo, Identificador ,Cantidad) {
   celdaNombre.innerHTML   ='<center>'+Articulo+'</center>';
   celdaBorrar.innerHTML   ='<center><button Class="Eliminar" id=Borrar' + Total_id +'>borrar</button></center>';
 
+};
 
-}
+
+const tabla = document.getElementById("tabla");
+
+export {tabla};
+
 
 
