@@ -130,9 +130,4 @@ function agregarFila(Articulo, Identificador ,Cantidad) {
 };
 
 
-const tabla = document.getElementById("tabla");
-
-export {tabla};
-
-
 
