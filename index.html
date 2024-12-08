@@ -4,41 +4,121 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="Estilos.css">
+    
+    <!-- Boostrap -->
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- Fin Boostrap -->
 
     <title>Document</title>
 </head>
 <body>
+<br><br><br>
 
   <center>
-  <div class="Principal">
+  <div class="Contenedor">
   
     <h1>Lista de Compras</h1>
   
-    <button id="start-btn">Iniciar Reconocimiento de Voz</button>
+    <button id="start-btn" type="button" class="btn btn-info"><strong> <span style="color: white;">Iniciar Reconocimiento de Voz </span></strong></button>
 
     <br><br>
 
-    <table id="tabla">
-      <thead>
-            <tr>
-              <th>ARTICULOS</th>
-            </tr>
-        </thead>
-
-        <tbody>
-
-        </tbody>
-    </table>
+    <div class="Contenedor_Tabla">
+      <table id="tabla" >
+        <thead>
+              <tr>
+                <th>ARTICULOS</th>
+              </tr>
+          </thead>
   
+          <tbody>
+  
+          </tbody>
+      </table>
+    </div>
   </div>
+
+  <br><br>
+
+  
+<center><a href="Listado.html"><button id="BtnAceptar" type="button" class="btn btn-primary">ACEPTAR</button>
+  </a></center>
 
   <br><br><br>
   
-  <button id="BtnAceptar" ><a href="ListadoSencillo.html"> ACEPTAR </a></button>
-
   </center>
 
-    <script src="script.js"></script>
-    
+  <!-- Carga Datos en Tabla ya existente -->
+  <script>
+
+    const Lista_Articulos = JSON.parse(localStorage.getItem('Listado'));
+
+   if (Lista_Articulos !== null){
+      var NColumnas = Lista_Articulos[0];
+      document.getElementById("BtnAceptar").hidden = false;
+
+     for (var i = 1; i < NColumnas; i++) {
+      agregarFila(Lista_Articulos[i],i, 0);
+     }
+
+   function agregarFila(Articulo, Identificador ,Cantidad) {
+   
+     // Obtén el cuerpo de la tabla
+     var tabla = document.getElementById("tabla").getElementsByTagName('tbody')[0];
+     
+     // Crea una nueva fila
+     var nuevaFila = tabla.insertRow();
+     
+     // Crea las celdas para la nueva fila
+     var celdaNombre   = nuevaFila.insertCell(0);
+     var celdaBorrar   = nuevaFila.insertCell(1);
+     
+     var Total_id = Identificador + Cantidad
+     
+       celdaNombre.id = "Fila" + Total_id;
+     
+       celdaNombre.innerHTML   ='<center>'+Articulo+'</center>';
+       celdaBorrar.innerHTML   ='<center><button Class="Eliminar" id=Borrar' + Total_id +'>borrar</button></center>';
+   
+      };
+
+      // Obtener todas las filas con el botón "Eliminar"
+      var botonesEliminar = document.querySelectorAll('.Eliminar');
+      
+      // Iterar sobre cada botón y agregar un evento de clic
+      
+      botonesEliminar.forEach(boton => {
+        boton.addEventListener('click', function() {
+
+        let respuesta = confirm("¿Estás seguro que quieres Borrar?");
+      
+        if (respuesta) {
+          // Obtener la fila en la que se hizo clic
+          const fila = this.parentNode.parentNode.parentNode; // el botón está dentro de una celda <td>, que a su vez está dentro de una fila <tr>
+          fila.remove(); // Eliminar la fila
+
+          var Eliminar = document.querySelectorAll('.Eliminar');
+
+          if (Eliminar.length == 0) { document.getElementById("BtnAceptar").hidden = true;}
+
+          }
+       
+        });
+      });
+
+      localStorage.clear();
+
+    } else {
+
+    document.getElementById("BtnAceptar").hidden = true;
+
+    };
+
+  </script>
+  <!-- Fin Carga Datos en Tabla ya existente -->
+
+
+   <script src="script.js"></script>
+
 </body>
 </html>

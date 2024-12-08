@@ -2,7 +2,6 @@
 
 window.addEventListener("load", function() {
 
-  document.getElementById("BtnAceptar").hidden = true;
 
 });
 
@@ -46,6 +45,8 @@ if (!('webkitSpeechRecognition' in window)) {
       agregarFila(Separadas[i],i, Cantidad);
     }
 
+    //GuardarLocal();
+
     var botones = document.querySelectorAll("button");
 
 
@@ -54,17 +55,6 @@ if (!('webkitSpeechRecognition' in window)) {
     if (Cantidad > 0) {
       document.getElementById("BtnAceptar").hidden = false;
     }
-
-
-//    botones.forEach(function(boton) {
-//      boton.addEventListener("click", function(event) {
-//          // El objeto event.target es el elemento que fue clicado
-//          //console.log("Se ha clicado el elemento:", event.target);
-//          //console.log("ID del elemento clicado:", event.target.id);
-//
-//      });
-//
-//    });
 
 
     // Obtener todas las filas con el botón "Eliminar"
@@ -125,9 +115,40 @@ function agregarFila(Articulo, Identificador ,Cantidad) {
   celdaNombre.id = "Fila" + Total_id;
 
   celdaNombre.innerHTML   ='<center>'+Articulo+'</center>';
-  celdaBorrar.innerHTML   ='<center><button Class="Eliminar" id=Borrar' + Total_id +'>borrar</button></center>';
+  celdaBorrar.innerHTML   ='<center><button type="button" Class="Eliminar" id=Borrar' + Total_id +'>borrar</button></center>';
+
+  
+};
+
+
+
+function GuardarLocal() {
+
+  // Eliminar todos los elementos
+  localStorage.clear();
+
+  // Obtener la tabla y sus filas
+  var tabla = document.getElementById("tabla");
+  var filas = tabla.getElementsByTagName("tr");
+  var NColumnas = filas.length;
+  
+  let ArrayArticulo = [];
+  ArrayArticulo.push(NColumnas);
+
+  // Recorrer las filas de la tabla y obtener los datos
+  for (var i = 1; i < filas.length; i++) {  // Comienza en 1 para omitir el encabezado
+
+      var celdas = filas[i].getElementsByTagName("td");
+      ArrayArticulo[i] = celdas[0].textContent;
+  }
+
+  localStorage.setItem('Listado', JSON.stringify(ArrayArticulo));
 
 };
 
+
+BtnAceptar.addEventListener('click', function() {
+  GuardarLocal();
+});
 
 
