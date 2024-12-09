@@ -18,17 +18,17 @@
   <div class="Contenedor">
   
     <h1>Lista de Compras</h1>
-  
+
     <br><br>
 
     <div class="Contenedor_Tabla">
       <table id="tabla1">
         <thead>
           <tr>
-            <th style="padding: 20px"> <center>ARTICULO</center></th>
-            <th style="padding: 20px"> <center>CANTIDAD</center></th>
-            <th style="padding: 20px"> <center>PRECIO/UNID</center></th>            
-            <th style="padding: 20px"> <center>LISTO</center></th>
+            <th style="padding: 10px; font-size: small;"> <center>ARTICULO</center></th>
+            <th style="padding: 10px; font-size: small;"> <center>CANTIDAD</center></th>
+            <th style="padding: 10px; font-size: small;"> <center>PRECIO/UNID</center></th>            
+            <th style="padding: 10px; font-size: small;"> <center>LISTO</center></th>
            </tr>
         </thead>
         <tbody>
@@ -63,11 +63,10 @@
      
      // Crea una nueva fila
      var nuevaFila = tabla.insertRow();
-     
+         nuevaFila.classList.add("Space_Tabla");
+
      // Crea las celdas para la nueva fila
      var celdaNombre   = nuevaFila.insertCell(0);
-         celdaNombre.classList.add("Space_Tabla");
-         
      var celdaCantidad = nuevaFila.insertCell(1);
      var celdaPrecio   = nuevaFila.insertCell(2);
      var celdaCheck    = nuevaFila.insertCell(3);
@@ -78,9 +77,9 @@
      celdaNombre.id = "Fila" + Total_id;
      
      celdaNombre.innerHTML   ='<center>'+Articulo+'</center>';
-     celdaCantidad.innerHTML ='<center><input style="width: 80px;" type="number" class="form-control" id=Cant'+Total_id+'></center>';
-     celdaPrecio.innerHTML   ='<center><input style="width: 80px;" type="number" class="form-control" id=Prec'+Total_id+'></center>';
-     celdaCheck.innerHTML    ='<center><input type="checkbox" class="form-check-input" id='+Total_id+'></center>';
+     celdaCantidad.innerHTML ='<center><input style="heigth: 10px; width: 70px;" type="number"   class="form-control" id=Cant'+Total_id+'></center>';
+     celdaPrecio.innerHTML   ='<center><input style="heigth: 10px; width: 70px;" type="number"   class="form-control" id=Prec'+Total_id+'></center>';
+     celdaCheck.innerHTML    ='<center><input style="heigth: 30px; width: 15px;" type="checkbox" class="form-check-input" id='+Total_id+'></center>';
      
     };
      
