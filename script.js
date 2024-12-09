@@ -45,7 +45,6 @@ if (!('webkitSpeechRecognition' in window)) {
       agregarFila(Separadas[i],i, Cantidad);
     }
 
-    //GuardarLocal();
 
     var botones = document.querySelectorAll("button");
 
@@ -66,7 +65,7 @@ if (!('webkitSpeechRecognition' in window)) {
       boton.addEventListener('click', function() {
 
       let respuesta = confirm("¿Estás seguro que quieres Borrar?");
-    
+
        if (respuesta) {
          // Obtener la fila en la que se hizo clic
          const fila = this.parentNode.parentNode.parentNode; // el botón está dentro de una celda <td>, que a su vez está dentro de una fila <tr>
@@ -108,6 +107,7 @@ function agregarFila(Articulo, Identificador ,Cantidad) {
 
   // Crea las celdas para la nueva fila
   var celdaNombre   = nuevaFila.insertCell(0);
+     celdaNombre.classList.add("Space_Tabla");
   var celdaBorrar   = nuevaFila.insertCell(1);
   
   var Total_id = Identificador + Cantidad
@@ -140,7 +140,8 @@ function GuardarLocal() {
 
       var celdas = filas[i].getElementsByTagName("td");
       ArrayArticulo[i] = celdas[0].textContent;
-  }
+
+   }
 
   localStorage.setItem('Listado', JSON.stringify(ArrayArticulo));
 

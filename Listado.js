@@ -9,12 +9,35 @@ document.addEventListener('click', function(event) {
         const Marcado = event.target.checked;
     
         ArticuloId = "Fila" + elementId; 
+        CantidadId = "Cant" + elementId; 
+        PrecioId   = "Prec" + elementId; 
         
         if (Marcado == true) {
-          document.getElementById(ArticuloId).style.color ="red";
+
+          var Elemento = document.getElementById(ArticuloId);
+              Elemento.style.color ="lightgray";
+              Elemento.disabled = true;
+
+          var Elemento = document.getElementById(CantidadId);
+              Elemento.style.color ="lightgray";
+              Elemento.disabled = true;
+
+          var Elemento = document.getElementById(PrecioId);
+              Elemento.style.color ="lightgray";
+              Elemento.disabled = true;
 
         } else {
-          document.getElementById(ArticuloId).style.color ="black";
+          var Elemento = document.getElementById(ArticuloId);
+              Elemento.style.color ="black";
+              Elemento.disabled = false;
+
+          var Elemento = document.getElementById(CantidadId);
+              Elemento.style.color ="black";
+              Elemento.disabled = false;
+
+          var Elemento = document.getElementById(PrecioId);
+              Elemento.style.color ="black";
+              Elemento.disabled = false;
         }
         
 
@@ -23,3 +46,28 @@ document.addEventListener('click', function(event) {
     }
   });
   
+
+  Calcular.addEventListener('click', function(event) {
+
+    var filas = document.querySelectorAll("#tabla1 tr");
+    var Resultado  = document.getElementById("Resultado");
+    var total = 0;  
+
+   for (var i = 1; i < filas.length; i++) {  // Comienza en 1 para omitir el encabezado
+     
+     var CantidadId = "Cant" + i;      
+     var PrecioId   = "Prec" + i;
+     
+     var Cantidad = document.getElementById(CantidadId).value;
+     var Precio   = document.getElementById(PrecioId).value;
+     var Marcado  = document.getElementById(i).checked;
+
+      if (Marcado == true) {
+         total = total + (Cantidad*Precio); 
+      }
+    
+    } 
+
+    Resultado.innerHTML = " Costo Total es: "+ total +" $";
+
+  });

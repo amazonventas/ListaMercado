@@ -17,25 +17,25 @@
   <center>
   <div class="Contenedor">
   
+     <button id="start-btn" type="button" class="btn btn-info"><strong> <span style="color: white;">Iniciar Reconocimiento de Voz </span></strong></button>
+    <br><br>
     <h1>Lista de Compras</h1>
   
-    <button id="start-btn" type="button" class="btn btn-info"><strong> <span style="color: white;">Iniciar Reconocimiento de Voz </span></strong></button>
-
     <br><br>
 
     <div class="Contenedor_Tabla">
-      <table id="tabla" >
+      <table id="tabla">
         <thead>
-              <tr>
-                <th>ARTICULOS</th>
-              </tr>
-          </thead>
-  
-          <tbody>
-  
-          </tbody>
+          <tr>
+            <th style="padding: 20px"> <center>ARTICULO</center></th>
+            <th style="padding: 20px"> <center>ACCION</center></th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
       </table>
     </div>
+  
   </div>
 
   <br><br>
@@ -71,6 +71,7 @@
      
      // Crea las celdas para la nueva fila
      var celdaNombre   = nuevaFila.insertCell(0);
+         celdaNombre.classList.add("Space_Tabla");
      var celdaBorrar   = nuevaFila.insertCell(1);
      
      var Total_id = Identificador + Cantidad

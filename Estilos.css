@@ -32,14 +32,15 @@ body {
 
   
  .Contenedor_Tabla {
-    background-color: lightgray;
-    border-radius: 10px;
-    border: 2px;
-    border-style: solid;
-    width: 60%; 
     padding-top: 10px;
     padding-bottom: 10px;
 }
+
+.Space_Tabla {
+  font-size: xx-large;
+  margin: 20px;
+}
+
   
   
   
