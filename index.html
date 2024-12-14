@@ -11,11 +11,11 @@
 
     <title>Document</title>
 </head>
-<body>
+<body id="Cuerpo">
 <br><br><br>
 
   <center>
-  <div class="Contenedor">
+  <div id="Contenedor" class="Contenedor">
   
      <button id="start-btn" type="button" class="btn btn-info"><strong> <span style="color: white;">Iniciar Reconocimiento de Voz </span></strong></button>
     <br><br>
@@ -31,8 +31,10 @@
             <th style="padding: 10px; font-size: small;"> <center>ACCION</center></th>
           </tr>
         </thead>
+
         <tbody>
         </tbody>
+
       </table>
     </div>
   
@@ -61,6 +63,7 @@
       agregarFila(Lista_Articulos[i],i, 0);
      }
 
+
    function agregarFila(Articulo, Identificador ,Cantidad) {
    
      // Obtén el cuerpo de la tabla
@@ -70,10 +73,11 @@
      var nuevaFila = tabla.insertRow();
      
      // Crea las celdas para la nueva fila
-     var celdaNombre   = nuevaFila.insertCell(0);
-         celdaNombre.classList.add("Space_Tabla");
-     var celdaBorrar   = nuevaFila.insertCell(1);
+     var celdaNombre = nuevaFila.insertCell(0);
+     var celdaBorrar = nuevaFila.insertCell(1);
+     var celdaUnir   = nuevaFila.insertCell(2);
      
+
      var Total_id = Identificador + Cantidad
      
        celdaNombre.id = "Fila" + Total_id;
@@ -83,29 +87,7 @@
    
       };
 
-      // Obtener todas las filas con el botón "Eliminar"
-      var botonesEliminar = document.querySelectorAll('.Eliminar');
-      
-      // Iterar sobre cada botón y agregar un evento de clic
-      
-      botonesEliminar.forEach(boton => {
-        boton.addEventListener('click', function() {
 
-        let respuesta = confirm("¿Estás seguro que quieres Borrar?");
-      
-        if (respuesta) {
-          // Obtener la fila en la que se hizo clic
-          const fila = this.parentNode.parentNode.parentNode; // el botón está dentro de una celda <td>, que a su vez está dentro de una fila <tr>
-          fila.remove(); // Eliminar la fila
-
-          var Eliminar = document.querySelectorAll('.Eliminar');
-
-          if (Eliminar.length == 0) { document.getElementById("BtnAceptar").hidden = true;}
-
-          }
-       
-        });
-      });
 
       localStorage.clear();
 
@@ -114,6 +96,7 @@
     document.getElementById("BtnAceptar").hidden = true;
 
     };
+
 
   </script>
   <!-- Fin Carga Datos en Tabla ya existente -->

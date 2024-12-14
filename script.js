@@ -1,7 +1,4 @@
-
-
 window.addEventListener("load", function() {
-
 
 });
 
@@ -32,7 +29,7 @@ if (!('webkitSpeechRecognition' in window)) {
     const transcript = event.results[0][0].transcript;
 
     // Separa el parrafo en
-    const Separadas = transcript.split(" ");
+    const Separadas = transcript.split('\n');
 
     //textOutput.textContent = "Texto reconocido: " + transcript ; // Mostramos el texto transcrito
     var N = Separadas.length;
@@ -45,7 +42,6 @@ if (!('webkitSpeechRecognition' in window)) {
       agregarFila(Separadas[i],i, Cantidad);
     }
 
-
     var botones = document.querySelectorAll("button");
 
 
@@ -54,31 +50,6 @@ if (!('webkitSpeechRecognition' in window)) {
     if (Cantidad > 0) {
       document.getElementById("BtnAceptar").hidden = false;
     }
-
-
-    // Obtener todas las filas con el botón "Eliminar"
-    var botonesEliminar = document.querySelectorAll('.Eliminar');
-    
-    // Iterar sobre cada botón y agregar un evento de clic
-    
-    botonesEliminar.forEach(boton => {
-      boton.addEventListener('click', function() {
-
-      let respuesta = confirm("¿Estás seguro que quieres Borrar?");
-
-       if (respuesta) {
-         // Obtener la fila en la que se hizo clic
-         const fila = this.parentNode.parentNode.parentNode; // el botón está dentro de una celda <td>, que a su vez está dentro de una fila <tr>
-         fila.remove(); // Eliminar la fila
-
-         var Eliminar = document.querySelectorAll('.Eliminar');
-
-         if (Eliminar.length == 0) { document.getElementById("BtnAceptar").hidden = true;}
-
-        }
-       
-      });
-    });
 
 
   };
@@ -106,16 +77,15 @@ function agregarFila(Articulo, Identificador ,Cantidad) {
   var nuevaFila = tabla.insertRow();
 
   // Crea las celdas para la nueva fila
-  var celdaNombre   = nuevaFila.insertCell(0);
-     celdaNombre.classList.add("Space_Tabla");
-  var celdaBorrar   = nuevaFila.insertCell(1);
-  
+  var celdaNombre = nuevaFila.insertCell(0);
+  var celdaBorrar = nuevaFila.insertCell(1);
+
   var Total_id = Identificador + Cantidad
-
-  celdaNombre.id = "Fila" + Total_id;
-
-  celdaNombre.innerHTML   ='<center>'+Articulo+'</center>';
-  celdaBorrar.innerHTML   ='<center><button type="button" Class="Eliminar" id=Borrar' + Total_id +'>borrar</button></center>';
+  
+    celdaNombre.id = "Fila" + Total_id;
+  
+    celdaNombre.innerHTML   ='<center>'+Articulo+'</center>';
+    celdaBorrar.innerHTML   ='<center><button Class="Eliminar" id=Borrar' + Total_id +'>borrar</button></center>';
 
   
 };
@@ -137,14 +107,11 @@ function GuardarLocal() {
 
   // Recorrer las filas de la tabla y obtener los datos
   for (var i = 1; i < filas.length; i++) {  // Comienza en 1 para omitir el encabezado
-
       var celdas = filas[i].getElementsByTagName("td");
       ArrayArticulo[i] = celdas[0].textContent;
-
    }
 
   localStorage.setItem('Listado', JSON.stringify(ArrayArticulo));
-
 };
 
 
@@ -153,3 +120,27 @@ BtnAceptar.addEventListener('click', function() {
 });
 
 
+
+Cuerpo.addEventListener('click', function(event) {
+
+  let contenedor = document.getElementById('Contenedor');
+  let elementos = document.getElementsByClassName('Eliminar');
+
+  contenedor.addEventListener('click', function(event) {
+  
+
+    if (event.target.classList.contains('Eliminar')) {
+      console.log(event.target);
+
+      let filas = event.target.closest('tr');
+      filas.remove();
+
+      if (elementos.length === 0) {
+         document.getElementById("BtnAceptar").hidden = true;
+      }
+
+    }
+
+  });
+
+});
