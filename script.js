@@ -11,6 +11,8 @@ const textOutput = document.getElementById('text-output');
 if (!('webkitSpeechRecognition' in window)) {
   alert("Lo siento, tu navegador no soporta la función de reconocimiento de voz.");
 } else {
+  
+  
   const recognition = new webkitSpeechRecognition(); // Creación de la instancia de la API
   recognition.continuous = false; // El reconocimiento se detendrá automáticamente después de un segmento de habla
   recognition.interimResults = false; // No mostrará resultados intermedios
@@ -18,6 +20,7 @@ if (!('webkitSpeechRecognition' in window)) {
   recognition.maxAlternatives = 1; // Solo tomamos una alternativa de texto
 
   startBtn.addEventListener('click', () => {
+ 
     recognition.start(); // Inicia el reconocimiento de voz cuando el usuario presiona el botón
     console.log("Iniciando reconocimiento de voz...");
   });
@@ -28,8 +31,15 @@ if (!('webkitSpeechRecognition' in window)) {
      // La transcripción resultante se obtiene en event.results
     const transcript = event.results[0][0].transcript;
 
-    // Separa el parrafo en
-    const Separadas = transcript.split('\n');
+    var EntradaVoz = document.getElementById("Palabras").checked;
+ 
+    if (EntradaVoz == true) {
+      var Separadas = transcript.split(' ');
+    } else {
+      var Separadas = transcript.split('\n');
+    }
+
+
 
     //textOutput.textContent = "Texto reconocido: " + transcript ; // Mostramos el texto transcrito
     var N = Separadas.length;
@@ -75,6 +85,7 @@ function agregarFila(Articulo, Identificador ,Cantidad) {
 
   // Crea una nueva fila
   var nuevaFila = tabla.insertRow();
+      nuevaFila.classList.add("Space_Tabla");
 
   // Crea las celdas para la nueva fila
   var celdaNombre = nuevaFila.insertCell(0);
@@ -120,27 +131,20 @@ BtnAceptar.addEventListener('click', function() {
 });
 
 
-
 Cuerpo.addEventListener('click', function(event) {
 
-  let contenedor = document.getElementById('Contenedor');
   let elementos = document.getElementsByClassName('Eliminar');
 
-  contenedor.addEventListener('click', function(event) {
-  
+  if (event.target.classList.contains('Eliminar')) {
 
-    if (event.target.classList.contains('Eliminar')) {
-      console.log(event.target);
-
-      let filas = event.target.closest('tr');
-      filas.remove();
-
-      if (elementos.length === 0) {
-         document.getElementById("BtnAceptar").hidden = true;
-      }
-
+    let filas = event.target.closest('tr');
+    filas.remove();
+    if (elementos.length === 0) {
+       document.getElementById("BtnAceptar").hidden = true;
     }
 
-  });
+  }
+ 
 
 });
+

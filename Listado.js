@@ -39,9 +39,6 @@ document.addEventListener('click', function(event) {
               Elemento.style.color ="black";
               Elemento.disabled = false;
         }
-        
-
-
 
     }
   });
@@ -71,3 +68,35 @@ document.addEventListener('click', function(event) {
     Resultado.innerHTML = " Costo Total es: "+ total +" $";
 
   });
+
+
+  function GuardarLocal() {
+
+    // Eliminar todos los elementos
+    localStorage.clear();
+  
+    // Obtener la tabla y sus filas
+    var tabla = document.getElementById("tabla1");
+    var filas = tabla.getElementsByTagName("tr");
+    var NColumnas = filas.length;
+    
+    let ArrayArticulo = [];
+    ArrayArticulo.push(NColumnas);
+  
+    // Recorrer las filas de la tabla y obtener los datos
+    for (var i = 1; i < filas.length; i++) {  // Comienza en 1 para omitir el encabezado
+        var celdas = filas[i].getElementsByTagName("td");
+        ArrayArticulo[i] = celdas[0].textContent;
+     }
+  
+    localStorage.setItem('Listado', JSON.stringify(ArrayArticulo));
+  };
+  
+  
+
+  Editar.addEventListener('click', function() {
+    GuardarLocal();
+  });
+  
+
+

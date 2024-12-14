@@ -29,18 +29,6 @@ body {
     margin: 5px 5px;
   }
 
-  .Unir {
-    background-color: lightsalmon; /* Color de fondo */
-    color: white;              /* Color del texto */
-    padding: 5px 5px;        /* Relleno alrededor del texto */
-    border: none;              /* Sin borde */
-    border-radius: 5px;        /* Bordes redondeados */
-    cursor: pointer;          /* Cambia el cursor al pasar por encima */
-    font-size: 12px;           /* Tamaño de la fuente */
-    transition: background-color 0.3s ease; /* Transición suave */
-    margin: 5px 5px;
-  }
-
   
  .Contenedor_Tabla {
     padding-top: 10px;
@@ -49,9 +37,12 @@ body {
 
 .Space_Tabla {
   font-size: small;
-  padding: 20px;
+  margin: 200PX;
 }
 
   
   
-  
+/* Estilo para todas las filas <tr> */
+#tabla tr {
+margin: 100px;
+}

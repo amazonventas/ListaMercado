@@ -19,6 +19,25 @@
   
      <button id="start-btn" type="button" class="btn btn-info"><strong> <span style="color: white;">Iniciar Reconocimiento de Voz </span></strong></button>
     <br><br>
+
+    <div class="form-check" style="width: 150px;">
+      <input class="form-check-input" type="radio" name="flexRadioDefault" id="Palabras" checked>
+      <label class="form-check-label" for="flexRadioDefault1">
+        Palabras
+      </label>
+    </div>
+    <div class="form-check"style="width: 150px;">
+      <input class="form-check-input" type="radio" name="flexRadioDefault" id="Frases" >
+      <label class="form-check-label" for="flexRadioDefault2">
+        Frases
+      </label>
+    </div>
+
+
+
+    <br><br>
+
+
     <h1>Lista de Compras</h1>
   
     <br><br>
@@ -32,7 +51,7 @@
           </tr>
         </thead>
 
-        <tbody>
+        <tbody style="padding: 50PX;">
         </tbody>
 
       </table>
@@ -71,6 +90,7 @@
      
      // Crea una nueva fila
      var nuevaFila = tabla.insertRow();
+         nuevaFila.classList.add("Space_Tabla");
      
      // Crea las celdas para la nueva fila
      var celdaNombre = nuevaFila.insertCell(0);
@@ -97,6 +117,7 @@
 
     };
 
+    Cuerpo.click();
 
   </script>
   <!-- Fin Carga Datos en Tabla ya existente -->
