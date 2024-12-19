@@ -19,7 +19,16 @@
   
     <h1>Lista de Compras</h1>
 
-    <br><br>
+    <br>
+      <button id="Guardar" type="button" class="btn btn-success">Guardar</button>
+    <br>
+    <br>
+    <div style="width: 220px;" class="form-check">
+      <input class="form-check-input" type="checkbox" value="" id="Ver_Precios" checked>
+      <label class="form-check-label" for="flexCheckChecked">
+        <strong>Incluir Cantidad y Precio</strong>
+      </label>
+    </div>
 
     <div class="Contenedor_Tabla">
       <table id="tabla1">
@@ -47,42 +56,109 @@
  <!-- Carga Datos en Tabla -->
  <script>
 
-   const Lista_Articulos = JSON.parse(localStorage.getItem('Listado'));
+  //localStorage.clear();
+  var Lista_Articulos= JSON.parse(localStorage.getItem('Listado' ));
+  var Lista_Cantidad = JSON.parse(localStorage.getItem('Cantidad'));
+  var Lista_Precios  = JSON.parse(localStorage.getItem('Precio'  ));
+  var Lista_Listo    = JSON.parse(localStorage.getItem('Listo'   ));
+  var NColumnas = Lista_Articulos[0];
+
+  if (Lista_Cantidad === null) {
+    Lista_Cantidad = new Array(NColumnas).fill("");
+  } else {
+    Lista_Cantidad.lenght = NColumnas;
+  }
+
+  if (Lista_Precios === null) {
+    Lista_Precios = new Array(NColumnas).fill("");
+  } else {
+    Lista_Precios.lenght = NColumnas;
+  }
+
+  if (Lista_Listo === null) {
+    Lista_Listo = new Array(NColumnas).fill(false);
+  } else {
+    Lista_Listo.lenght = NColumnas;
+  }
+
+
+  for (var i = 1; i < NColumnas; i++) {
+    agregarFila(Lista_Articulos[i], Lista_Cantidad[i], Lista_Precios[i], Lista_Listo[i] , i , 0);
+  };
+  
+  
+  function agregarFila(Articulo, Cantidad, Precio, Listo, Identificador ,Sumar) {
+  
+   // Obtén el cuerpo de la tabla
+   var tabla = document.getElementById("tabla1").getElementsByTagName('tbody')[0];
    
-   var NColumnas = Lista_Articulos[0];
+   // Crea una nueva fila
+   var nuevaFila = tabla.insertRow();
+       nuevaFila.classList.add("Space_Tabla");
    
-   for (var i = 1; i < NColumnas; i++) {
-    agregarFila(Lista_Articulos[i],i, 0);
+   // Crea las celdas para la nueva fila
+   var celdaNombre   = nuevaFila.insertCell(0);
+   var celdaCantidad = nuevaFila.insertCell(1);
+   var celdaPrecio   = nuevaFila.insertCell(2);
+   var celdaListo    = nuevaFila.insertCell(3);
+  
+   var Total_id = Identificador + Sumar;
+
+   if (Cantidad === undefined) {
+     Cantidad =" ";
+   };
+
+   if (Precio === undefined) {
+     Precio =" ";
+   };
+
+   if (Listo === undefined) {
+     Listo =false;
+   };
+
+
+   celdaNombre.id = "Fila" + Total_id;
+  
+   celdaNombre.innerHTML   ='<center>'+Articulo+'</center>';
+   celdaCantidad.innerHTML ='<center><input style="width: 60px;"  Class="form-control" type="number" id=Cant'   + Total_id    +' value ='+ Cantidad +'></center>';
+   celdaPrecio.innerHTML   ='<center><input style="width: 100px;" Class="form-control" type="number" id=Prec'   + Total_id    +' value ='+ Precio   +'></center>';   
+   celdaListo.innerHTML    ='<center><input style="height: 15px;" class="form-check-input" type="checkbox" id='+ Total_id +'></center>';    
+  
+   var Listo_Check = document.getElementById(Total_id);
+       Listo_Check.checked = Listo;
+       
+   if (Listo_Check.checked == true) {
+    var Elemento = document.getElementById(celdaNombre.id);
+        Elemento.style.color ="lightgray";
+        Elemento.disabled = true;
+
+    var Elemento = document.getElementById("Cant"+Total_id);
+        Elemento.style.color ="lightgray";
+        Elemento.disabled = true;
+
+    var Elemento = document.getElementById("Prec"+Total_id);
+        Elemento.style.color ="lightgray";
+        Elemento.disabled = true;
+   }
+         
+
+   if (Listo_Check.checked == false) {
+    var Elemento = document.getElementById(celdaNombre.id);
+        Elemento.style.color ="black";
+        Elemento.disabled = false;
+
+    var Elemento = document.getElementById("Cant"+Total_id);
+        Elemento.style.color ="black";
+        Elemento.disabled = false;
+
+    var Elemento = document.getElementById("Prec"+Total_id);
+        Elemento.style.color ="black";
+        Elemento.disabled = false;
    }
 
 
-   function agregarFila(Articulo, Identificador ,Cantidad) {
-   
-     // Obtén el cuerpo de la tabla
-     var tabla = document.getElementById("tabla1").getElementsByTagName('tbody')[0];
-     
-     // Crea una nueva fila
-     var nuevaFila = tabla.insertRow();
-         nuevaFila.classList.add("Space_Tabla");
+  };
 
-     // Crea las celdas para la nueva fila
-     var celdaNombre   = nuevaFila.insertCell(0);
-     var celdaCantidad = nuevaFila.insertCell(1);
-     var celdaPrecio   = nuevaFila.insertCell(2);
-     var celdaCheck    = nuevaFila.insertCell(3);
-
-     
-     var Total_id = Identificador + Cantidad
-     
-     celdaNombre.id = "Fila" + Total_id;
-     
-     celdaNombre.innerHTML   ='<center>'+Articulo+'</center>';
-     celdaCantidad.innerHTML ='<center><input style="heigth: 10px; width: 70px;" type="number"   class="form-control" id=Cant'+Total_id+'></center>';
-     celdaPrecio.innerHTML   ='<center><input style="heigth: 10px; width: 70px;" type="number"   class="form-control" id=Prec'+Total_id+'></center>';
-     celdaCheck.innerHTML    ='<center><input style="heigth: 30px; width: 15px;" type="checkbox" class="form-check-input" id='+Total_id+'></center>';
-     
-    };
-     
  </script>
  <!-- Fin de Carga Datos en Tabla -->
 

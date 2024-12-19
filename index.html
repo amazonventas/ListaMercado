@@ -17,7 +17,7 @@
   <center>
   <div id="Contenedor" class="Contenedor">
   
-     <button id="start-btn" type="button" class="btn btn-info"><strong> <span style="color: white;">Iniciar Reconocimiento de Voz </span></strong></button>
+     <button id="start-btn" type="button" class="btn btn-success"><strong> <span style="color: white;">Iniciar Reconocimiento de Voz </span></strong></button>
     <br><br>
 
     <div class="form-check" style="width: 150px;">
@@ -33,13 +33,14 @@
       </label>
     </div>
 
-
-
-    <br><br>
-
+    <br>
 
     <h1>Lista de Compras</h1>
-  
+
+    <br>  
+
+    <button type="button" id="Borrar_Todo" class="btn btn-danger" onclick="mostrarPopup()">Borrar Lista</button>
+
     <br><br>
 
     <div class="Contenedor_Tabla">
@@ -52,29 +53,30 @@
         </thead>
 
         <tbody style="padding: 50PX;">
-        </tbody>
+        </tbody  >
 
       </table>
     </div>
   
   </div>
 
-  <br><br>
+  <br>
 
-  
-<center><a href="Listado.html"><button id="BtnAceptar" type="button" class="btn btn-primary">ACEPTAR</button>
-  </a></center>
+ <center><a href="Listado.html"><button id="BtnAceptar" type="button" class="btn btn-primary">ACEPTAR</button></a></center>  
 
   <br><br><br>
   
   </center>
 
+
   <!-- Carga Datos en Tabla ya existente -->
   <script>
 
-    const Lista_Articulos = JSON.parse(localStorage.getItem('Listado'));
+  //localStorage.clear();      
 
-   if (Lista_Articulos !== null){
+   var Lista_Articulos = JSON.parse(localStorage.getItem('Listado'));
+
+   if (Lista_Articulos != null){
       var NColumnas = Lista_Articulos[0];
       document.getElementById("BtnAceptar").hidden = false;
 
@@ -88,18 +90,15 @@
      // Obtén el cuerpo de la tabla
      var tabla = document.getElementById("tabla").getElementsByTagName('tbody')[0];
      
-     // Crea una nueva fila
-     var nuevaFila = tabla.insertRow();
-         nuevaFila.classList.add("Space_Tabla");
+       // Crea una nueva fila
+       var nuevaFila = tabla.insertRow();
+           nuevaFila.classList.add("Space_Tabla");
      
-     // Crea las celdas para la nueva fila
-     var celdaNombre = nuevaFila.insertCell(0);
-     var celdaBorrar = nuevaFila.insertCell(1);
-     var celdaUnir   = nuevaFila.insertCell(2);
-     
-
-     var Total_id = Identificador + Cantidad
-     
+       // Crea las celdas para la nueva fila
+       var celdaNombre = nuevaFila.insertCell(0);
+       var celdaBorrar = nuevaFila.insertCell(1);
+       var Total_id = Identificador + Cantidad
+      
        celdaNombre.id = "Fila" + Total_id;
      
        celdaNombre.innerHTML   ='<center>'+Articulo+'</center>';
@@ -107,20 +106,51 @@
    
       };
 
-
-
-      localStorage.clear();
-
     } else {
 
     document.getElementById("BtnAceptar").hidden = true;
+    
+  };
 
-    };
-
-    Cuerpo.click();
 
   </script>
   <!-- Fin Carga Datos en Tabla ya existente -->
+
+  <!-- Ventana Emergente Personalizada -->
+  <div id="popupOverlay" class="popup-overlay">
+      <div class="popup">
+          <p>¿Realmente quieres borrar la lista? Esta acción no se puede deshacer.</p>
+          <button class="btn-aceptar" onclick="borrarLista()">Aceptar</button>
+          <button class="btn-cancelar" onclick="cerrarPopup()">Cancelar</button>
+      </div>
+  </div>
+
+  <script>
+      // Función para mostrar el popup
+      function mostrarPopup() {
+          document.getElementById('popupOverlay').style.display = 'block';
+      }
+
+      // Función para cerrar el popup
+      function cerrarPopup() {
+          document.getElementById('popupOverlay').style.display = 'none';
+      }
+
+      // Función para borrar la lista
+      function borrarLista() {
+ 
+        var tabla = document.getElementById("tabla");
+        var tbody = tabla.getElementsByTagName("tbody")[0];
+
+        // Eliminar todas las filas del cuerpo de la tabla
+        while (tbody.rows.length > 0) {
+          tbody.deleteRow(0);  // Eliminar la primera fila
+        }
+        document.getElementById('popupOverlay').style.display = 'none';
+        document.getElementById("BtnAceptar").hidden = true;
+      }
+
+  </script>
 
 
    <script src="script.js"></script>

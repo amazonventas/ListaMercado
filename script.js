@@ -1,8 +1,3 @@
-window.addEventListener("load", function() {
-
-});
-
-
 // Verificamos que el navegador soporte la Web Speech API
 
 const startBtn = document.getElementById('start-btn');
@@ -20,13 +15,17 @@ if (!('webkitSpeechRecognition' in window)) {
   recognition.maxAlternatives = 1; // Solo tomamos una alternativa de texto
 
   startBtn.addEventListener('click', () => {
- 
+    startBtn.className = "btn btn-warning";
+    console.log(startBtn.style.color);
     recognition.start(); // Inicia el reconocimiento de voz cuando el usuario presiona el botón
     console.log("Iniciando reconocimiento de voz...");
   });
 
 
   recognition.onresult = function(event) {
+
+    var boton = document.getElementById("start-btn");
+
 
      // La transcripción resultante se obtiene en event.results
     const transcript = event.results[0][0].transcript;
@@ -53,9 +52,7 @@ if (!('webkitSpeechRecognition' in window)) {
     }
 
     var botones = document.querySelectorAll("button");
-
-
-     var Cantidad = botones.length - 1;
+    var Cantidad = botones.length - 1;
 
     if (Cantidad > 0) {
       document.getElementById("BtnAceptar").hidden = false;
@@ -70,6 +67,7 @@ if (!('webkitSpeechRecognition' in window)) {
   };
   
   recognition.onend = function() {
+    startBtn.className = "btn btn-success";
     console.log("El reconocimiento de voz ha terminado.");
   };
 
@@ -97,16 +95,12 @@ function agregarFila(Articulo, Identificador ,Cantidad) {
   
     celdaNombre.innerHTML   ='<center>'+Articulo+'</center>';
     celdaBorrar.innerHTML   ='<center><button Class="Eliminar" id=Borrar' + Total_id +'>borrar</button></center>';
-
   
-};
+  };
 
 
 
 function GuardarLocal() {
-
-  // Eliminar todos los elementos
-  localStorage.clear();
 
   // Obtener la tabla y sus filas
   var tabla = document.getElementById("tabla");
@@ -117,7 +111,7 @@ function GuardarLocal() {
   ArrayArticulo.push(NColumnas);
 
   // Recorrer las filas de la tabla y obtener los datos
-  for (var i = 1; i < filas.length; i++) {  // Comienza en 1 para omitir el encabezado
+  for (var i = 1; i < NColumnas; i++) {  // Comienza en 1 para omitir el encabezado
       var celdas = filas[i].getElementsByTagName("td");
       ArrayArticulo[i] = celdas[0].textContent;
    }
@@ -126,8 +120,14 @@ function GuardarLocal() {
 };
 
 
+
+
 BtnAceptar.addEventListener('click', function() {
   GuardarLocal();
+});
+
+Borrar_Todo.addEventListener('click', function() {
+  localStorage.clear();
 });
 
 
@@ -141,6 +141,7 @@ Cuerpo.addEventListener('click', function(event) {
     filas.remove();
     if (elementos.length === 0) {
        document.getElementById("BtnAceptar").hidden = true;
+       localStorage.clear();
     }
 
   }
