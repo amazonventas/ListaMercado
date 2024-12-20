@@ -11,14 +11,32 @@
 
     <title>Document</title>
 </head>
-<body>
-  <br><br><br><br><br>
+<body id="Cuerpo">
+
+ <!--Barra de navegación-->
+<nav class="navbar">
+  <img class="Icono" src="./imagenes/icono-list.bmp" alt="">
+  <img style="height: 50px; width: 300px;" src="./imagenes/Lista de Compras.bmp" alt="">
+  <button class="Boton-abrir-menu" style="border-style: none;" id="hamburguesa"><img style="height: 50px; width: 50px;" src="./imagenes/menu.png" alt="" ></button>
+</nav>
+<!--Fin Barra de navegación-->
+
+
+ <!--Menú Hamburguesa -->
+<div id="movil-menu" class="menu-oculto">
+  <ul class="movil-lista-nav">
+    <li><center><a href="index.html"><strong>Inicio</strong></a></center></li><hr>
+    <li><center><a href=""><strong>Listado Compras </strong></a></center></li><hr>
+    <li><center><a href=""><strong>Listado Tareas  </strong></a></center></li><hr>
+    <li id="Apariencia" ><center><a href="Configuracion.html"><strong>Configuración</strong></a></center></li><hr>
+    <li><center><a href=""><strong>Contacto        </strong></a></center></li>
+  </ul>
+</div>
+<!--Fin Menú Hamburguesa -->
 
   <center>
   <div class="Contenedor">
   
-    <h1>Lista de Compras</h1>
-
     <br>
       <button id="Guardar" type="button" class="btn btn-success">Guardar</button>
     <br>
@@ -31,7 +49,7 @@
     </div>
 
     <div class="Contenedor_Tabla">
-      <table id="tabla1">
+      <table id="tabla1" class="table" >
         <thead>
           <tr>
             <th style="padding: 10px; font-size: small;"> <center>ARTICULO</center></th>
@@ -46,8 +64,8 @@
     </div>
 
   <br><br>
-  <a style="text-decoration: none;" href="index.html"><button id="Editar" type="button" class="btn btn-outline-primary">EDITAR</button></a>
-  <button id="Calcular" type="button" class="btn btn-outline-primary">CALCULAR</button>
+  <a style="text-decoration: none;" href="index.html"><button id="Editar" type="button" class="btn btn-warning">EDITAR</button></a>
+  <button id="Calcular" type="button" class="btn btn-primary">CALCULAR</button>
 
   <br><br>
 
@@ -61,6 +79,9 @@
   var Lista_Cantidad = JSON.parse(localStorage.getItem('Cantidad'));
   var Lista_Precios  = JSON.parse(localStorage.getItem('Precio'  ));
   var Lista_Listo    = JSON.parse(localStorage.getItem('Listo'   ));
+  var Tamano_Letra    = localStorage.getItem('Letra_Size');
+  var Fondo_Pantalla  = localStorage.getItem('Fondo');
+
   var NColumnas = Lista_Articulos[0];
 
   if (Lista_Cantidad === null) {
@@ -121,7 +142,7 @@
   
    celdaNombre.innerHTML   ='<center>'+Articulo+'</center>';
    celdaCantidad.innerHTML ='<center><input style="width: 60px;"  Class="form-control" type="number" id=Cant'   + Total_id    +' value ='+ Cantidad +'></center>';
-   celdaPrecio.innerHTML   ='<center><input style="width: 100px;" Class="form-control" type="number" id=Prec'   + Total_id    +' value ='+ Precio   +'></center>';   
+   celdaPrecio.innerHTML   ='<center><input style="width: 70px;" Class="form-control" type="number" id=Prec'   + Total_id    +' value ='+ Precio   +'></center>';   
    celdaListo.innerHTML    ='<center><input style="height: 15px;" class="form-check-input" type="checkbox" id='+ Total_id +'></center>';    
   
    var Listo_Check = document.getElementById(Total_id);
@@ -158,6 +179,30 @@
 
 
   };
+
+  if (Tamano_Letra != null){
+    let tabla = document.getElementById("tabla1");
+    let filas = tabla.getElementsByTagName("tr");
+    let tamanoLetra = Tamano_Letra;
+
+    for (let i = 0; i < filas.length; i++) {
+      let celdas = filas[i].getElementsByTagName("td");
+      if (celdas.length > 0) {
+        celdas[0].style.fontSize = tamanoLetra;
+      }
+    }
+
+  //  let th_cero = document.getElementsByTagName("th")[0];
+  //  let th_uno  = document.getElementsByTagName("th")[1];
+  //  th_cero.style.fontSize = tamanoLetra;
+  //  th_uno.style.fontSize = tamanoLetra;
+  }
+
+  if (Fondo_Pantalla != null){
+    var Cuerpo = document.getElementById("Cuerpo");
+    Cuerpo.style.backgroundImage = "url("+ Fondo_Pantalla +")";
+  }
+
 
  </script>
  <!-- Fin de Carga Datos en Tabla -->

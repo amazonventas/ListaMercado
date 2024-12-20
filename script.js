@@ -1,3 +1,21 @@
+window.addEventListener("load",function(){
+  document.getElementById("movil-menu").hidden = true;
+}); 
+
+
+hamburguesa.addEventListener("click",function(){
+  var Visible = document.getElementById("movil-menu").hidden;
+ 
+  if (Visible == true){
+    document.getElementById("movil-menu").hidden = false;
+  } else {
+    document.getElementById("movil-menu").hidden = true;
+  }
+
+}); 
+
+
+
 // Verificamos que el navegador soporte la Web Speech API
 
 const startBtn = document.getElementById('start-btn');
@@ -141,7 +159,10 @@ Cuerpo.addEventListener('click', function(event) {
     filas.remove();
     if (elementos.length === 0) {
        document.getElementById("BtnAceptar").hidden = true;
-       localStorage.clear();
+       localStorage.removeItem('Listado' );
+       localStorage.removeItem('Cantidad');
+       localStorage.removeItem('Precio'  );
+       localStorage.removeItem('Listo'   );
     }
 
   }

@@ -12,10 +12,32 @@
     <title>Document</title>
 </head>
 <body id="Cuerpo">
-<br><br><br>
+
+<!--Barra de navegación-->
+<nav class="navbar">
+  <img class="Icono" src="./imagenes/icono-list.bmp" alt="">
+  <img style="height: 50px; width: 300px;" src="./imagenes/Lista de Compras.bmp" alt="">
+  <button class="Boton-abrir-menu" style="border-style: none;" id="hamburguesa"><img style="height: 50px; width: 50px;" src="./imagenes/menu.png" alt="" ></button>
+</nav>
+<!--Fin Barra de navegación-->
+
+
+ <!--Menú Hamburguesa -->
+<div id="movil-menu" class="menu-oculto">
+  <ul class="movil-lista-nav">
+    <li><center><a href="index.html"><strong>Inicio</strong></a></center></li><hr>
+    <li><center><a href=""><strong>Listado Compras </strong></a></center></li><hr>
+    <li><center><a href=""><strong>Listado Tareas  </strong></a></center></li><hr>
+    <li id="Apariencia" ><center><a href="Configuracion.html"><strong>Configuración</strong></a></center></li><hr>
+    <li><center><a href=""><strong>Contacto        </strong></a></center></li>
+  </ul>
+</div>
+<!--Fin Menú Hamburguesa -->
+
+  <br><br>
 
   <center>
-  <div id="Contenedor" class="Contenedor">
+  <div id="Contenedor" class="Contenedor" >
   
      <button id="start-btn" type="button" class="btn btn-success"><strong> <span style="color: white;">Iniciar Reconocimiento de Voz </span></strong></button>
     <br><br>
@@ -35,16 +57,12 @@
 
     <br>
 
-    <h1>Lista de Compras</h1>
-
-    <br>  
-
     <button type="button" id="Borrar_Todo" class="btn btn-danger" onclick="mostrarPopup()">Borrar Lista</button>
 
     <br><br>
 
     <div class="Contenedor_Tabla">
-      <table id="tabla">
+      <table id="tabla" class="table" >
         <thead>
           <tr>
             <th style="padding: 10px; font-size: small;"> <center>ARTICULO</center></th>
@@ -68,13 +86,14 @@
   
   </center>
 
-
   <!-- Carga Datos en Tabla ya existente -->
   <script>
 
   //localStorage.clear();      
 
    var Lista_Articulos = JSON.parse(localStorage.getItem('Listado'));
+   var Tamano_Letra    = localStorage.getItem('Letra_Size');
+   var Fondo_Pantalla  = localStorage.getItem('Fondo');
 
    if (Lista_Articulos != null){
       var NColumnas = Lista_Articulos[0];
@@ -113,7 +132,31 @@
   };
 
 
+  if (Tamano_Letra != null){
+    let tabla = document.getElementById("tabla");
+    let filas = tabla.getElementsByTagName("tr");
+    let tamanoLetra = Tamano_Letra;
+
+    for (let i = 0; i < filas.length; i++) {
+      let celdas = filas[i].getElementsByTagName("td");
+      if (celdas.length > 0) {
+        celdas[0].style.fontSize = tamanoLetra;
+      }
+    }
+
+   // let th_cero = document.getElementsByTagName("th")[0];
+   // let th_uno  = document.getElementsByTagName("th")[1];
+   // th_cero.style.fontSize = tamanoLetra;
+   // th_uno.style.fontSize = tamanoLetra;
+  }
+
+  if (Fondo_Pantalla != null){
+    var Cuerpo = document.getElementById("Cuerpo");
+    Cuerpo.style.backgroundImage = "url("+ Fondo_Pantalla +")";
+  }
+
   </script>
+
   <!-- Fin Carga Datos en Tabla ya existente -->
 
   <!-- Ventana Emergente Personalizada -->

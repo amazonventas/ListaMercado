@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Estilos.css">
+    
+    <!-- Boostrap -->
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- Fin Boostrap -->
+
+    <title>Document</title>
+</head>
+<body id="Cuerpo">
+
+  <!--Barra de navegación-->
+ <nav class="navbar">
+   <img class="Icono" src="./imagenes/icono-list.bmp" alt="">
+   <img style="height: 50px; width: 300px;" src="./imagenes/Lista de Compras.bmp" alt="">
+   <button class="Boton-abrir-menu" style="border-style: none;" id="hamburguesa"><img style="height: 50px; width: 50px;" src="./imagenes/menu.png" alt="" ></button>
+ </nav>
+ <!--Fin Barra de navegación-->
+ 
+ 
+  <!--Menú Hamburguesa -->
+ <div id="movil-menu" class="menu-oculto">
+   <ul class="movil-lista-nav">
+     <li><center><a href="index.html"><strong>Inicio</strong></a></center></li><hr>
+     <li><center><a href=""><strong>Listado Compras </strong></a></center></li><hr>
+     <li><center><a href=""><strong>Listado Tareas  </strong></a></center></li><hr>
+     <li id="Apariencia" ><center><a href="Configuracion.html"><strong>Configuración</strong></a></center></li><hr>
+     <li><center><a href=""><strong>Contacto        </strong></a></center></li>
+   </ul>
+ </div>
+ <!--Fin Menú Hamburguesa -->
+ 
+<br><br>
+
+  <center>
+  <div id="Contenedor" class="Contenedor_Tabla" >
+    <h3>Apariencia</h3>
+    <br>
+    <table id="tabla" >
+      <tbody>
+        <tr>
+          <td style="padding-right: 15px;">Fondo</td>
+          <td style="padding-right: 15px;">
+            <select id="Select_Fondo" class="form-select" aria-label="Default select example">
+              <option value="1">Azul Claro</option>
+              <option value="2">Claridad</option>
+              <option value="3">Gris Azulado</option>
+            </select>
+          </td>
+          <td style="padding-right: 15px;"><img id="Fondo_Pantalla" style="height: 35px; width: 80px;" src='' alt=""></td>
+        </tr>
+      </tbody >
+    </table>
+    <br>
+  </div>
+  </center>
+
+  <br><br>
+
+  <center>
+    <div id="Contenedor" class="Contenedor_Tabla" >
+      <h3>Estilo de Letra</h3>
+      <br>
+      <table id="tabla" >
+        <tbody>
+          <tr>
+            <td style="padding-right: 15px;">Tamaño</td>
+            <td style="padding-right: 15px;">
+              <select id="Select_Letra" class="form-select" aria-label="Default select example">
+                <option value="medium">medium</option>
+                <option value="large">large</option>
+                <option value="xx-Large">xx-large</option>
+              </select>
+            </td>
+            <td style="padding-right: 15px;"><span id="tamano" >Ejemplo</span></td>
+          </tr>
+        </tbody >
+      </table>
+      <br>
+    </div>
+    </center>
+    
+    <br>
+    
+    <center><a href="index.html"><button id="Aceptar_Config" type="button" class="btn btn-primary">ACEPTAR</button></a></center>  
+
+   <script src="Configuracion.js"></script>
+
+</body>
+</html>
