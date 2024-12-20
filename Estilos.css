@@ -36,6 +36,11 @@ body {
   margin-left: 10px;
 }
 
+.Titulo_Compras {
+  width: 500px;
+}
+
+
 .Boton-abrir-menu {
   margin-left: auto; 
   margin-right: 10px;
@@ -155,6 +160,11 @@ transition: 0.3s;
 
 /* Estilos para dispositivos móviles */
 @media screen and (max-width: 768px) {
+
+  .Titulo_Compras {
+    width: 200px;
+  }
+  
 
 }
 
