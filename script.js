@@ -137,19 +137,12 @@ function GuardarLocal() {
   localStorage.setItem('Listado', JSON.stringify(ArrayArticulo));
 };
 
-
-
-
 BtnAceptar.addEventListener('click', function() {
   GuardarLocal();
 });
 
-Borrar_Todo.addEventListener('click', function() {
-  localStorage.clear();
-});
 
-
-Cuerpo.addEventListener('click', function(event) {
+Body1.addEventListener('click', function(event) {
 
   let elementos = document.getElementsByClassName('Eliminar');
 
@@ -166,7 +159,27 @@ Cuerpo.addEventListener('click', function(event) {
     }
 
   }
- 
 
 });
 
+
+function Guardar_JSON (nombre) {
+
+let datos = localStorage.getItem(nombre);
+let datosJson = JSON.parse(datos);
+
+let blob = new Blob([JSON.stringify(datosJson, null, 2)], { type: 'application/json' });
+
+let enlace = document.createElement('a');
+enlace.href = URL.createObjectURL(blob);
+enlace.download = 'datos.json'; 
+
+enlace.click();
+
+
+};
+
+
+Guardar_Archivo.addEventListener('click', function() {
+  Guardar_JSON ('Listado');
+});

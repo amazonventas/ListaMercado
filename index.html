@@ -11,7 +11,7 @@
 
     <title>Document</title>
 </head>
-<body id="Cuerpo">
+<body id="Body1">
 
 <!--Barra de navegación-->
 <nav class="navbar">
@@ -81,11 +81,10 @@
   <br>
 
  <center><a href="Listado.html"><button id="BtnAceptar" type="button" class="btn btn-primary">ACEPTAR</button></a></center>  
+ <center><button id="Guardar_Archivo" type="button" class="btn btn-primary">GUARDAR</button></center>  
 
   <br><br><br>
   
-  </center>
-
   <!-- Carga Datos en Tabla ya existente -->
   <script>
 
@@ -94,6 +93,7 @@
    var Lista_Articulos = JSON.parse(localStorage.getItem('Listado'));
    var Tamano_Letra    = localStorage.getItem('Letra_Size');
    var Fondo_Pantalla  = localStorage.getItem('Fondo');
+   var Tipo_Letra      = localStorage.getItem('TipoLetra');
 
    if (Lista_Articulos != null){
       var NColumnas = Lista_Articulos[0];
@@ -119,7 +119,11 @@
        var Total_id = Identificador + Cantidad
       
        celdaNombre.id = "Fila" + Total_id;
-     
+
+       if (Tipo_Letra != null){
+         celdaNombre.style.fontFamily = Tipo_Letra;
+       }
+
        celdaNombre.innerHTML   ='<center>'+Articulo+'</center>';
        celdaBorrar.innerHTML   ='<center><button Class="Eliminar" id=Borrar' + Total_id +'>borrar</button></center>';
    
@@ -144,14 +148,10 @@
       }
     }
 
-   // let th_cero = document.getElementsByTagName("th")[0];
-   // let th_uno  = document.getElementsByTagName("th")[1];
-   // th_cero.style.fontSize = tamanoLetra;
-   // th_uno.style.fontSize = tamanoLetra;
   }
 
   if (Fondo_Pantalla != null){
-    var Cuerpo = document.getElementById("Cuerpo");
+    var Cuerpo = document.getElementById("Body1");
     Cuerpo.style.backgroundImage = "url("+ Fondo_Pantalla +")";
   }
 
