@@ -11,12 +11,12 @@
 
     <title>Document</title>
 </head>
-<body id="Cuerpo">
+<body id="Body2">
 
  <!--Barra de navegación-->
 <nav class="navbar">
   <img class="Icono" src="./imagenes/icono-list.bmp" alt="">
-  <img style="height: 50px; width: 300px;" src="./imagenes/Lista de Compras.bmp" alt="">
+  <img class="Titulo_Compras" src="./imagenes/Lista de Compras.bmp" alt="">
   <button class="Boton-abrir-menu" style="border-style: none;" id="hamburguesa"><img style="height: 50px; width: 50px;" src="./imagenes/menu.png" alt="" ></button>
 </nav>
 <!--Fin Barra de navegación-->
@@ -47,9 +47,11 @@
         <strong>Incluir Cantidad y Precio</strong>
       </label>
     </div>
-
+    
+    <br>
+    
     <div class="Contenedor_Tabla">
-      <table id="tabla1" class="table" >
+      <table id="tabla1" class="table">
         <thead>
           <tr>
             <th style="padding: 10px; font-size: small;"> <center>ARTICULO</center></th>
@@ -81,6 +83,7 @@
   var Lista_Listo    = JSON.parse(localStorage.getItem('Listo'   ));
   var Tamano_Letra    = localStorage.getItem('Letra_Size');
   var Fondo_Pantalla  = localStorage.getItem('Fondo');
+  var Tipo_Letra      = localStorage.getItem('TipoLetra');
 
   var NColumnas = Lista_Articulos[0];
 
@@ -136,6 +139,10 @@
    if (Listo === undefined) {
      Listo =false;
    };
+
+   if (Tipo_Letra != null){
+     celdaNombre.style.fontFamily = Tipo_Letra;
+   }
 
 
    celdaNombre.id = "Fila" + Total_id;
@@ -199,7 +206,7 @@
   }
 
   if (Fondo_Pantalla != null){
-    var Cuerpo = document.getElementById("Cuerpo");
+    var Cuerpo = document.getElementById("Body2");
     Cuerpo.style.backgroundImage = "url("+ Fondo_Pantalla +")";
   }
 

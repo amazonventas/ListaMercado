@@ -11,12 +11,12 @@
 
     <title>Document</title>
 </head>
-<body id="Cuerpo">
+<body id="Body3">
 
   <!--Barra de navegación-->
  <nav class="navbar">
    <img class="Icono" src="./imagenes/icono-list.bmp" alt="">
-   <img style="height: 50px; width: 300px;" src="./imagenes/Lista de Compras.bmp" alt="">
+   <img class="Titulo_Compras" src="./imagenes/Lista de Compras.bmp" alt="">
    <button class="Boton-abrir-menu" style="border-style: none;" id="hamburguesa"><img style="height: 50px; width: 50px;" src="./imagenes/menu.png" alt="" ></button>
  </nav>
  <!--Fin Barra de navegación-->
@@ -37,7 +37,7 @@
 <br><br>
 
   <center>
-  <div id="Contenedor" class="Contenedor_Tabla" >
+  <div style="background-color: lightgray;" id="Contenedor" class="Contenedor_Tabla" >
     <h3>Apariencia</h3>
     <br>
     <table id="tabla" >
@@ -46,12 +46,12 @@
           <td style="padding-right: 15px;">Fondo</td>
           <td style="padding-right: 15px;">
             <select id="Select_Fondo" class="form-select" aria-label="Default select example">
-              <option value="1">Azul Claro</option>
+              <option value="1">Arbol Blanco</option>
               <option value="2">Claridad</option>
               <option value="3">Gris Azulado</option>
             </select>
           </td>
-          <td style="padding-right: 15px;"><img id="Fondo_Pantalla" style="height: 35px; width: 80px;" src='' alt=""></td>
+          <td style="padding-right: 15px;"><img id="Fondo_Pantalla" style="height: 35px; width: 80px; border: solid black 2px;" src='' alt=""></td>
         </tr>
       </tbody >
     </table>
@@ -62,8 +62,8 @@
   <br><br>
 
   <center>
-    <div id="Contenedor" class="Contenedor_Tabla" >
-      <h3>Estilo de Letra</h3>
+    <div style="background-color: lightgray;" id="Contenedor" class="Contenedor_Tabla" >
+      <h3>Letras Listado</h3>
       <br>
       <table id="tabla" >
         <tbody>
@@ -72,17 +72,39 @@
             <td style="padding-right: 15px;">
               <select id="Select_Letra" class="form-select" aria-label="Default select example">
                 <option value="medium">medium</option>
+                <option value="small">small</option>
                 <option value="large">large</option>
-                <option value="xx-Large">xx-large</option>
               </select>
             </td>
             <td style="padding-right: 15px;"><span id="tamano" >Ejemplo</span></td>
           </tr>
+ 
+          <tr>
+            <td><br></td>
+          </tr>
+
+          <tr>
+            <td style="padding-right: 15px;">Tamaño</td>
+            <td style="padding-right: 15px;">
+              <select id="Select_Estilo" class="form-select" aria-label="Default select example">
+                <option value="1">Courier New</option>
+                <option value="2">Franklin Gothic</option>
+                <option value="3">Times New Roman</option>
+                <option value="4">Segoe UI</option>
+              </select>
+            </td>
+            <td style="padding-right: 15px;"><span id="Estilo" >Ejemplo</span></td>
+          </tr>
+
+
+
         </tbody >
       </table>
       <br>
     </div>
     </center>
+    
+
     
     <br>
     
