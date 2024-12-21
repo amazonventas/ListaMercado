@@ -163,33 +163,3 @@ Body1.addEventListener('click', function(event) {
 });
 
 
-Archivo_JSON.addEventListener('click', function() {
-  Guardar_JSON();
-});
-
-
-function Guardar_JSON(){
-
-// Obtener la lista del localStorage
-let listaRecuperada = JSON.parse(localStorage.getItem("Listado"));
-
-// Verifica si la lista existe
-if (listaRecuperada) {
-    // Convertir la lista a JSON
-    let datos = JSON.stringify(listaRecuperada, null, 2);
-
-    // Crear un Blob con los datos de la lista
-    let blob = new Blob([datos], { type: 'application/json' });
-
-    // Crear un enlace para la descarga
-    let enlace = document.createElement('a');
-    enlace.href = URL.createObjectURL(blob);
-    enlace.download = 'miLista.json';  // El nombre del archivo descargado
-
-    // Simular un clic para descargar el archivo
-    enlace.click();
-} else {
-    console.log("No hay lista en localStorage.");
-}
-
-}
