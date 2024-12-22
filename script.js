@@ -98,6 +98,7 @@ function agregarFila(Articulo, Identificador ,Cantidad) {
 
   // Obtén el cuerpo de la tabla
   var tabla = document.getElementById("tabla").getElementsByTagName('tbody')[0];
+  var Tipo_Letra      = localStorage.getItem('TipoLetra');
 
   // Crea una nueva fila
   var nuevaFila = tabla.insertRow();
@@ -108,9 +109,13 @@ function agregarFila(Articulo, Identificador ,Cantidad) {
   var celdaBorrar = nuevaFila.insertCell(1);
 
   var Total_id = Identificador + Cantidad
-  
+
     celdaNombre.id = "Fila" + Total_id;
-  
+
+    if (Tipo_Letra != null){
+      celdaNombre.style.fontFamily = Tipo_Letra;
+    }
+
     celdaNombre.innerHTML   ='<center>'+Articulo+'</center>';
     celdaBorrar.innerHTML   ='<center><button Class="Eliminar" id=Borrar' + Total_id +'>borrar</button></center>';
   

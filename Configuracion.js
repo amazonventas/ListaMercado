@@ -106,4 +106,23 @@ Aceptar_Config.addEventListener('click', function() {
 });
   
 
+Guardar_TXT.addEventListener('click', function() {
 
+// Obtener los datos del localStorage
+let datosUsuario = localStorage.getItem('Fondo');
+
+// Verifica si hay datos en localStorage
+if (datosUsuario) {
+    // Crear un Blob con los datos, que es lo que se guardará como archivo
+    let blob = new Blob([datosUsuario], { type: 'text/plain;charset=utf-8' });
+
+    // Usar FileSaver.js para guardar el archivo
+    saveAs(blob, 'Fondo.txt'); // 'datos_usuario.txt' es el nombre del archivo
+} else {
+    console.log('No hay datos en el localStorage');
+}
+    
+
+});
+    
+  
