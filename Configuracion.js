@@ -107,25 +107,25 @@ Aceptar_Config.addEventListener('click', function() {
   
 
 Guardar_TXT.addEventListener('click', function() {
-// Obtener datos desde localStorage
-let datosUsuario = localStorage.getItem('Fondo');
-
-if (datosUsuario) {
-    // Si hay datos, los guardamos en Firestore
-    db.collection("usuarios").doc("usuarioIdUnico").set({
-        usuario: datosUsuario
-    })
-    .then(() => {
-        console.log('Datos guardados en Firebase Firestore');
-    })
-    .catch((error) => {
-        console.error('Error al guardar en Firebase: ', error);
-    });
-} else {
-    console.log('No hay datos en localStorage');
-}
-
-    
+  // Obtener datos desde localStorage
+  let datos = localStorage.getItem('Fondo');
+  
+  
+   // Verificar si hay datos
+   if (datos) {
+       // Crear un Blob con los datos en formato de texto
+       let blob = new Blob([datos], { type: 'text/plain' });
+  
+       // Crear un enlace de descarga
+       let enlace = document.createElement('a');
+       enlace.href = URL.createObjectURL(blob);
+       enlace.download = 'localStorage.txt'; // Nombre del archivo a descargar
+  
+       // Simular el clic en el enlace para iniciar la descarga
+       enlace.click();
+   } else {
+       alert("No hay datos en localStorage.");
+   }
 
 });
     
