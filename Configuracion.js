@@ -107,20 +107,24 @@ Aceptar_Config.addEventListener('click', function() {
   
 
 Guardar_TXT.addEventListener('click', function() {
-
-// Obtener los datos del localStorage
+// Obtener datos desde localStorage
 let datosUsuario = localStorage.getItem('Fondo');
 
-// Verifica si hay datos en localStorage
 if (datosUsuario) {
-    // Crear un Blob con los datos, que es lo que se guardará como archivo
-    let blob = new Blob([datosUsuario], { type: 'text/plain;charset=utf-8' });
-
-    // Usar FileSaver.js para guardar el archivo
-    saveAs(blob, 'Fondo.txt'); // 'datos_usuario.txt' es el nombre del archivo
+    // Si hay datos, los guardamos en Firestore
+    db.collection("usuarios").doc("usuarioIdUnico").set({
+        usuario: datosUsuario
+    })
+    .then(() => {
+        console.log('Datos guardados en Firebase Firestore');
+    })
+    .catch((error) => {
+        console.error('Error al guardar en Firebase: ', error);
+    });
 } else {
-    console.log('No hay datos en el localStorage');
+    console.log('No hay datos en localStorage');
 }
+
     
 
 });

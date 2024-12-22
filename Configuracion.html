@@ -9,12 +9,38 @@
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <!-- Fin Boostrap -->
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <!-- Incluir Firebase SDK -->
+     <script src="https://www.gstatic.com/firebasejs/9.18.0/firebase-app.js"></script>
+     <script src="https://www.gstatic.com/firebasejs/9.18.0/firebase-firestore.js"></script>
 
 
     <title>Document</title>
 </head>
 <body id="Body3">
+
+
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+  
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyAR8hAX6SDcQMFo76WE9gx5_SPv9C0GsRQ",
+      authDomain: "listado-compras-b3292.firebaseapp.com",
+      projectId: "listado-compras-b3292",
+      storageBucket: "listado-compras-b3292.firebasestorage.app",
+      messagingSenderId: "302893880877",
+      appId: "1:302893880877:web:ee0621a7fd78b00ed84aa4"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+  </script>
+
+
+
 
   <!--Barra de navegación-->
  <nav class="navbar">
