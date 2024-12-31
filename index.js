@@ -30,7 +30,9 @@ mostrarPopup_Listado.addEventListener('click', function() {
   const tbody = document.querySelector('#tabla_Index tbody');
   tbody.innerHTML = '';
 
-  if (localStorage.length > 0) {
+  console.log(localStorage.length);
+
+  if (localStorage.length > 4) {
 
     for (let i = 0; i < localStorage.length; i++) {
       Agregar_Listado_LocalStorage(localStorage.key(i));
