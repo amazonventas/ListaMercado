@@ -146,6 +146,11 @@ Aceptar_Config.addEventListener('click', function() {
 
 
   document.getElementById("alert-success").style.display ="block";
+
+  setTimeout(() => {
+    document.getElementById("alert-success").style.display ="none";
+  }, 2000);
+
   document.getElementById("Volver").style.display ="block";
 
 });

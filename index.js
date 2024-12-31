@@ -1,14 +1,19 @@
 
 window.addEventListener("load",function(){
+
+  var Nombre = localStorage.getItem("Nombre_Lista");             
+  var Listado= JSON.parse(localStorage.getItem(Nombre));
+
   document.getElementById('alert-danger').style.display  = 'none';
   document.getElementById('alert-warning').style.display = 'none';
   document.getElementById('alert-Listas_Disponibles').style.display = 'none';
 
-  var Fondo_Pantalla  = localStorage.getItem('Fondo');
-  
-  if (Fondo_Pantalla != null){
+  if (Listado.Fondo != null){
       var Cuerpo = document.getElementById("Body_index");
-      Cuerpo.style.backgroundImage = "url("+ Fondo_Pantalla +")";
+      Cuerpo.style.backgroundImage = "url("+ Listado.Fondo +")";
+  } else {
+    var Cuerpo = document.getElementById("Body_index");
+    Cuerpo.style.backgroundImage = "url('./imagenes/Cielo.jpg')";
   }
 
 
@@ -32,7 +37,7 @@ mostrarPopup_Listado.addEventListener('click', function() {
 
   console.log(localStorage.length);
 
-  if (localStorage.length > 4) {
+  if (localStorage.length > 0) {
 
     for (let i = 0; i < localStorage.length; i++) {
       Agregar_Listado_LocalStorage(localStorage.key(i));
@@ -130,9 +135,9 @@ function Agregar_Listado_LocalStorage(Nombre_Lista) {
 
   }
 
-  if (value !== null && typeof value === 'object') {
+ if (value !== null && typeof value === 'object') {
 
-    if (Nombre_Lista !== "Nombre_Lista") {
+   if (Nombre_Lista !== "Nombre_Lista") {
     
       var tabla = document.getElementById("tabla_Index").getElementsByTagName('tbody')[0];
       

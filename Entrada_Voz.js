@@ -132,10 +132,6 @@ Body1.addEventListener('click', function(event) {
     filas.remove();
     if (elementos.length === 0) {
        document.getElementById("BtnAceptar").hidden = true;
-       localStorage.removeItem('Articulos' );
-       localStorage.removeItem('Cantidad'  );
-       localStorage.removeItem('Precio'    );
-       localStorage.removeItem('Listo'     );
     }
 
   }
@@ -216,6 +212,7 @@ function borrarLista() {
 
   var Nombre  = localStorage.getItem("Nombre_Lista");             
   localStorage.removeItem(Nombre);
+  localStorage.removeItem("Nombre_Lista");
   window.location.href = 'index.html';
 
 }
