@@ -8,7 +8,7 @@ window.addEventListener("load",function(){
   document.getElementById("movil-menu").hidden = true;
   
   var Fondo = document.getElementById("Fondo_Pantalla");
-  Fondo.src ='./imagenes/Blanco Elegante.jpg';    
+  Fondo.src ='./imagenes/Azul Claro.jpg';    
   
   document.getElementById('tamano').style.fontSize = 'medium';
   document.getElementById('tamano').style.color = 'blue';
@@ -53,30 +53,37 @@ document.getElementById('Select_Fondo').addEventListener('change', function() {
     // Dependiendo de la opción seleccionada, realiza una acción
     switch(seleccion) {
         case '1':
-            resultado.src = './imagenes/Blanco ELegante.jpg';
+            resultado.src = './imagenes/Azul Claro.jpg';
             break;
         case '2':
-            resultado.src = './imagenes/Claridad.jpg';
+            resultado.src = './imagenes/Azul Solido.jpg';
             break;
         case '3':
-            resultado.src = './imagenes/Gris Azulado.jpg';
+            resultado.src = './imagenes/Blanco Elegante.jpg';
             break;
 
         case '4':
-            resultado.src = './imagenes/Azul Cuadros.jpg';
-            break;
-        case '5':
             resultado.src = './imagenes/Cielo.jpg';
             break;
+        case '5':
+            resultado.src = './imagenes/Claridad.jpg';
+            break;
         case '6':
-            resultado.src = './imagenes/Estrellas.jpg';
+            resultado.src = './imagenes/Degradado Azul.jpg';
             break;
         case '7':
+            resultado.src = './imagenes/Estrellas.jpg';
+        break;        
+        case '8':
+            resultado.src = './imagenes/Gris Azulado.jpg';
+        break;        
+        case '9':
             resultado.src = './imagenes/Tela morada.jpg';
         break;        
 
     }
 });
+
 
 document.getElementById('Select_Letra').addEventListener('change', function() {
     var seleccion = this.value; // Obtiene el valor de la opción seleccionada
