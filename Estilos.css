@@ -8,7 +8,7 @@
 
 /* Configuración del body */
 body {
-    background-image: url('./imagenes/Degradado\ Azul.jpg');  /* Ruta de la imagen */
+    background-image: url('./imagenes/Cielo.jpg');  /* Ruta de la imagen */
     background-size: cover;  /* Hace que la imagen cubra todo el fondo */
     background-position: center center;  /* Centra la imagen en el fondo */
     background-repeat: no-repeat;  /* Evita que la imagen se repita */
@@ -16,7 +16,6 @@ body {
     font-family: 'Arial', sans-serif;  /* Fuente por defecto */
     min-height: 100vh;  /* Asegura que el body ocupe toda la altura de la pantalla */
 }
-
 
 /* Barra de navegación */
 
@@ -40,6 +39,19 @@ body {
   width: 500px;
 }
 
+
+.Enlace_index {
+  text-decoration: none;
+  color: black;
+  font-size: large;
+  background-color: white;
+  border-style: none;
+}
+
+.Enlace_index:hover {
+  transition: 0.2s;
+  color: blue;
+}
 
 .Boton-abrir-menu {
   margin-left: auto; 
@@ -86,6 +98,7 @@ body {
   box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
 }
 
+
 .movil-lista-nav li{
   list-style: none;
   margin-bottom: 10px;
@@ -106,6 +119,27 @@ transition: 0.3s;
   font-size: medium;
   font-family: 'Courier New', Courier, monospace;
   margin: 200PX;
+}
+
+.Tabla_Listados_Existentes {
+  font-size: medium;
+  font-family: 'Courier New', Courier, monospace;
+  margin: 200PX;
+}
+
+.Tabla_Listados_Existentes :hover {
+  background-color: aqua;
+  cursor: pointer;
+}
+
+.Volver {
+  text-decoration: none;
+  color: black;
+}
+
+
+.Volver :hover {
+  color: green;
 }
 
 /* Ventana Emergente */
@@ -145,11 +179,11 @@ transition: 0.3s;
   border: none;
   border-radius: 5px;
 }
-.popup .btn-aceptar {
+.popup .Aceptar_Lista_New {
   background-color: #4CAF50; /* Verde */
   color: white;
 }
-.popup .btn-cancelar {
+.popup .Cancelar_Lista_New {
   background-color: #f44336; /* Rojo */
   color: white;
 }
@@ -169,4 +203,7 @@ transition: 0.3s;
 
 }
 
+.redes-sociales {
+  margin-top: 10px;
+}
 

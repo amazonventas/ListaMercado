@@ -23,23 +23,38 @@
 
 
  <!--Menú Hamburguesa -->
-<div id="movil-menu" class="menu-oculto">
+ <div id="movil-menu" class="menu-oculto">
   <ul class="movil-lista-nav">
     <li><center><a href="index.html"><strong>Inicio</strong></a></center></li><hr>
-    <li><center><a href=""><strong>Listado Compras </strong></a></center></li><hr>
-    <li><center><a href=""><strong>Listado Tareas  </strong></a></center></li><hr>
+    <li><center><a href="Entrada_Voz.html"><strong>Entrada de Voz </strong></a></center></li><hr>
+    <li><center><a href="Listado.html"><strong>Listado Compras  </strong></a></center></li><hr>
     <li id="Apariencia" ><center><a href="Configuracion.html"><strong>Configuración</strong></a></center></li><hr>
     <li><center><a href=""><strong>Contacto        </strong></a></center></li>
   </ul>
 </div>
 <!--Fin Menú Hamburguesa -->
 
+  <br>
+  <center><p id = "Nombre-Lista" ></p></center>
+  <br>
+
   <center>
   <div class="Contenedor">
   
     <br>
-      <button id="Guardar" type="button" class="btn btn-success">Guardar</button>
-    <br>
+      <button id="Guardar_Listado" type="button" class="btn btn-success">Guardar Lista</button>
+      <button id="Borrar_Campos" type="button" class="btn btn-warning">Borrar Campos</button> 
+      <button id="Ordenar_Alfabeticamente" type="button" class="btn btn-secondary">Ordenar por Alfabeto</button> <br>
+
+
+    <br><br>
+
+    <center>
+    <div id="Guardado_Lista" style="width: 25%;"  class="alert alert-success" role="alert">
+      Guardado Exitoso
+    </div>
+    </center>
+
     <br>
     <div style="width: 220px;" class="form-check">
       <input class="form-check-input" type="checkbox" value="" id="Ver_Precios" checked>
@@ -65,157 +80,61 @@
       </table>
     </div>
 
+
+    <!-- Ventana Emergente Personalizada -->
+    <div id="popupOverlay" class="popup-overlay">
+      <div class="popup">
+  
+          <p>¿Desea Borrar todas las<br>
+              Cantidades y Precios?</p>
+   
+          <button id="Aceptar"  class="Aceptar_Lista_New"  >Aceptar</button>
+          <button id="Cancelar" class="Cancelar_Lista_New" >Cancelar</button>
+ 
+      </div>
+    </div>
+    
+    <!-- Fin Ventana Emergente Personalizada -->
+    
+
   <br><br>
-  <a style="text-decoration: none;" href="index.html"><button id="Editar" type="button" class="btn btn-warning">EDITAR</button></a>
+  <a style="text-decoration: none;" href="Entrada_Voz.html"><button id="Editar" type="button" class="btn btn-warning">EDITAR</button></a>
   <button id="Calcular" type="button" class="btn btn-primary">CALCULAR</button>
 
   <br><br>
 
   <h4 id="Resultado" ></h4>
 
+
  <!-- Carga Datos en Tabla -->
- <script>
-
-  //localStorage.clear();
-  var Lista_Articulos= JSON.parse(localStorage.getItem('Listado' ));
-  var Lista_Cantidad = JSON.parse(localStorage.getItem('Cantidad'));
-  var Lista_Precios  = JSON.parse(localStorage.getItem('Precio'  ));
-  var Lista_Listo    = JSON.parse(localStorage.getItem('Listo'   ));
-  var Tamano_Letra    = localStorage.getItem('Letra_Size');
-  var Fondo_Pantalla  = localStorage.getItem('Fondo');
-  var Tipo_Letra      = localStorage.getItem('TipoLetra');
-
-  var NColumnas = Lista_Articulos[0];
-
-  if (Lista_Cantidad === null) {
-    Lista_Cantidad = new Array(NColumnas).fill("");
-  } else {
-    Lista_Cantidad.lenght = NColumnas;
-  }
-
-  if (Lista_Precios === null) {
-    Lista_Precios = new Array(NColumnas).fill("");
-  } else {
-    Lista_Precios.lenght = NColumnas;
-  }
-
-  if (Lista_Listo === null) {
-    Lista_Listo = new Array(NColumnas).fill(false);
-  } else {
-    Lista_Listo.lenght = NColumnas;
-  }
+<script>
 
 
-  for (var i = 1; i < NColumnas; i++) {
-    agregarFila(Lista_Articulos[i], Lista_Cantidad[i], Lista_Precios[i], Lista_Listo[i] , i , 0);
-  };
-  
-  
-  function agregarFila(Articulo, Cantidad, Precio, Listo, Identificador ,Sumar) {
-  
-   // Obtén el cuerpo de la tabla
-   var tabla = document.getElementById("tabla1").getElementsByTagName('tbody')[0];
-   
-   // Crea una nueva fila
-   var nuevaFila = tabla.insertRow();
-       nuevaFila.classList.add("Space_Tabla");
-   
-   // Crea las celdas para la nueva fila
-   var celdaNombre   = nuevaFila.insertCell(0);
-   var celdaCantidad = nuevaFila.insertCell(1);
-   var celdaPrecio   = nuevaFila.insertCell(2);
-   var celdaListo    = nuevaFila.insertCell(3);
-  
-   var Total_id = Identificador + Sumar;
+ 
 
-   if (Cantidad === undefined) {
-     Cantidad =" ";
-   };
-
-   if (Precio === undefined) {
-     Precio =" ";
-   };
-
-   if (Listo === undefined) {
-     Listo =false;
-   };
-
-   if (Tipo_Letra != null){
-     celdaNombre.style.fontFamily = Tipo_Letra;
-   }
-
-
-   celdaNombre.id = "Fila" + Total_id;
-  
-   celdaNombre.innerHTML   ='<center>'+Articulo+'</center>';
-   celdaCantidad.innerHTML ='<center><input style="width: 60px;"  Class="form-control" type="number" id=Cant'   + Total_id    +' value ='+ Cantidad +'></center>';
-   celdaPrecio.innerHTML   ='<center><input style="width: 70px;" Class="form-control" type="number" id=Prec'   + Total_id    +' value ='+ Precio   +'></center>';   
-   celdaListo.innerHTML    ='<center><input style="height: 15px;" class="form-check-input" type="checkbox" id='+ Total_id +'></center>';    
-  
-   var Listo_Check = document.getElementById(Total_id);
-       Listo_Check.checked = Listo;
-       
-   if (Listo_Check.checked == true) {
-    var Elemento = document.getElementById(celdaNombre.id);
-        Elemento.style.color ="lightgray";
-        Elemento.disabled = true;
-
-    var Elemento = document.getElementById("Cant"+Total_id);
-        Elemento.style.color ="lightgray";
-        Elemento.disabled = true;
-
-    var Elemento = document.getElementById("Prec"+Total_id);
-        Elemento.style.color ="lightgray";
-        Elemento.disabled = true;
-   }
-         
-
-   if (Listo_Check.checked == false) {
-    var Elemento = document.getElementById(celdaNombre.id);
-        Elemento.style.color ="black";
-        Elemento.disabled = false;
-
-    var Elemento = document.getElementById("Cant"+Total_id);
-        Elemento.style.color ="black";
-        Elemento.disabled = false;
-
-    var Elemento = document.getElementById("Prec"+Total_id);
-        Elemento.style.color ="black";
-        Elemento.disabled = false;
-   }
-
-
-  };
-
-  if (Tamano_Letra != null){
-    let tabla = document.getElementById("tabla1");
-    let filas = tabla.getElementsByTagName("tr");
-    let tamanoLetra = Tamano_Letra;
-
-    for (let i = 0; i < filas.length; i++) {
-      let celdas = filas[i].getElementsByTagName("td");
-      if (celdas.length > 0) {
-        celdas[0].style.fontSize = tamanoLetra;
-      }
-    }
-
-  //  let th_cero = document.getElementsByTagName("th")[0];
-  //  let th_uno  = document.getElementsByTagName("th")[1];
-  //  th_cero.style.fontSize = tamanoLetra;
-  //  th_uno.style.fontSize = tamanoLetra;
-  }
-
-  if (Fondo_Pantalla != null){
-    var Cuerpo = document.getElementById("Body2");
-    Cuerpo.style.backgroundImage = "url("+ Fondo_Pantalla +")";
-  }
-
-
- </script>
+</script>
  <!-- Fin de Carga Datos en Tabla -->
 
 
   </center>
+
+  <br><br><br><br>
+  
+  <footer>
+    <center>
+    <div class="contenido">
+        <p>&copy; <strong>2024 Listado por Voz - Todos los derechos reservados</strong></p>
+        <div class="redes-sociales">
+    <!-- 
+          <a href="https://www.facebook.com/electrofacil80/" target="_blank"><img class="IconRedes" src="Imagenes/274791_facebook_social network_icon.png" alt=""></i></a>
+          <a href="https://www.youtube.com/@electricidadfacil80" target="_blank" ><img class="IconRedes" src="Imagenes/341094_youtube_icon.png" alt=""></i></a>
+          <a href="https://wa.me/18292918680" target="_blank"><img class="IconRedes" src="Imagenes/pngtree-whatsapp-icon-png-image_3584844.jpg" alt=""></i></a>
+     -->
+        </div>
+    </div>
+  </center>
+  </footer>
+  
 
   <script src="Listado.js"></script>
 

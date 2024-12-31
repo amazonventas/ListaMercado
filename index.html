@@ -11,26 +11,18 @@
 
     <title>Document</title>
 </head>
-<body id="Body1">
+<body id="Body_index">
 
 <!--Barra de navegación-->
 <nav class="navbar">
   <img class="Icono" src="./imagenes/icono-list.bmp" alt="">
-  <img class="Titulo_Compras" src="./imagenes/Lista de Compras.bmp" alt="">
   <button class="Boton-abrir-menu" style="border-style: none;" id="hamburguesa"><img style="height: 50px; width: 50px;" src="./imagenes/menu.png" alt="" ></button>
 </nav>
 <!--Fin Barra de navegación-->
 
 
  <!--Menú Hamburguesa -->
-<div id="movil-menu" class="menu-oculto">
-  <ul class="movil-lista-nav">
-    <li><center><a href="index.html"><strong>Inicio</strong></a></center></li><hr>
-    <li><center><a href=""><strong>Listado Compras </strong></a></center></li><hr>
-    <li><center><a href=""><strong>Listado Tareas  </strong></a></center></li><hr>
-    <li id="Apariencia" ><center><a href="Configuracion.html"><strong>Configuración</strong></a></center></li><hr>
-    <li><center><a href=""><strong>Contacto        </strong></a></center></li>
-  </ul>
+<div style="visibility: hidden;" id="movil-menu" class="menu-oculto">
 </div>
 <!--Fin Menú Hamburguesa -->
 
@@ -39,163 +31,101 @@
   <center>
   <div id="Contenedor" class="Contenedor" >
   
-     <button id="start-btn" type="button" class="btn btn-success"><strong> <span style="color: white;">Iniciar Reconocimiento de Voz </span></strong></button>
-    <br><br>
-
-    <div class="form-check" style="width: 150px;">
-      <input class="form-check-input" type="radio" name="flexRadioDefault" id="Palabras" checked>
-      <label class="form-check-label" for="flexRadioDefault1">
-        Palabras
-      </label>
-    </div>
-    <div class="form-check"style="width: 150px;">
-      <input class="form-check-input" type="radio" name="flexRadioDefault" id="Frases" >
-      <label class="form-check-label" for="flexRadioDefault2">
-        Frases
-      </label>
-    </div>
-
-    <br>
-
-    <button type="button" id="Borrar_Todo" class="btn btn-danger" onclick="mostrarPopup()">Borrar Lista</button>
-
-    <br><br>
+    <br><br><br>
 
     <div class="Contenedor_Tabla">
-      <table id="tabla" class="table" >
-        <thead>
-          <tr>
-            <th style="padding: 10px; font-size: small;"> <center>ARTICULO</center></th>
-            <th style="padding: 10px; font-size: small;"> <center>ACCION</center></th>
-          </tr>
-        </thead>
-
+      <table class="table" >
         <tbody style="padding: 50PX;">
-        </tbody  >
 
+          <tr>
+            <td><center><img class="Titulo_Compras" src="./imagenes/Lista de Compras.bmp" alt=""></center><br></td>
+          </tr>
+        
+          <tr>
+            <td><center><button class="Enlace_index" id="mostrarPopup_Lista_Nueva">Crear Nuevo Listado</button></center></td>
+          </tr>
+  
+          <tr>
+            <td><center><button class="Enlace_index" id="mostrarPopup_Listado"    >Abrir Listado Existente</button></center></td>
+          </tr>
+
+        </tbody  >
       </table>
+      
+      <p id="Mensaje_localstorage"; style="color:red;"  ><br><strong></strong></p>
+
     </div>
   
   </div>
 
-  <br>
-
- <center><a href="Listado.html"><button id="BtnAceptar" type="button" class="btn btn-primary">ACEPTAR</button></a></center>  
-
- <br><br><br>
-  
-  <!-- Carga Datos en Tabla ya existente -->
-  <script>
-
-  //localStorage.clear();      
-
-   var Lista_Articulos = JSON.parse(localStorage.getItem('Listado'));
-   var Tamano_Letra    = localStorage.getItem('Letra_Size');
-   var Fondo_Pantalla  = localStorage.getItem('Fondo');
-   var Tipo_Letra      = localStorage.getItem('TipoLetra');
-
-   if (Lista_Articulos != null){
-      var NColumnas = Lista_Articulos[0];
-      document.getElementById("BtnAceptar").hidden = false;
-
-     for (var i = 1; i < NColumnas; i++) {
-      agregarFila(Lista_Articulos[i],i, 0);
-     }
-
-
-   function agregarFila(Articulo, Identificador ,Cantidad) {
-   
-     // Obtén el cuerpo de la tabla
-     var tabla = document.getElementById("tabla").getElementsByTagName('tbody')[0];
-     
-       // Crea una nueva fila
-       var nuevaFila = tabla.insertRow();
-           nuevaFila.classList.add("Space_Tabla");
-     
-       // Crea las celdas para la nueva fila
-       var celdaNombre = nuevaFila.insertCell(0);
-       var celdaBorrar = nuevaFila.insertCell(1);
-       var Total_id = Identificador + Cantidad
-      
-       celdaNombre.id = "Fila" + Total_id;
-
-       if (Tipo_Letra != null){
-         celdaNombre.style.fontFamily = Tipo_Letra;
-       }
-
-       celdaNombre.innerHTML   ='<center>'+Articulo+'</center>';
-       celdaBorrar.innerHTML   ='<center><button Class="Eliminar" id=Borrar' + Total_id +'>borrar</button></center>';
-   
-      };
-
-    } else {
-
-    document.getElementById("BtnAceptar").hidden = true;
-    
-  };
-
-
-  if (Tamano_Letra != null){
-    let tabla = document.getElementById("tabla");
-    let filas = tabla.getElementsByTagName("tr");
-    let tamanoLetra = Tamano_Letra;
-
-    for (let i = 0; i < filas.length; i++) {
-      let celdas = filas[i].getElementsByTagName("td");
-      if (celdas.length > 0) {
-        celdas[0].style.fontSize = tamanoLetra;
-      }
-    }
-
-  }
-
-  if (Fondo_Pantalla != null){
-    var Cuerpo = document.getElementById("Body1");
-    Cuerpo.style.backgroundImage = "url("+ Fondo_Pantalla +")";
-  }
-
-  </script>
-
-  <!-- Fin Carga Datos en Tabla ya existente -->
 
   <!-- Ventana Emergente Personalizada -->
   <div id="popupOverlay" class="popup-overlay">
-      <div class="popup">
-          <p>¿Realmente quieres borrar la lista? Esta acción no se puede deshacer.</p>
-          <button class="btn-aceptar" onclick="borrarLista()">Aceptar</button>
-          <button class="btn-cancelar" onclick="cerrarPopup()">Cancelar</button>
+    <div class="popup">
+
+      <div id="Crear_Listado">
+        <p>Introduzca Nombre del Nuevo Listado:</p>
+        <input type="text" class="form-control" id="Nombre_Listado" >
+        
+        <br>
+  
+        <div id="alert-danger" class="alert alert-danger" role="alert">
+          Este Nombre ya existe.
+        </div>
+  
+        <div id="alert-warning" class="alert alert-warning" role="alert">
+          Debe ingresar un Nombre.
+        </div>
+  
+  
+        <button id="Aceptar_Lista_New"  class="Aceptar_Lista_New"  >Aceptar</button>
+        <button id="Cancelar_Lista_New" class="Cancelar_Lista_New" >Cancelar</button>
+      </div>
+
+      <div id="Abrir_Listado">
+
+        <p>Seleccione un Listado:</p>
+
+        <div id="alert-Listas_Disponibles" class="alert alert-warning" role="alert">
+          No hay Listadas almacenadas.
+        </div>
+
+        <table id="tabla_Index" class="table" >
+          <tbody style="padding: 50PX;">
+          </tbody  >
+        </table>
+
+        <button id="Cancelar_Listado" class="Cancelar_Lista_New" >Cerrar</button>
+
+      </div>
+
+
+    </div>
+  </div>
+  
+  <!-- Fin Ventana Emergente Personalizada -->
+
+
+  <br><br><br><br>
+
+
+
+<footer>
+  <center>
+  <div class="contenido">
+      <p>&copy; <strong>2024 Listado por Voz - Todos los derechos reservados</strong></p>
+      <div class="redes-sociales">
+  <!-- 
+        <a href="https://www.facebook.com/electrofacil80/" target="_blank"><img class="IconRedes" src="Imagenes/274791_facebook_social network_icon.png" alt=""></i></a>
+        <a href="https://www.youtube.com/@electricidadfacil80" target="_blank" ><img class="IconRedes" src="Imagenes/341094_youtube_icon.png" alt=""></i></a>
+        <a href="https://wa.me/18292918680" target="_blank"><img class="IconRedes" src="Imagenes/pngtree-whatsapp-icon-png-image_3584844.jpg" alt=""></i></a>
+   -->
       </div>
   </div>
+</center>
+</footer>
 
-  <script>
-      // Función para mostrar el popup
-      function mostrarPopup() {
-          document.getElementById('popupOverlay').style.display = 'block';
-      }
-
-      // Función para cerrar el popup
-      function cerrarPopup() {
-          document.getElementById('popupOverlay').style.display = 'none';
-      }
-
-      // Función para borrar la lista
-      function borrarLista() {
- 
-        var tabla = document.getElementById("tabla");
-        var tbody = tabla.getElementsByTagName("tbody")[0];
-
-        // Eliminar todas las filas del cuerpo de la tabla
-        while (tbody.rows.length > 0) {
-          tbody.deleteRow(0);  // Eliminar la primera fila
-        }
-        document.getElementById('popupOverlay').style.display = 'none';
-        document.getElementById("BtnAceptar").hidden = true;
-      }
-
-  </script>
-
-
-   <script src="script.js"></script>
+   <script src="index.js"></script>
 
 </body>
 </html>

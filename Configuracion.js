@@ -1,21 +1,37 @@
+
 window.addEventListener("load",function(){
 
-    document.getElementById("movil-menu").hidden = true;
-    
-    var Fondo = document.getElementById("Fondo_Pantalla");
-    Fondo.src ='./imagenes/Blanco Elegante.jpg';    
+  var Nombre = localStorage.getItem("Nombre_Lista");             
+  var Listado= JSON.parse(localStorage.getItem(Nombre));
 
-    document.getElementById('tamano').style.fontSize = 'medium';
-    document.getElementById('tamano').style.color = 'blue';
-    document.getElementById('Estilo').style.fontFamily = 'Courier New';    
+  document.getElementById("Nombre-Lista").innerHTML ="Listado Activo: <br><strong>" + Nombre + "</strong>";
+  document.getElementById("movil-menu").hidden = true;
+  
+  var Fondo = document.getElementById("Fondo_Pantalla");
+  Fondo.src ='./imagenes/Blanco Elegante.jpg';    
+  
+  document.getElementById('tamano').style.fontSize = 'medium';
+  document.getElementById('tamano').style.color = 'blue';
+  document.getElementById('Estilo').style.fontFamily = 'Courier New';    
+  
+  if (Listado.Fondo != null){
+      var Cuerpo = document.getElementById("Body3");
+      Cuerpo.style.backgroundImage = "url("+ Listado.Fondo +")";
+    }
 
-    var Fondo_Pantalla  = localStorage.getItem('Fondo');
+  if (Listado.EstiloLetra != null){
+    var resultado = document.getElementById('Estilo');
+    resultado.style.fontFamily = Listado.EstiloLetra;
+  }
 
-    if (Fondo_Pantalla != null){
-        var Cuerpo = document.getElementById("Body3");
-        Cuerpo.style.backgroundImage = "url("+ Fondo_Pantalla +")";
-      }
-    
+  if (Listado.TamanoLetra != null){
+    var resultado = document.getElementById('tamano');
+    resultado.style.fontSize = Listado.TamanoLetra;
+  }
+
+  document.getElementById("alert-success").style.display ="none";
+  document.getElementById("Volver").style.display ="none";    
+
 }); 
 
 hamburguesa.addEventListener("click",function(){
@@ -37,7 +53,7 @@ document.getElementById('Select_Fondo').addEventListener('change', function() {
     // Dependiendo de la opción seleccionada, realiza una acción
     switch(seleccion) {
         case '1':
-            resultado.src = './imagenes/Blanco Elegante.jpg';
+            resultado.src = './imagenes/Blanco ELegante.jpg';
             break;
         case '2':
             resultado.src = './imagenes/Claridad.jpg';
@@ -45,6 +61,20 @@ document.getElementById('Select_Fondo').addEventListener('change', function() {
         case '3':
             resultado.src = './imagenes/Gris Azulado.jpg';
             break;
+
+        case '4':
+            resultado.src = './imagenes/Azul Cuadros.jpg';
+            break;
+        case '5':
+            resultado.src = './imagenes/Cielo.jpg';
+            break;
+        case '6':
+            resultado.src = './imagenes/Estrellas.jpg';
+            break;
+        case '7':
+            resultado.src = './imagenes/Tela morada.jpg';
+        break;        
+
     }
 });
 
@@ -73,60 +103,50 @@ document.getElementById('Select_Estilo').addEventListener('change', function() {
 
     // Dependiendo de la opción seleccionada, realiza una acción
     switch(seleccion) {
-        case '1':
-            resultado.style.fontFamily = 'Courier New', Courier, monospace;
+        case 'Courier New':
+            resultado.style.fontFamily = 'Courier New';
             break;
-        case '2':
-            resultado.style.fontFamily = 'Franklin Gothic Medium', 'Arial Narrow';
+        case 'Franklin Gothic':
+            resultado.style.fontFamily = 'Franklin Gothic Medium';
             break;
-        case '3':
+        case 'Times New Roman':
             resultado.style.fontFamily = 'Times New Roman';
             break;
-        case '4':
+        case 'Segoe UI':
             resultado.style.fontFamily = 'Segoe UI';
             break;
         
     }
+
 });
 
 Aceptar_Config.addEventListener('click', function() {
-  var Cuerpo = document.getElementById("Body3");
+
   var Fondo = document.getElementById("Fondo_Pantalla").src;
   var Letrasize = document.getElementById('tamano').style.fontSize;
   var FamiliaFont = document.getElementById('Estilo').style.fontFamily;
 
+  var Letrasize = document.getElementById("Select_Letra");
+  var LetrasizeValue = Letrasize.value;
 
+  var FamiliaFont = document.getElementById("Select_Estilo");
+  var FamiliaFontValue = FamiliaFont.value;
+
+  var Cuerpo = document.getElementById("Body3");
   Cuerpo.style.backgroundImage = "url("+ Fondo +")";
 
-  localStorage.setItem('Letra_Size', Letrasize);
-  localStorage.setItem('Fondo', Fondo);
-  localStorage.setItem('TipoLetra', FamiliaFont);
+  var Nombre = localStorage.getItem("Nombre_Lista");             
+  var Listado= JSON.parse(localStorage.getItem(Nombre));
+
+  Listado.Fondo = Fondo;
+  Listado.TamanoLetra = LetrasizeValue;
+  Listado.EstiloLetra = FamiliaFontValue;
+
+  localStorage.setItem(Nombre, JSON.stringify(Listado));
 
 
-});
-  
-
-Guardar_TXT.addEventListener('click', function() {
-  // Obtener datos desde localStorage
-  let datos = localStorage.getItem('Fondo');
-  
-  
-   // Verificar si hay datos
-   if (datos) {
-       // Crear un Blob con los datos en formato de texto
-       let blob = new Blob([datos], { type: 'text/plain' });
-  
-       // Crear un enlace de descarga
-       let enlace = document.createElement('a');
-       enlace.href = URL.createObjectURL(blob);
-       enlace.download = 'localStorage.txt'; // Nombre del archivo a descargar
-  
-       // Simular el clic en el enlace para iniciar la descarga
-       enlace.click();
-   } else {
-       alert("No hay datos en localStorage.");
-   }
+  document.getElementById("alert-success").style.display ="block";
+  document.getElementById("Volver").style.display ="block";
 
 });
-    
   
