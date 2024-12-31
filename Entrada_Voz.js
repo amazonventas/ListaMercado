@@ -27,7 +27,6 @@ window.addEventListener("load",function(){
     document.getElementById("BtnAceptar").hidden = false;
   }
 
-
   let tamaño = obtenerTamañoLocalStorage();
   console.log("Espacio ocupado en localStorage (%): " + tamaño);
 
@@ -56,7 +55,6 @@ if (!('webkitSpeechRecognition' in window)) {
   alert("Lo siento, tu navegador no soporta la función de reconocimiento de voz.");
 } else {
   
-  
   const recognition = new webkitSpeechRecognition(); // Creación de la instancia de la API
   recognition.continuous = false; // El reconocimiento se detendrá automáticamente después de un segmento de habla
   recognition.interimResults = false; // No mostrará resultados intermedios
@@ -72,10 +70,7 @@ if (!('webkitSpeechRecognition' in window)) {
 
   recognition.onresult = function(event) {
 
-//    var boton = document.getElementById("start-btn");
-
-
-     // La transcripción resultante se obtiene en event.results
+    // La transcripción resultante se obtiene en event.results
     const transcript = event.results[0][0].transcript;
 
     var EntradaVoz = document.getElementById("Palabras").checked;
@@ -233,5 +228,26 @@ function obtenerTamañoLocalStorage() {
 
   let OcupacionKB = tamañoKB/50;
   return OcupacionKB.toFixed(2);  // Retornamos el tamaño en KB con dos decimales
+}
+
+Enviar.addEventListener('click', function() {
+  var Nombre = localStorage.getItem("Nombre_Lista");             
+  var Listado= JSON.parse(localStorage.getItem(Nombre));
+
+  Descargar_Objeto_Como_Txt(Listado, Nombre);
+
+});
+
+
+function Descargar_Objeto_Como_Txt(obj, fileName) {
+
+  const jsonString = JSON.stringify(obj, null, 2); 
+  const blob = new Blob([jsonString], { type: 'text/plain' });
+
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = fileName;
+
+  link.click();
 }
 
