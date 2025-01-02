@@ -167,7 +167,6 @@ function agregarFila(Articulo, Identificador ,Cantidad) {
 };
 
 
-
 function GuardarLocal() {
 
   // Obtener la tabla y sus filas
@@ -182,7 +181,6 @@ function GuardarLocal() {
   for (var i = 1; i < NColumnas; i++) { 
       var celdas = filas[i].getElementsByTagName("td");
       ArrayArticulo[i] = celdas[0].textContent;
-
   }
 
    var Nombre = localStorage.getItem("Nombre_Lista");             

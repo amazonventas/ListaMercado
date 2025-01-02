@@ -67,11 +67,7 @@ Aceptar_Lista_New.addEventListener('click', function() {
   var ListaNueva = document.getElementById("Nombre_Listado").value;
   var N = localStorage.length;
   
-
   if (ListaNueva !== "") {
-
-    document.getElementById('alert-danger').style.display   = 'none';
-    document.getElementById('alert-warning').style.display  = 'none' ;
 
     var Nueva_Lista = {
       Articulos: [],
@@ -103,7 +99,11 @@ Aceptar_Lista_New.addEventListener('click', function() {
 
         if (ListaNueva == key){
           document.getElementById('alert-danger').style.display   = 'block';
-          document.getElementById('alert-warning').style.display  = 'none' ;
+
+          setTimeout(() => {
+            document.getElementById('alert-danger').style.display ="none";
+          }, 2000);
+
           break;
         } else { Contador++;}
   
@@ -118,8 +118,12 @@ Aceptar_Lista_New.addEventListener('click', function() {
     }
   
   } else {
-    document.getElementById('alert-danger').style.display   = 'none';
     document.getElementById('alert-warning').style.display  = 'block' ;
+
+    setTimeout(() => {
+      document.getElementById('alert-warning').style.display ="none";
+    }, 2000);
+
   }
 
 });  
@@ -147,9 +151,12 @@ Aceptar_Importada.addEventListener('click', function() {
         localStorage.removeItem("Nombre_Lista");
         localStorage.removeItem(Nombre_ListaNueva);
         console.log("Error, se borro "+ Nombre_ListaNueva);
-        document.getElementById('alert-danger-import').style.display  = 'none';
-        document.getElementById('alert-warning-import').style.display = 'none';
         document.getElementById('alert-info-import').style.display = 'block';
+
+        setTimeout(() => {
+          document.getElementById('alert-info-import').style.display ="none";
+        }, 2000);
+
       }
   
     } else {
@@ -161,8 +168,11 @@ Aceptar_Importada.addEventListener('click', function() {
            
         if (Nombre_ListaNueva == key){
           document.getElementById('alert-danger-import').style.display   = 'block';
-          document.getElementById('alert-warning-import').style.display  = 'none' ;
-          document.getElementById('alert-info-import').style.display = 'none';
+
+          setTimeout(() => {
+            document.getElementById('alert-danger-import').style.display ="none";
+          }, 2000);
+
           break;
         } else { Contador++;}
   
@@ -182,10 +192,13 @@ Aceptar_Importada.addEventListener('click', function() {
           localStorage.removeItem("Nombre_Lista");
           localStorage.removeItem(Nombre_ListaNueva);
           console.log("Error, se borro "+ Nombre_ListaNueva);
-          document.getElementById('alert-danger-import').style.display  = 'none';
-          document.getElementById('alert-warning-import').style.display = 'none';
           document.getElementById('alert-info-import').style.display = 'block';
-          }
+
+          setTimeout(() => {
+            document.getElementById('alert-info-import').style.display ="none";
+          }, 2000);
+
+        }
       
       }
 
@@ -193,9 +206,11 @@ Aceptar_Importada.addEventListener('click', function() {
 
 
   } else { 
-    document.getElementById('alert-danger-import').style.display  = 'block';
-    document.getElementById('alert-warning-import').style.display = 'none';
-    document.getElementById('alert-info-import').style.display = 'none';
+    document.getElementById('alert-warning-import').style.display  = 'block';
+
+    setTimeout(() => {
+      document.getElementById('alert-warning-import').style.display ="none";
+    }, 2000);
 
   }
 
@@ -205,21 +220,17 @@ Aceptar_Importada.addEventListener('click', function() {
 
 Cancelar_Lista_New.addEventListener('click', function() {
   document.getElementById('popupOverlay').style.display = 'none';
-  document.getElementById('alert-danger').style.display   = 'none';
-  document.getElementById('alert-warning').style.display  = 'none' ;
 });  
 
 Cancelar_Listado.addEventListener('click', function() {
   document.getElementById('popupOverlay').style.display = 'none';
-  document.getElementById('alert-danger').style.display   = 'none';
-  document.getElementById('alert-warning').style.display  = 'none' ;
 });  
 
 Cancelar_Importada.addEventListener('click', function() {
   document.getElementById('popupOverlay').style.display = 'none';
-  document.getElementById('alert-danger-import').style.display  = 'none';
-  document.getElementById('alert-warning-import').style.display = 'none';
 });  
+
+
 
 function Agregar_Listado_LocalStorage(Nombre_Lista) {
 

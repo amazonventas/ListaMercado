@@ -14,15 +14,6 @@ window.addEventListener("load",function(){
     Cuerpo.style.backgroundImage = "url("+ Listado.Fondo +")";
   }
 
-  if (Listado != null){
-    document.getElementById("Listado_Exportar_Articulos"  ).value = Listado.Articulos;
-    document.getElementById("Listado_Exportar_Cantidad"   ).value = Listado.Cantidad;
-    document.getElementById("Listado_Exportar_Precios"    ).value = Listado.Precios;
-    document.getElementById("Listado_Exportar_Listo"      ).value = Listado.Listo;
-    document.getElementById("Listado_Exportar_Fondo"      ).value = Listado.Fondo;
-    document.getElementById("Listado_Exportar_LetraEstilo").value = Listado.TamanoLetra;
-    document.getElementById("Listado_Exportar_LetraTamano").value = Listado.EstiloLetra;
-  }
 
 }); 
 
@@ -40,8 +31,36 @@ hamburguesa.addEventListener("click",function(){
 }); 
 
 
+Exportar.addEventListener("click",function(){
 
-function compartirWhatsapp(mensaje) {
+  var Whassapp = document.getElementById("Lista_Simple").checked;
+
+  if (Whassapp == true) { Compartir_Whatsapp() }
+                  else  { Compartir_App()      };
+
+}); 
+
+
+
+function Compartir_Whatsapp() {
+
+  var Nombre = localStorage.getItem("Nombre_Lista");             
+  var Listado= JSON.parse(localStorage.getItem(Nombre));
+
+  var NColumnas= Listado.Articulos.length;
+  var Texto ="";
+
+  if (NColumnas !== 0) {
+    for (var i = 1; i < NColumnas; i++) {
+    Texto = Texto + Listado.Articulos[i] + "\n";
+    }
+  }
+  window.open(`https://wa.me/?text=${encodeURIComponent(Texto)}`, "_blank");
+}
+
+
+
+function Compartir_App() {
 
   var Nombre = localStorage.getItem("Nombre_Lista");             
   var Listado= localStorage.getItem(Nombre);
