@@ -2,6 +2,7 @@
 
 window.addEventListener("load",function(){
 
+
   var Nombre = localStorage.getItem("Nombre_Lista");             
   var Listado= JSON.parse(localStorage.getItem(Nombre));
 
@@ -230,24 +231,25 @@ function obtenerTamañoLocalStorage() {
   return OcupacionKB.toFixed(2);  // Retornamos el tamaño en KB con dos decimales
 }
 
-Enviar.addEventListener('click', function() {
-  var Nombre = localStorage.getItem("Nombre_Lista");             
-  var Listado= JSON.parse(localStorage.getItem(Nombre));
-
-  Descargar_Objeto_Como_Txt(Listado, Nombre);
-
-});
 
 
-function Descargar_Objeto_Como_Txt(obj, fileName) {
-
-  const jsonString = JSON.stringify(obj, null, 2); 
-  const blob = new Blob([jsonString], { type: 'text/plain' });
-
-  const link = document.createElement('a');
-  link.href = URL.createObjectURL(blob);
-  link.download = fileName;
-
-  link.click();
-}
-
+//Recibir.addEventListener('click', function() {
+//
+//  if (navigator.share) {
+//
+//      navigator.share({
+//        title: 'Título del contenido',
+//        text: 'Aquí va una descripción o el texto del contenido que quieres compartir.',
+//        url: 'https://ejemplo.com'  // El enlace que deseas compartir
+//      })
+//      .then(() => console.log('Contenido compartido exitosamente'))
+//      .catch((error) => console.log('Error al compartir: ', error));
+//
+//
+//  } else {
+//    console.log('La API Web Share no está disponible en este navegador');
+//  }
+//
+//
+//
+//});

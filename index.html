@@ -49,6 +49,10 @@
             <td><center><button class="Enlace_index" id="mostrarPopup_Listado"    >Abrir Listado Existente</button></center></td>
           </tr>
 
+          <tr>
+            <td><center><button class="Enlace_index" id="mostrarPopup_Importar"    >Importar Listado</button></center></td>
+          </tr>
+
         </tbody  >
       </table>
       
@@ -99,6 +103,30 @@
 
       </div>
 
+      <div id="Importar_Listado">
+        <p>Introduzca nombre a guardar del listado importado:</p>
+        <input type="text" class="form-control" id="Nombre_Listado_Importado" >
+        <br>
+
+        <div id="alert-danger-import" class="alert alert-danger" role="alert">
+          Este Nombre ya existe.
+        </div>
+  
+        <div id="alert-warning-import" class="alert alert-warning" role="alert">
+          Debe ingresar un Nombre.
+        </div>
+  
+        <div id="alert-info-import" class="alert alert-info" role="alert">
+          Debe pegar el codigo recibido por Whassap.
+        </div>
+
+        <textarea class="form-control" id="textarea" rows="3" style="resize: none; overflow-y: auto;" placeholder="Pegue aquí codigo recibido..."></textarea>
+              
+        <br>
+  
+        <button id="Aceptar_Importada"  class="Aceptar_Lista_New"  >Aceptar</button>
+        <button id="Cancelar_Importada" class="Cancelar_Lista_New" >Cancelar</button>
+      </div>
 
     </div>
   </div>
@@ -106,7 +134,7 @@
   <!-- Fin Ventana Emergente Personalizada -->
 
 
-  <br><br><br><br>
+  <br><br><br><br><br><br><br>
 
 
 

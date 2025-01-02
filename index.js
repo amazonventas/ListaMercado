@@ -1,41 +1,44 @@
 
 window.addEventListener("load",function(){
 
-  var Nombre = localStorage.getItem("Nombre_Lista");             
+  var Nombre = localStorage.getItem("Nombre_Lista");       
   var Listado= JSON.parse(localStorage.getItem(Nombre));
-
+ 
   document.getElementById('alert-danger').style.display  = 'none';
   document.getElementById('alert-warning').style.display = 'none';
   document.getElementById('alert-Listas_Disponibles').style.display = 'none';
+  document.getElementById('alert-danger-import').style.display  = 'none';
+  document.getElementById('alert-warning-import').style.display = 'none';
+  document.getElementById('alert-info-import').style.display = 'none';
 
-  if (Listado.Fondo != null){
-      var Cuerpo = document.getElementById("Body_index");
-      Cuerpo.style.backgroundImage = "url("+ Listado.Fondo +")";
-  } else {
-    var Cuerpo = document.getElementById("Body_index");
-    Cuerpo.style.backgroundImage = "url('./imagenes/Cielo.jpg')";
-  }
+ if (Listado != null){
+     var Cuerpo = document.getElementById("Body_index");
+     Cuerpo.style.backgroundImage = "url("+ Listado.Fondo +")";
+ } else {
+   var Cuerpo = document.getElementById("Body_index");
+   Cuerpo.style.backgroundImage = "url('./imagenes/Cielo.jpg')";
+ }
 
 
 }); 
 
 
 mostrarPopup_Lista_Nueva.addEventListener('click', function() {
-  document.getElementById('popupOverlay' ).style.display = 'block';
-  document.getElementById('Crear_Listado').style.display = 'block';
-  document.getElementById('Abrir_Listado').style.display = 'none';
+  document.getElementById('popupOverlay'    ).style.display = 'block';
+  document.getElementById('Crear_Listado'   ).style.display = 'block';
+  document.getElementById('Abrir_Listado'   ).style.display = 'none';
+  document.getElementById('Importar_Listado').style.display = 'none';
 });  
 
 
 mostrarPopup_Listado.addEventListener('click', function() {
-  document.getElementById('popupOverlay' ).style.display = 'block';
-  document.getElementById('Crear_Listado').style.display = 'none';
-  document.getElementById('Abrir_Listado').style.display = 'block';
+  document.getElementById('popupOverlay'    ).style.display = 'block';
+  document.getElementById('Crear_Listado'   ).style.display = 'none';
+  document.getElementById('Abrir_Listado'   ).style.display = 'block';
+  document.getElementById('Importar_Listado').style.display = 'none';
 
   const tbody = document.querySelector('#tabla_Index tbody');
   tbody.innerHTML = '';
-
-  console.log(localStorage.length);
 
   if (localStorage.length > 0) {
 
@@ -48,6 +51,15 @@ mostrarPopup_Listado.addEventListener('click', function() {
   };
   
 });  
+
+
+mostrarPopup_Importar.addEventListener('click', function() {
+  document.getElementById('popupOverlay'    ).style.display = 'block';
+  document.getElementById('Crear_Listado'   ).style.display = 'none';
+  document.getElementById('Abrir_Listado'   ).style.display = 'none';
+  document.getElementById('Importar_Listado').style.display = 'block';
+});  
+
 
 
 Aceptar_Lista_New.addEventListener('click', function() {
@@ -111,7 +123,85 @@ Aceptar_Lista_New.addEventListener('click', function() {
   }
 
 });  
+
+
+
+Aceptar_Importada.addEventListener('click', function() {
+
+  var Nombre_ListaNueva = document.getElementById("Nombre_Listado_Importado").value;
+  var Lista_Recibida = document.getElementById("textarea").value;
+  var N = localStorage.length;
+
+  if (Nombre_ListaNueva !== "") {
   
+    if (N == 0) {
+      console.log("Se grabo Registro");
+      localStorage.setItem("Nombre_Lista", Nombre_ListaNueva);            //Guardo Nombre de la lista Nueva
+      localStorage.setItem(Nombre_ListaNueva, Lista_Recibida);   //Guardo Lista recibida con sus componentes
+  
+      let value;
+      try {
+          value = JSON.parse(localStorage.getItem(Nombre_ListaNueva));
+          window.location.href = 'Entrada_Voz.html';
+      } catch (e) {
+        localStorage.removeItem("Nombre_Lista");
+        localStorage.removeItem(Nombre_ListaNueva);
+        console.log("Error, se borro "+ Nombre_ListaNueva);
+        document.getElementById('alert-danger-import').style.display  = 'none';
+        document.getElementById('alert-warning-import').style.display = 'none';
+        document.getElementById('alert-info-import').style.display = 'block';
+      }
+  
+    } else {
+
+      var Contador = 0;
+  
+      for (let i = 0; i < localStorage.length; i++) {
+        var key = localStorage.key(i);
+           
+        if (Nombre_ListaNueva == key){
+          document.getElementById('alert-danger-import').style.display   = 'block';
+          document.getElementById('alert-warning-import').style.display  = 'none' ;
+          document.getElementById('alert-info-import').style.display = 'none';
+          break;
+        } else { Contador++;}
+  
+      }
+  
+      if (Contador == localStorage.length){
+        
+        console.log("Se grabo Registro");
+        localStorage.setItem("Nombre_Lista", Nombre_ListaNueva);            //Guardo Nombre de la lista Nueva
+        localStorage.setItem(Nombre_ListaNueva, Lista_Recibida);   //Guardo Lista recibidacon sus componentes
+  
+        let value;
+        try {
+            value = JSON.parse(localStorage.getItem(Nombre_ListaNueva));
+            window.location.href = 'Entrada_Voz.html';
+        } catch (e) {
+          localStorage.removeItem("Nombre_Lista");
+          localStorage.removeItem(Nombre_ListaNueva);
+          console.log("Error, se borro "+ Nombre_ListaNueva);
+          document.getElementById('alert-danger-import').style.display  = 'none';
+          document.getElementById('alert-warning-import').style.display = 'none';
+          document.getElementById('alert-info-import').style.display = 'block';
+          }
+      
+      }
+
+    }
+
+
+  } else { 
+    document.getElementById('alert-danger-import').style.display  = 'block';
+    document.getElementById('alert-warning-import').style.display = 'none';
+    document.getElementById('alert-info-import').style.display = 'none';
+
+  }
+
+});  
+
+
 
 Cancelar_Lista_New.addEventListener('click', function() {
   document.getElementById('popupOverlay').style.display = 'none';
@@ -123,7 +213,12 @@ Cancelar_Listado.addEventListener('click', function() {
   document.getElementById('popupOverlay').style.display = 'none';
   document.getElementById('alert-danger').style.display   = 'none';
   document.getElementById('alert-warning').style.display  = 'none' ;
-  //localStorage.clear();
+});  
+
+Cancelar_Importada.addEventListener('click', function() {
+  document.getElementById('popupOverlay').style.display = 'none';
+  document.getElementById('alert-danger-import').style.display  = 'none';
+  document.getElementById('alert-warning-import').style.display = 'none';
 });  
 
 function Agregar_Listado_LocalStorage(Nombre_Lista) {

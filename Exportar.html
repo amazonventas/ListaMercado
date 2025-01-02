@@ -11,7 +11,7 @@
 
     <title>Document</title>
 </head>
-<body id="Body1">
+<body id="Body_Exportar">
 
 <!--Barra de navegación-->
 <nav class="navbar">
@@ -40,68 +40,23 @@
   <center>
   <div id="Contenedor" class="Contenedor" >
   
-     <button id="start-btn" type="button" class="btn btn-success"><strong> <span style="color: white;">Iniciar Reconocimiento de Voz </span></strong></button>
-    <br><br>
-
-    <div class="form-check" style="width: 150px;">
-      <input class="form-check-input" type="radio" name="flexRadioDefault" id="Palabras" checked>
-      <label class="form-check-label" for="flexRadioDefault1">
-        <strong>Palabras</strong>
-      </label>
-    </div>
-    <div class="form-check"style="width: 150px;">
-      <input class="form-check-input" type="radio" name="flexRadioDefault" id="Frases" >
-      <label class="form-check-label" for="flexRadioDefault2">
-        <strong>Frases</strong>
-      </label>
-    </div>
-
-    <br>
-
-    <button type="button" id="Borrar_Todo" class="btn btn-danger" onclick="mostrarPopup()">Borrar Lista</button>
-
-    <br><br>
+  <br><br><br><br>
 
     <div class="Contenedor_Tabla">
-      <table id="tabla" class="table" >
-        <thead>
-          <tr>
-            <th style="padding: 10px; font-size: small;"> <center>ARTICULO</center></th>
-            <th style="padding: 10px; font-size: small;"> <center>ACCION</center></th>
-          </tr>
-        </thead>
-
-        <tbody style="padding: 50PX;">
-        </tbody  >
-
-      </table>
+      <input type="text" style="width: 90%;" id="Listado_Exportar_Articulos">
+      <input type="text" style="width: 90%;" id="Listado_Exportar_Cantidad">
+      <input type="text" style="width: 90%;" id="Listado_Exportar_Precios">
+      <input type="text" style="width: 90%;" id="Listado_Exportar_Listo">
+      <input type="text" style="width: 90%;" id="Listado_Exportar_Fondo">
+      <input type="text" style="width: 90%;" id="Listado_Exportar_LetraEstilo">
+      <input type="text" style="width: 90%;" id="Listado_Exportar_LetraTamano">
     </div>
-  
-  </div>
 
   <br>
-
- <center><a href="Listado.html"><button id="BtnAceptar" type="button" class="btn btn-primary">ACEPTAR</button></a></center>  
+  <center><button class="btn btn-primary" onclick="compartirWhatsapp()">Exportar Listado</button></center>
  <br>
 
- <br><br><br>
-  
-  <!-- Ventana Emergente Personalizada -->
-  <div id="popupOverlay" class="popup-overlay">
-      <div class="popup">
-          <p id="Mensaje_Borrar"></p>
-
-          <script>
-            var Nombre = localStorage.getItem("Nombre_Lista");             
-            document.getElementById("Mensaje_Borrar").innerHTML = "¿ Desea borrar <strong>" + Nombre + "</strong> ? Esta acción no se puede deshacer.";   
-          </script>
-
-          <button class="Aceptar_Lista_New" onclick="borrarLista()">Aceptar</button>
-          <button class="Cancelar_Lista_New" onclick="cerrarPopup()">Cancelar</button>
-      </div>
-  </div>
-
-  <br><br><br><br>
+  <br><br><br><br><br><br><br><br><br><br>
 
 <footer>
   <center>
@@ -119,7 +74,7 @@
 </footer>
 
 
-  <script src="Entrada_Voz.js"></script>
+  <script src="Exportar.js"></script>
 
 </body>
 </html>
