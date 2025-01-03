@@ -2,6 +2,9 @@
 window.addEventListener("load",function(){
 
   document.getElementById("Permiso_Microfono").style.display  = 'none';
+  document.getElementById("movil-menu").hidden = true;
+
+  document.getElementById("Contenedor_Acerca").style.display ="none";
 
   navigator.mediaDevices.getUserMedia({ audio: true })
   .then(function(stream) {
@@ -31,6 +34,24 @@ window.addEventListener("load",function(){
  }
 
 
+}); 
+
+
+hamburguesa.addEventListener("click",function(){
+  var Visible = document.getElementById("movil-menu").hidden;
+ 
+  if (Visible == true){
+    document.getElementById("movil-menu").hidden = false;
+  } else {
+    document.getElementById("movil-menu").hidden = true;
+  }
+
+}); 
+
+Acerca_Index.addEventListener("click",function(){
+  document.getElementById("tabla_index"      ).style.display ="none";
+  document.getElementById("Contenedor_Acerca").style.display ="block";
+  hamburguesa.click();
 }); 
 
 
