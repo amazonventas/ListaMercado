@@ -5,7 +5,7 @@ window.addEventListener("load",function(){
   var Nombre = localStorage.getItem("Nombre_Lista");             
   var Listado= JSON.parse(localStorage.getItem(Nombre));
 
-  document.getElementById("Nombre-Lista").innerHTML ="Listado Activo: <br><strong>" + Nombre + "</strong>";
+  document.getElementById("Nombre-Lista").innerHTML ="Lista Activa: <br><strong>" + Nombre + "</strong>";
 
   document.getElementById("movil-menu").hidden = true;
   
