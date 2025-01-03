@@ -51,6 +51,7 @@ window.addEventListener("load",function(){
     Cuerpo.style.backgroundImage = "url("+ Listado.Fondo +")";
   }
 
+  Ocultar_celdas();
 
 }); 
 
@@ -230,8 +231,8 @@ function agregarFila(Articulo, Cantidad, Precio, Listo, Identificador ,Sumar) {
   }
 
   celdaNombre.innerHTML   ='<center>'+Articulo+'</center>';
-  celdaCantidad.innerHTML ='<center><input style="width: 60px;"  Class="form-control" type="number" id=Cant'   + Total_id    +' value ='+ Cantidad +'></center>';
-  celdaPrecio.innerHTML   ='<center><input style="width: 70px;" Class="form-control" type="number" id=Prec'   + Total_id    +' value ='+ Precio   +'></center>';   
+  celdaCantidad.innerHTML ='<center><input style="width: 50px;"  Class="form-control" type="number" id=Cant'   + Total_id    +' value ='+ Cantidad +'></center>';
+  celdaPrecio.innerHTML   ='<center><input style="width: 50px;" Class="form-control" type="number" id=Prec'   + Total_id    +' value ='+ Precio   +'></center>';   
   celdaListo.innerHTML    ='<center><input style="height: 15px;" class="form-check-input" type="checkbox" id='+ Total_id +'></center>';    
  
   var Listo_Check = document.getElementById(Total_id);
@@ -374,4 +375,22 @@ document.getElementById("Ordenar_Alfabeticamente").addEventListener("click", fun
 
 });
 
+function Ocultar_celdas() {
 
+  var tabla = document.getElementById("tabla1");
+  var filas = tabla.getElementsByTagName("tr");
+  var NColumnas = filas.length;  
+
+  for (var i = 0; i < NColumnas; i++) {  
+    if (i == 0) {
+      var celdas_th = filas[i].getElementsByTagName("th");
+          celdas_th[1].hidden = true;
+          celdas_th[2].hidden = true;
+    } else {
+      var celdas_td = filas[i].getElementsByTagName("td");
+          celdas_td[1].hidden = true;
+          celdas_td[2].hidden = true;
+    }
+  }  
+
+}

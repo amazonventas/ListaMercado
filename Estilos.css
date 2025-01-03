@@ -35,7 +35,7 @@ body {
 }
 
 .Titulo_Compras {
-  width: 500px;
+  width: 300px;
 }
 
 
@@ -56,8 +56,6 @@ body {
   margin-left: auto; 
   margin-right: 10px;
 }
-
-
 
 /* Fin Barra de navegación */
 
@@ -198,7 +196,7 @@ transition: 0.3s;
 @media screen and (max-width: 768px) {
 
   .Titulo_Compras {
-    width: 250px;
+    width: 150px;
   }
 
 }
