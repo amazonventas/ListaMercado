@@ -140,6 +140,17 @@ transition: 0.3s;
   color: blue;
 }
 
+.Boton_ayuda {
+  cursor: pointer;
+  border-style: none;
+  background-color: white;
+}
+
+.Boton_ayuda :hover {
+  color: blue;
+}
+
+
 /* Ventana Emergente */
 
 /* Estilo para el fondo del popup */
@@ -168,6 +179,34 @@ transition: 0.3s;
   text-align: center;
 }
 
+/* Estilo para el contenido del popup menu ayuda*/
+.popup-ayuda {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 400px;
+  text-align: center;
+}
+
+.popup-ayuda button {
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+}
+
+.popup-ayuda .Cancelar_Ayuda {
+  background-color: blue; /* Rojo */
+  color: white;
+}
+
 /* Estilo de los botones dentro del popup */
 .popup button {
   margin: 10px;
@@ -177,10 +216,12 @@ transition: 0.3s;
   border: none;
   border-radius: 5px;
 }
+
 .popup .Aceptar_Lista_New {
   background-color: #4CAF50; /* Verde */
   color: white;
 }
+
 .popup .Cancelar_Lista_New {
   background-color: #f44336; /* Rojo */
   color: white;
