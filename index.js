@@ -1,6 +1,15 @@
 
 window.addEventListener("load",function(){
 
+  navigator.mediaDevices.getUserMedia({ audio: true })
+    .then(function(stream) {
+        console.log("Permiso concedido.");
+    })
+    .catch(function(err) {
+        console.error("Permiso denegado: ", err);
+    });
+
+
   var Nombre = localStorage.getItem("Nombre_Lista");       
   var Listado= JSON.parse(localStorage.getItem(Nombre));
  
