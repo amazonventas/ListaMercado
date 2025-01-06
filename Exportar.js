@@ -46,13 +46,17 @@ function Compartir_Whatsapp() {
 
   var Nombre = localStorage.getItem("Nombre_Lista");             
   var Listado= JSON.parse(localStorage.getItem(Nombre));
-
   var NColumnas= Listado.Articulos.length;
+
   var Texto ="";
 
   if (NColumnas !== 0) {
-    for (var i = 1; i < NColumnas; i++) {
-    Texto = Texto + Listado.Articulos[i] + "\n";
+    for (var i = 0; i < NColumnas; i++) {
+      if (i == 0) {
+        Texto = "Nombre: " + Nombre + "\n";
+      } else {
+        Texto = Texto + "\n" + i + "-) " + Listado.Articulos[i] + "\n";
+      }
     }
   }
   window.open(`https://wa.me/?text=${encodeURIComponent(Texto)}`, "_blank");
@@ -67,4 +71,5 @@ function Compartir_App() {
 
   window.open(`https://wa.me/?text=${encodeURIComponent(Listado)}`, "_blank");
 }
+
 

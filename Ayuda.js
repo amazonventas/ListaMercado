@@ -33,14 +33,27 @@ Crear_lista.addEventListener("click",function(){
   document.getElementById('Titulo_Video').innerHTML = "<strong>¿Como crear mi primera lista?</strong>";
   document.getElementById('Crear'   ).style.display = 'block';
   document.getElementById('Crear'   ).src ="https://www.youtube.com/embed/jVITFZJEm_k?si=oQz-myXmr1gNUizU";
+  document.getElementById('Borrar' ).style.display = 'none';
   document.getElementById('Exportar' ).style.display = 'none';
   document.getElementById('Importar').style.display = 'none';
 }); 
+
+Borrar_lista.addEventListener("click",function(){
+  document.getElementById('popupOverlay').style.display = 'block';
+  document.getElementById('Titulo_Video').innerHTML = "<strong>¿Como borrar una lista?</strong>";
+  document.getElementById('Crear'   ).style.display = 'none';
+  document.getElementById('Borrar' ).style.display = 'block';
+  document.getElementById('Borrar').src ="https://www.youtube.com/embed/qk67wS7WYxo?si=Zji87zjyCCXlKUfS";
+  document.getElementById('Exportar' ).style.display = 'none';
+  document.getElementById('Importar').style.display = 'none';
+}); 
+
 
 Exportar_lista.addEventListener("click",function(){
   document.getElementById('popupOverlay').style.display = 'block';
   document.getElementById('Titulo_Video').innerHTML = "<strong>¿Como exporta una lista?</strong>";
   document.getElementById('Crear'   ).style.display = 'none';
+  document.getElementById('Borrar' ).style.display = 'none';
   document.getElementById('Exportar' ).style.display = 'block';
   document.getElementById('Exportar').src ="https://www.youtube.com/embed/qk67wS7WYxo?si=Zji87zjyCCXlKUfS";
   document.getElementById('Importar').style.display = 'none';
@@ -50,6 +63,7 @@ Importar_lista.addEventListener("click",function(){
   document.getElementById('popupOverlay').style.display = 'block';
   document.getElementById('Titulo_Video').innerHTML = "<strong>¿Como importar una lista?</strong>";
   document.getElementById('Crear'   ).style.display = 'none';
+  document.getElementById('Borrar' ).style.display = 'none';
   document.getElementById('Exportar' ).style.display = 'none';
   document.getElementById('Importar').style.display = 'block';
   document.getElementById('Importar').src ="https://www.youtube.com/embed/PogXFDqR770?si=dR0AB7MtGLMOFrRw";

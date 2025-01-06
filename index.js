@@ -49,7 +49,7 @@ hamburguesa.addEventListener("click",function(){
 }); 
 
 Acerca_Index.addEventListener("click",function(){
-  document.getElementById("tabla_index"      ).style.display ="none";
+  document.getElementById("div_tabla"      ).style.display ="none";
   document.getElementById("Contenedor_Acerca").style.display ="block";
 
   document.getElementById("Ayuda").style.display ="none";
