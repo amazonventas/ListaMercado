@@ -72,6 +72,12 @@ Importar_lista.addEventListener("click",function(){
 
 Cancelar_Ayuda.addEventListener('click', function() {
   document.getElementById('popupOverlay').style.display = 'none';
+
+  document.getElementById('Crear'   ).src="";
+  document.getElementById('Borrar'  ).src="";
+  document.getElementById('Exportar').src="";
+  document.getElementById('Importar').src="";
+  
 });  
 
 

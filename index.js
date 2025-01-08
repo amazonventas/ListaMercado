@@ -313,13 +313,4 @@ mostrarPopup_Listado.addEventListener('click', function() {
 });
 
 
-Cerrar_App.addEventListener('click', function() {
-
-  if (window.AndroidInterface) {
-      window.AndroidInterface.closeApp();
-  } else {
-      alert("La función nativa no está disponible.");
-  }
-
-});
 
