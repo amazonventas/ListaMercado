@@ -357,23 +357,6 @@ Cancelar.addEventListener('click', function() {
 });
 
 
-document.getElementById("Ordenar_Alfabeticamente").addEventListener("click", function() {
-  let tabla = document.getElementById("tabla1");
-  let filas = Array.from(tabla.querySelectorAll("tbody tr")); 
-
-  filas.sort(function(a, b) {
-    let celdaA = a.cells[0].textContent.trim().toLowerCase();
-    let celdaB = b.cells[0].textContent.trim().toLowerCase();
-    
-    return celdaA.localeCompare(celdaB);
-  });
-
-  let tbody = tabla.querySelector("tbody");
-  filas.forEach(function(fila) {
-    tbody.appendChild(fila); 
-  });
-
-});
 
 function Ocultar_celdas() {
 
@@ -392,5 +375,24 @@ function Ocultar_celdas() {
           celdas_td[2].hidden = true;
     }
   }  
+
+}
+
+
+function ordenarPorCheckbox() {
+
+  const tabla = document.getElementById("tabla1");
+  const cuerpoTabla = tabla.querySelector("tbody");
+  const filas = Array.from(cuerpoTabla.rows);
+
+  // Ordenar las filas en función del estado del checkbox
+  filas.sort((filaA, filaB) => {
+      const checkboxA = filaA.querySelector("input[type='checkbox']");
+      const checkboxB = filaB.querySelector("input[type='checkbox']");
+      return checkboxB.checked - checkboxA.checked; // Orden descendente: checkboxes marcados primero
+  });
+
+  // Reinsertar las filas en el cuerpo de la tabla en el nuevo orden
+  filas.forEach(fila => cuerpoTabla.appendChild(fila));
 
 }
