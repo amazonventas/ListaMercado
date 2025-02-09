@@ -24,7 +24,8 @@ window.addEventListener("load",function(){
   document.getElementById('alert-danger-import').style.display  = 'none';
   document.getElementById('alert-warning-import').style.display = 'none';
   document.getElementById('alert-info-import').style.display = 'none';
-
+  document.getElementById('mensaje-borrado-exitoso').style.display = 'none';
+    
  if (Listado != null){
      var Cuerpo = document.getElementById("Body_index");
      Cuerpo.style.backgroundImage = "url("+ Listado.Fondo +")";
@@ -64,6 +65,7 @@ mostrarPopup_Lista_Nueva.addEventListener('click', function() {
   document.getElementById('Crear_Listado'   ).style.display = 'block';
   document.getElementById('Abrir_Listado'   ).style.display = 'none';
   document.getElementById('Importar_Listado').style.display = 'none';
+  document.getElementById('borrar_listados' ).style.display = 'none';
 });  
 
 
@@ -72,6 +74,7 @@ mostrarPopup_Listado.addEventListener('click', function() {
   document.getElementById('Crear_Listado'   ).style.display = 'none';
   document.getElementById('Abrir_Listado'   ).style.display = 'block';
   document.getElementById('Importar_Listado').style.display = 'none';
+  document.getElementById('borrar_listados' ).style.display = 'none';
 
   const tbody = document.querySelector('#tabla_Index tbody');
   tbody.innerHTML = '';
@@ -94,8 +97,16 @@ mostrarPopup_Importar.addEventListener('click', function() {
   document.getElementById('Crear_Listado'   ).style.display = 'none';
   document.getElementById('Abrir_Listado'   ).style.display = 'none';
   document.getElementById('Importar_Listado').style.display = 'block';
+  document.getElementById('borrar_listados' ).style.display = 'none';
 });  
 
+mostrarPopup_borrar_listados.addEventListener('click', function() {
+  document.getElementById('popupOverlay'    ).style.display = 'block';
+  document.getElementById('Crear_Listado'   ).style.display = 'none';
+  document.getElementById('Abrir_Listado'   ).style.display = 'none';
+  document.getElementById('Importar_Listado').style.display = 'none';
+  document.getElementById('borrar_listados' ).style.display = 'block';
+});  
 
 
 Aceptar_Lista_New.addEventListener('click', function() {
@@ -250,6 +261,27 @@ Aceptar_Importada.addEventListener('click', function() {
 
   }
 
+});
+
+
+Aceptar_borrar_listado.addEventListener('click', function() {
+
+  document.getElementById('mensaje-borrado-exitoso').style.display  = 'block';
+
+  localStorage.clear();
+
+  setTimeout(() => {
+    document.getElementById('mensaje-borrado-exitoso').style.display ="none";
+  }, 2000);
+
+  setTimeout(() => {
+    document.getElementById('popupOverlay').style.display = 'none';
+  }, 2000);
+
+  
+  console.log(localStorage);
+
+
 });  
 
 
@@ -265,6 +297,11 @@ Cancelar_Listado.addEventListener('click', function() {
 Cancelar_Importada.addEventListener('click', function() {
   document.getElementById('popupOverlay').style.display = 'none';
 });  
+
+Cancelar_borrar_listado.addEventListener('click', function() {
+  document.getElementById('popupOverlay').style.display = 'none';
+});  
+
 
 
 

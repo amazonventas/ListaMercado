@@ -55,7 +55,10 @@
             <tr>
               <td><center><button class="Enlace_index" id="mostrarPopup_Importar"   >Importar Lista</button></center></td>
             </tr>
-          </tbody  >
+            <tr>
+              <td><center><button class="Enlace_index" id="mostrarPopup_borrar_listados"   >Borrar todas las listas</button></center></td>
+            </tr>
+          </tbody>
         </table>
   
         <br>
@@ -163,6 +166,27 @@
         <button id="Aceptar_Importada"  class="Aceptar_Lista_New"  >Aceptar</button>
         <button id="Cancelar_Importada" class="Cancelar_Lista_New" >Cancelar</button>
       </div>
+
+
+
+      <div id="borrar_listados">
+
+        <center><img style="height: 70px; width: 70px;" src="./imagenes/warning.png" alt=""></center>
+        <p>¿Esta seguro que desea <br><strong>BORRAR TODAS LAS LISTAS</strong>?<br> Esta acción no se puede deshacer.</p>   
+  
+        <div id="mensaje-borrado-exitoso" class="alert alert-success" role="alert">
+          Se elimino todos los listados con exito!
+        </div>
+  
+        <button id ="Aceptar_borrar_listado"  class="Aceptar_Lista_New" >Aceptar</button>
+        <button id ="Cancelar_borrar_listado" class="Cancelar_Lista_New">Cancelar</button>
+
+       </div>
+
+  
+
+
+
 
     </div>
   </div>
