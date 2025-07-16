@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Consumo Eléctrico kWh</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="imagenes/icono.png" type="image/png" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container-fluid pantalla-completa d-flex flex-column">
+      <nav class="navbar navbar-expand bg-navbar shadow-sm px-3">
+        <div
+          class="container-fluid d-flex justify-content-between align-items-center"
+        >
+          <img src="imagenes/icono.png" class="icono" alt="" />
+          <span class="text-white fs-5 fw-semibold text-center flex-grow-1">
+            Detalle de Cargas
+          </span>
+          <button class="btn btn-navbar-icon ms-2" title="Opciones">
+            <span style="font-size: 1.5rem">⋮</span>
+          </button>
+        </div>
+      </nav>
+      <div class="Contenedor">
+        <div id="contenedor-tablas" class="mb-4">
+          <a href="index.html" style="text-decoration: none">
+            <img src="imagenes/flecha-izquierda.png" class="icono" alt="" />
+            Volver</a
+          ><br /><br />
+          <div style="display: flex">
+            <input type="number" class="form-control w-50" id="costo_Kwh" />
+            <span style="margin-left: 10px"
+              ><strong>Tarifa eléctrica</strong></span
+            >
+          </div>
+          <table id="Tabla1" class="Tabla_elementos">
+            <tbody>
+              <tr>
+                <td>Equipo</td>
+                <td>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="equipo1"
+                    placeholder="ejemplo: Nevera"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>Potencia</td>
+                <td style="display: flex">
+                  <input
+                    type="number"
+                    class="form-control Input_potencia_grup"
+                    id="potencia1"
+                  />
+                  <select id="Unidad1" class="form-select Select_unidad_grup">
+                    <option value="W">W</option>
+                    <option value="KW">KW</option>
+                    <option value="Hp">Hp</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td>Cantidad</td>
+                <td>
+                  <input
+                    type="number"
+                    class="form-control Input_potencia_grup"
+                    id="cantidad1"
+                    placeholder="# equipos"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>Uso diario</td>
+                <td style="display: flex">
+                  <input
+                    type="number"
+                    class="form-control Input_potencia_grup"
+                    id="tiempo1"
+                    placeholder="Introduzca tiempo"
+                    min="0"
+                    max="24"
+                    step="1"
+                  />
+                  <select
+                    id="Unidad_tiempo1"
+                    class="form-select Select_unidad_grup"
+                  >
+                    <option value="horas">h</option>
+                    <option value="minutos">min.</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td>dias</td>
+                <td>
+                  <input
+                    type="number"
+                    class="form-control Input_potencia_grup"
+                    id="dias1"
+                    placeholder="# dias al mes"
+                    min="0"
+                    max="31"
+                    step="1"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <button
+                    style="border-radius: 5px"
+                    onclick="carga_predeterminada('Tabla1')"
+                  >
+                    Archivo
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <button
+          type="button"
+          style="border-radius: 5px; width: 50%"
+          onclick="agregarTabla()"
+        >
+          + Agregar Equipo +
+        </button>
+        <center>
+          <button
+            onclick="Calcular()"
+            type="button"
+            class="btn btn-primary w-50 mt-3"
+          >
+            Calcular
+          </button>
+        </center>
+        <br /><br />
+
+        <!-- Ventana MODAL Cargas Predeterminadas -->
+        <div id="modalResultado" class="modal">
+          <div class="modal-contenido">
+            <button class="botonX" onclick="cerrarModal()">X</button>
+            <center>
+              <div style="display: flex; justify-content: center; width: 80%">
+                <select
+                  id="acciones"
+                  class="form-select"
+                  aria-label="Default select example"
+                  onchange="accion_tabla()"
+                >
+                  <option selected>Selecciona acción</option>
+                  <option value="Editar">Editar Tabla</option>
+                  <option value="Agregar">Agregar Equipo</option>
+                  <option value="Eliminar">Eliminar Equipo</option>
+                  <option value="Recargar">Recargar Valores</option>
+                </select>
+                <button
+                  type="button"
+                  style="border-radius: 5px"
+                  onclick="guardar_tabla()"
+                >
+                  guardar
+                </button>
+              </div>
+            </center>
+            <center>
+              <div id="Contenedor_tabla_cargas">
+                <script>
+                  const contenedor = document.getElementById(
+                    "Contenedor_tabla_cargas"
+                  ); // el div donde quieres colocarla
+                  const tablaGuardada = localStorage.getItem("Tabla_cargas");
+
+                  if (tablaGuardada) {
+                    contenedor.innerHTML = tablaGuardada;
+
+                    // Reasignar eventos a los botones con clase específica
+                    const botonesCarga =
+                      contenedor.querySelectorAll(".btn_carga");
+                    botonesCarga.forEach((boton) => {
+                      boton.onclick = function () {
+                        carga_seleccionada(this);
+                      };
+                    });
+
+                    const celdasFilas = contenedor.querySelectorAll("td.filas");
+                    celdasFilas.forEach((td) => {
+                      td.onclick = function () {
+                        eliminar_equipo(this);
+                      };
+                    });
+                  } else {
+                    contenedor.innerHTML = `
+                       <table id="Tabla_cargas" class="Tabla_elementos_predefinidos">
+                         <thead>
+                           <tr>
+                             <th class="filas">Nombre Equipo</th>
+                             <th class="filas">Potencia (Watts)</th>
+                             <th></th>
+                           </tr>
+                         </thead>
+                         <tbody>
+                           <tr>
+                             <td class="filas" onclick="eliminar_equipo(this)">
+                               Refrigerador
+                             </td>
+                             <td class="filas" onclick="eliminar_equipo(this)">200</td>
+                             <td>
+                               <button class ="btn_carga"
+                                 style="border-radius: 5px"
+                                 onclick="carga_seleccionada(this)"
+                               >
+                                 +
+                               </button>
+                             </td>
+                           </tr>
+                           <tr>
+                             <td class="filas" onclick="eliminar_equipo(this)">
+                               Congelador
+                             </td>
+                             <td class="filas" onclick="eliminar_equipo(this)">300</td>
+                             <td>
+                               <button class ="btn_carga"
+                                 style="border-radius: 5px"
+                                 onclick="carga_seleccionada(this)"
+                               >
+                                 +
+                               </button>
+                             </td>
+                           </tr>
+                           <tr>
+                             <td class="filas" onclick="eliminar_equipo(this)">
+                               Estufa eléctrica (hornilla)
+                             </td>
+                             <td class="filas" onclick="eliminar_equipo(this)">
+                               1500
+                             </td>
+                             <td>
+                               <button class ="btn_carga"
+                                 style="border-radius: 5px"
+                                 onclick="carga_seleccionada(this)"
+                               >
+                                 +
+                               </button>
+                             </td>
+                           </tr>
+                           <tr>
+                             <td class="filas" onclick="eliminar_equipo(this)">
+                               Horno eléctrico
+                             </td>
+                             <td class="filas" onclick="eliminar_equipo(this)">
+                               3500
+                             </td>
+                             <td>
+                               <button class ="btn_carga"
+                                 style="border-radius: 5px"
+                                 onclick="carga_seleccionada(this)"
+                               >
+                                 +
+                               </button>
+                             </td>
+                           </tr>
+                           <tr>
+                             <td class="filas" onclick="eliminar_equipo(this)">
+                               Microondas
+                             </td>
+                             <td class="filas" onclick="eliminar_equipo(this)">
+                               1200
+                             </td>
+                             <td>
+                               <button class ="btn_carga"
+                                 style="border-radius: 5px"
+                                 onclick="carga_seleccionada(this)"
+                               >
+                                 +
+                               </button>
+                             </td>
+                           </tr>
+                           <tr>
+                             <td class="filas" onclick="eliminar_equipo(this)">
+                               Cafetera eléctrica
+                             </td>
+                             <td class="filas" onclick="eliminar_equipo(this)">
+                               1000
+                             </td>
+                             <td>
+                               <button class ="btn_carga"
+                                 style="border-radius: 5px"
+                                 onclick="carga_seleccionada(this)"
+                               >
+                                 +
+                               </button>
+                             </td>
+                           </tr>
+                           <tr>
+                             <td class="filas" onclick="eliminar_equipo(this)">
+                               Licuadora
+                             </td>
+                             <td class="filas" onclick="eliminar_equipo(this)">500</td>
+                             <td>
+                               <button class ="btn_carga"
+                                 style="border-radius: 5px"
+                                 onclick="carga_seleccionada(this)"
+                               >
+                                 +
+                               </button>
+                             </td>
+                           </tr>
+                           <tr>
+                             <td class="filas" onclick="eliminar_equipo(this)">
+                               Lavadora de ropa
+                             </td>
+                             <td class="filas" onclick="eliminar_equipo(this)">400</td>
+                             <td>
+                               <button class ="btn_carga"
+                                 style="border-radius: 5px"
+                                 onclick="carga_seleccionada(this)"
+                               >
+                                 +
+                               </button>
+                             </td>
+                           </tr>
+                           <tr>
+                             <td class="filas" onclick="eliminar_equipo(this)">
+                               Secadora eléctrica
+                             </td>
+                             <td class="filas" onclick="eliminar_equipo(this)">
+                               4500
+                             </td>
+                             <td>
+                               <button class ="btn_carga"
+                                 style="border-radius: 5px"
+                                 onclick="carga_seleccionada(this)"
+                               >
+                                 +
+                               </button>
+                             </td>
+                           </tr>
+                           <tr>
+                             <td class="filas" onclick="eliminar_equipo(this)">
+                               Ventilador de techo
+                             </td>
+                             <td class="filas" onclick="eliminar_equipo(this)">75</td>
+                             <td>
+                               <button class ="btn_carga"
+                                 style="border-radius: 5px"
+                                 onclick="carga_seleccionada(this)"
+                               >
+                                 +
+                               </button>
+                             </td>
+                           </tr>
+                           <tr>
+                             <td class="filas" onclick="eliminar_equipo(this)">
+                               Plancha eléctrica
+                             </td>
+                             <td class="filas" onclick="eliminar_equipo(this)">
+                               1500
+                             </td>
+                             <td>
+                               <button class ="btn_carga"
+                                 style="border-radius: 5px"
+                                 onclick="carga_seleccionada(this)"
+                               >
+                                 +
+                               </button>
+                             </td>
+                           </tr>
+                           <tr>
+                             <td class="filas" onclick="eliminar_equipo(this)">
+                               Secador de pelo
+                             </td>
+                             <td class="filas" onclick="eliminar_equipo(this)">
+                               1200
+                             </td>
+                             <td>
+                               <button class ="btn_carga"
+                                 style="border-radius: 5px"
+                                 onclick="carga_seleccionada(this)"
+                               >
+                                 +
+                               </button>
+                             </td>
+                           </tr>
+                           <tr>
+                             <td class="filas" onclick="eliminar_equipo(this)">
+                               TV LED
+                             </td>
+                             <td class="filas" onclick="eliminar_equipo(this)">100</td>
+                             <td>
+                               <button class ="btn_carga"
+                                 style="border-radius: 5px"
+                                 onclick="carga_seleccionada(this)"
+                               >
+                                 +
+                               </button>
+                             </td>
+                           </tr>
+                           <tr>
+                             <td class="filas" onclick="eliminar_equipo(this)">
+                               Computadora de escritorio
+                             </td>
+                             <td class="filas" onclick="eliminar_equipo(this)">200</td>
+                             <td>
+                               <button class ="btn_carga"
+                                 style="border-radius: 5px"
+                                 onclick="carga_seleccionada(this)"
+                               >
+                                 +
+                               </button>
+                             </td>
+                           </tr>
+                           <tr>
+                             <td class="filas" onclick="eliminar_equipo(this)">
+                               Laptop
+                             </td>
+                             <td class="filas" onclick="eliminar_equipo(this)">60</td>
+                             <td>
+                               <button class ="btn_carga"
+                                 style="border-radius: 5px"
+                                 onclick="carga_seleccionada(this)"
+                               >
+                                 +
+                               </button>
+                             </td>
+                           </tr>
+                           <tr>
+                             <td class="filas" onclick="eliminar_equipo(this)">
+                               Router / Módem WiFi
+                             </td>
+                             <td class="filas" onclick="eliminar_equipo(this)">10</td>
+                             <td>
+                               <button class ="btn_carga"
+                                 style="border-radius: 5px"
+                                 onclick="carga_seleccionada(this)"
+                               >
+                                 +
+                               </button>
+                             </td>
+                           </tr>
+                           <tr>
+                             <td class="filas" onclick="eliminar_equipo(this)">
+                               Bombillo LED
+                             </td>
+                             <td class="filas" onclick="eliminar_equipo(this)">10</td>
+                             <td>
+                               <button class ="btn_carga"
+                                 style="border-radius: 5px"
+                                 onclick="carga_seleccionada(this)"
+                               >
+                                 +
+                               </button>
+                             </td>
+                           </tr>
+                           <tr>
+                             <td class="filas" onclick="eliminar_equipo(this)">
+                               Bomba de agua (1 HP)
+                             </td>
+                             <td class="filas" onclick="eliminar_equipo(this)">745</td>
+                             <td>
+                               <button class ="btn_carga"
+                                 style="border-radius: 5px"
+                                 onclick="carga_seleccionada(this)"
+                               >
+                                 +
+                               </button>
+                             </td>
+                           </tr>
+                           <tr>
+                             <td class="filas" onclick="eliminar_equipo(this)">
+                               Calentador de agua eléctrico
+                             </td>
+                             <td class="filas" onclick="eliminar_equipo(this)">
+                               4500
+                             </td>
+                             <td>
+                               <button class ="btn_carga"
+                                 style="border-radius: 5px"
+                                 onclick="carga_seleccionada(this)"
+                               >
+                                 +
+                               </button>
+                             </td>
+                           </tr>
+                           <tr>
+                             <td class="filas" onclick="eliminar_equipo(this)">
+                               Horno tostador
+                             </td>
+                             <td class="filas" onclick="eliminar_equipo(this)">
+                               1200
+                             </td>
+                             <td>
+                               <button class ="btn_carga"
+                                 style="border-radius: 5px"
+                                 onclick="carga_seleccionada(this)"
+                               >
+                                 +
+                               </button>
+                             </td>
+                           </tr>
+                         </tbody>
+                       </table> `;
+                  }
+                </script>
+              </div>
+              <button class="btn-cerrar" onclick="cerrarModal()">Cerrar</button>
+              <br />
+              <br />
+            </center>
+          </div>
+        </div>
+        <!-- Fin Ventana MODAL Cargas Predeterminadas-->
+
+        <!-- Ventana MODAL Resultados1 -->
+        <div id="modalResultado1" class="modal">
+          <div class="modal-contenido">
+            <!-- Encabezado con fondo azul -->
+            <div class="modal-header">
+              <h2>Resultado del cálculo</h2>
+            </div>
+            <!-- Contenido principal -->
+            <div class="modal-body">
+              <table id="tablaEquipos" class="Tabla_elementos">
+                <thead>
+                  <tr>
+                    <th>Equipos seleccionados</th>
+                    <th>Cant.</th>
+                    <th>Consumo diario</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Filas dinámicas aquí -->
+                </tbody>
+              </table>
+              <br />
+              <label id="Total_kwh_diario"></label><br />
+              <center>
+                <table class="Tabla_elementos">
+                  <tbody>
+                    <tr>
+                      <td>
+                        <strong> Costo por hora &nbsp;&nbsp;</strong>
+                      </td>
+                      <td>-----></td>
+                      <td id="Precio_hora"></td>
+                    </tr>
+                    <tr>
+                      <td><strong> Costo por dia &nbsp;&nbsp;</strong></td>
+                      <td>-----></td>
+                      <td id="Precio_dia"></td>
+                    </tr>
+                    <tr>
+                      <td><strong> Costo por mes &nbsp;&nbsp;</strong></td>
+                      <td>-----></td>
+                      <td id="Precio_mes"></td>
+                    </tr>
+                    <tr>
+                      <td><strong> Costo por año &nbsp;&nbsp;</strong></td>
+                      <td>-----></td>
+                      <td id="Precio_ano"></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </center>
+              <button class="btn-cerrar" onclick="cerrarModal()">Cerrar</button>
+            </div>
+          </div>
+        </div>
+        <!-- Fin Ventana MODAL Resultados1-->
+
+        <!-- Ventana MODAL Advertencia -->
+        <div id="modalResultado2" class="modal">
+          <div class="modal-contenido-warning">
+            <!-- Encabezado con fondo azul -->
+            <div class="modal-header">
+              <h2>Advertencia</h2>
+            </div>
+            <!-- Contenido principal -->
+            <div class="modal-body">
+              <div
+                id="warning"
+                class="alert alert-warning"
+                style="flex: 1"
+                role="alert"
+              ></div>
+            </div>
+          </div>
+        </div>
+        <!-- Fin Ventana MODAL Advertencia-->
+      </div>
+    </div>
+    <script src="Grupal.js"></script>
+  </body>
+</html>
