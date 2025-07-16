@@ -32,7 +32,7 @@ function Unidad_tiempo(Unidad) {
   if (Unidad === "horas") {
     return 1;
   } else {
-    return (1 / 60).toFixed(2);
+    return 1 / 60;
   }
 }
 
