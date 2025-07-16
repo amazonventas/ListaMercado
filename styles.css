@@ -243,4 +243,13 @@ label {
 }
 
 @media (max-width: 1024px) and (min-width: 600px) {
+  .Contenedor {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 50%;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
