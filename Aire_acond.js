@@ -104,17 +104,16 @@ function Tipo_calculo() {
 }
 
 function Calcular_KW() {
-  const Moneda = localStorage.getItem("Moneda");
   const Tipo_equipo = document.getElementById("Tipo_equipo").value;
   const BTU_h = Conversion_BTU(document.getElementById("BTU").value);
   const Tipo_calculo = document.getElementById("Tipo_calculo").value;
-  const SEER = document.getElementById("SEER").value;
+  const SEER = Valor_SEER();
+  console.log(SEER);
 
   if (Tipo_calculo == "basico") {
     const KW_nominal = (BTU_h / (SEER * 1000)).toFixed(3);
     document.getElementById("Resultados_AA").style.display = "flex";
     document.getElementById("potencia").innerText = KW_nominal + " KW";
-    //document.getElementById("costo").innerText = "Costo: " + Moneda;
   }
 
   if (Tipo_calculo == "avanzado") {
@@ -123,7 +122,6 @@ function Calcular_KW() {
     const F_uso = Factor_uso(T_amb, T_equip, Tipo_equipo);
     const KW_nominal = BTU_h / (SEER * 1000);
     const KW = (KW_nominal * F_uso).toFixed(3);
-    console.log(KW);
     document.getElementById("Resultados_AA").style.display = "flex";
     document.getElementById("potencia").innerText = KW + " KW";
   }
@@ -199,9 +197,7 @@ function Factor_uso(Tamb, Tajuste, equipo) {
     if (DeltaT >= 9) {
       return 1;
     }
-  }
-
-  if (equipo == "Inverter") {
+  } else {
     if (DeltaT <= 0) {
       return "El equipo no requiere enfriar — ambiente ya está más frío que la temperatura deseada";
     }
@@ -237,4 +233,54 @@ function Factor_uso(Tamb, Tajuste, equipo) {
 
 function cerrarModal() {
   document.getElementById("Resultados_AA").style.display = "none";
+}
+
+function Tipo_equipo() {
+  const equipo = document.getElementById("Tipo_equipo").value;
+
+  if (equipo == "Convencional") {
+    document.getElementById("convencional").style.display = "flex";
+    document.getElementById("gama_media").style.display = "none";
+    document.getElementById("gama_alta").style.display = "none";
+    document.getElementById("gama_premium").style.display = "none";
+  }
+  if (equipo == "Inverter_media") {
+    document.getElementById("convencional").style.display = "none";
+    document.getElementById("gama_media").style.display = "flex";
+    document.getElementById("gama_alta").style.display = "none";
+    document.getElementById("gama_premium").style.display = "none";
+  }
+  if (equipo == "Inverter_alta") {
+    document.getElementById("convencional").style.display = "none";
+    document.getElementById("gama_media").style.display = "none";
+    document.getElementById("gama_alta").style.display = "flex";
+    document.getElementById("gama_premium").style.display = "none";
+  }
+  if (equipo == "Inverter_premium") {
+    document.getElementById("convencional").style.display = "none";
+    document.getElementById("gama_media").style.display = "none";
+    document.getElementById("gama_alta").style.display = "none";
+    document.getElementById("gama_premium").style.display = "flex";
+  }
+}
+
+function Valor_SEER() {
+  const equipo = document.getElementById("Tipo_equipo").value;
+
+  if (equipo == "Convencional") {
+    const SEER = document.getElementById("convencional").value;
+    return SEER;
+  }
+  if (equipo == "Inverter_media") {
+    const SEER = document.getElementById("gama_media").value;
+    return SEER;
+  }
+  if (equipo == "Inverter_alta") {
+    const SEER = document.getElementById("gama_alta").value;
+    return SEER;
+  }
+  if (equipo == "Inverter_premium") {
+    const SEER = document.getElementById("gama_premium").value;
+    return SEER;
+  }
 }

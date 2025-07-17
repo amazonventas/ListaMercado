@@ -33,8 +33,8 @@
             >Selecciona el tipo de cálculo:</label
           >
           <select id="modo" class="form-select" onchange="cargar_imagen()">
-            <option value="Grupal">Consumo Total</option>
-            <option value="A/A">Consumo Aire Acondicionado</option>
+            <option value="Grupal">Consumo Total (KWh)</option>
+            <option value="A/A">KW Aire Acondicionado</option>
           </select>
         </div>
 
@@ -99,7 +99,7 @@
 
         if (Tipo_calculo == "Grupal") {
           document.getElementById("imagen").src = "imagenes/icono_grupal.png";
-          document.getElementById("imagen").className = "imagen_portada";
+          document.getElementById("imagen").className = "electric-image";
         } else {
           document.getElementById("imagen").src =
             "imagenes/aire-acondicionado.png";

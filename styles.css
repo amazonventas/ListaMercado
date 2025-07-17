@@ -102,11 +102,11 @@ label {
 }
 
 .Input_potencia_grup {
-  width: 70%;
+  width: 60%;
 }
 
 .Select_unidad_grup {
-  width: 30%;
+  width: 40%;
 }
 
 .Tabla_elementos {
@@ -183,6 +183,14 @@ label {
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
   justify-content: center;
+}
+
+.modal-header-AA {
+  background: linear-gradient(to bottom right, #5472d3, #90a4ae);
+  color: white;
+  padding: 10px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
 }
 
 .modal-body {

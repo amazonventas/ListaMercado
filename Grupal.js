@@ -58,7 +58,7 @@ function agregarTabla() {
         <tr>
           <td>Potencia</td>
           <td style="display: flex">
-            <input type="number" class="form-control Input_potencia_grup" id="potencia${contador}" placeholder="" />
+            <input type="number" class="form-control Input_potencia_grup" id="potencia${contador}" />
             <select id="Unidad${contador}" class="form-select Select_unidad_grup">
               <option value="W">W</option>
               <option value="KW">KW</option>
@@ -69,15 +69,15 @@ function agregarTabla() {
         <tr>
           <td>Cantidad</td>
           <td>
-            <input type="number" class="form-control Input_potencia_grup" id="cantidad${contador}" placeholder="# equipos" />
+            <input type="number" class="form-control Input_potencia_grup" id="cantidad${contador}" placeholder="# de equipos" />
           </td>
         </tr>
         <tr>
           <td>Uso diario</td>
           <td style="display: flex">
-            <input type="number" class="form-control Input_potencia_grup" id="tiempo${contador}" placeholder="Introduzca tiempo" />
+            <input type="number" class="form-control Input_potencia_grup" id="tiempo${contador}" placeholder="horas o min." />
             <select id="Unidad_tiempo${contador}" class="form-select Select_unidad_grup">
-              <option value="horas">h</option>
+              <option value="horas">horas</option>
               <option value="minutos">min.</option>
             </select>
           </td>

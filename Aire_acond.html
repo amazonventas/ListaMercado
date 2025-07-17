@@ -33,6 +33,24 @@
             Volver</a
           ><br />
           <br />
+          <div
+            id="Contenedor_tipo_equipo"
+            style="display: flex; margin-bottom: 10px; justify-content: right"
+          >
+            <label for="Tipo_equipo" style="padding-right: 10px"
+              >Tipo equipo</label
+            >
+            <select
+              id="Tipo_equipo"
+              class="form-select w-75"
+              onchange="Tipo_equipo()"
+            >
+              <option value="Convencional">Convencional</option>
+              <option value="Inverter_media">Inverter Gama media</option>
+              <option value="Inverter_alta">Inverter Gama alta</option>
+              <option value="Inverter_premium">Eficiencia premium</option>
+            </select>
+          </div>
           <span>Capacidad equipo:</span>
           <div style="display: flex">
             <div class="mb-4 w-75">
@@ -64,37 +82,63 @@
               </select>
             </div>
           </div>
-          <span>Tipo de Cálculo:</span>
-          <div class="mb-4">
-            <select
-              id="Tipo_calculo"
-              class="form-select"
-              onchange="Tipo_calculo()"
-            >
-              <option value="basico">Estimación rápida (solo SEER)</option>
-              <option value="avanzado">
-                Cálculo preciso (Con temp. ambiente)
-              </option>
-            </select>
-          </div>
+
           <span>SEER del equipo</span>
-          <input
-            type="number"
-            class="form-control"
-            id="SEER"
-            placeholder="Indice Eficiencia Estacional equipo (SEER)"
-          />
-        </div>
-        <div
-          id="Contenedor_tipo_equipo"
-          style="display: none; margin-bottom: 10px; justify-content: right"
-        >
-          <label for="Tipo_equipo" style="padding-right: 10px"
-            >Tipo de equipo</label
+          <select id="convencional" class="form-select w-65">
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+          </select>
+          <select
+            id="gama_media"
+            style="display: none"
+            class="form-select w-65"
           >
-          <select id="Tipo_equipo" class="form-select w-50">
-            <option value="Convencional">Convencional</option>
-            <option value="Inverter">Inverter</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+            <option value="16">16</option>
+            <option value="17">17</option>
+            <option value="18">18</option>
+          </select>
+          <select id="gama_alta" style="display: none" class="form-select w-65">
+            <option value="19">19</option>
+            <option value="20">20</option>
+            <option value="21">21</option>
+            <option value="22">22</option>
+            <option value="23">23</option>
+            <option value="24">24</option>
+            <option value="25">25</option>
+          </select>
+          <select
+            id="gama_premium"
+            style="display: none"
+            class="form-select w-65"
+          >
+            <option value="26">26</option>
+            <option value="27">27</option>
+            <option value="28">28</option>
+            <option value="29">29</option>
+            <option value="30">30</option>
+            <option value="32">32</option>
+            <option value="33">33</option>
+            <option value="34">34</option>
+            <option value="35">35</option>
+          </select>
+        </div>
+        <span>Tipo de Cálculo:</span>
+        <div class="mb-4">
+          <select
+            id="Tipo_calculo"
+            class="form-select"
+            onchange="Tipo_calculo()"
+          >
+            <option value="basico">Estimación rápida (solo SEER)</option>
+            <option value="avanzado">
+              Cálculo preciso (Con temp. ambiente)
+            </option>
           </select>
         </div>
         <div id="Contenedor_temperaturas" style="display: none">
@@ -148,8 +192,15 @@
         <div id="Resultados_AA" class="modal">
           <div class="modal-contenido-AA">
             <!-- Encabezado con fondo azul -->
-            <div class="modal-header">
-              <h4>Potencia Cálculada</h4>
+            <div class="modal-header-AA">
+              <button
+                style="background-color: transparent"
+                type="button"
+                onclick="cerrarModal()"
+              >
+                X</button
+              ><br />
+              <center><h4>Potencia</h4></center>
             </div>
             <!-- Contenido principal -->
             <div class="modal-body">
@@ -169,16 +220,9 @@
                 style="flex: 1; font-size: 20px"
                 role="alert"
               ></div>
-              <br />
-              <center>
-                <button
-                  type="button"
-                  class="btn btn-primary w-50"
-                  onclick="cerrarModal()"
-                >
-                  cerrar
-                </button>
-              </center>
+              <div id="mensaje" style="flex: 1; font-size: 15px" role="alert">
+                Potencia eléctrica promedio consumida.
+              </div>
             </div>
           </div>
         </div>
