@@ -1,3 +1,54 @@
+document.addEventListener("DOMContentLoaded", () => {
+  const savedLang = localStorage.getItem("lang") || "es";
+  changeLanguage(savedLang);
+});
+
+function Page_Acerca_de() {
+  window.location.href = "Acerca_de.html";
+}
+
+function changeLanguage(Valor) {
+  let lang = "";
+
+  if (Valor) {
+    lang = Valor;
+  } else {
+    const idioma = document.getElementById("Idioma").value;
+
+    if (idioma == "es") {
+      lang = "es";
+    }
+    if (idioma == "en") {
+      lang = "en";
+    }
+  }
+  if (lang == "es" || lang == "en") {
+    fetch(`idiomas/${lang}.json`)
+      .then((response) => response.json())
+      .then((translations) => {
+        document.querySelectorAll("[data-i18n]").forEach((el) => {
+          const key = el.getAttribute("data-i18n");
+          if (translations[key]) {
+            el.textContent = translations[key];
+          }
+        });
+        // Guarda el idioma en localStorage
+        localStorage.setItem("lang", lang);
+      });
+  }
+}
+
+//Inicio Funciones
+
+function Mostrar_menu() {
+  const menu = document.getElementById("menuLateral");
+  if (menu.style.right === "0px") {
+    menu.style.right = "-200px"; // ocultar
+  } else {
+    menu.style.right = "0px"; // mostrar
+  }
+}
+
 function cambio_valores() {
   const valor = document.getElementById("unidades").value;
 
@@ -108,12 +159,11 @@ function Calcular_KW() {
   const BTU_h = Conversion_BTU(document.getElementById("BTU").value);
   const Tipo_calculo = document.getElementById("Tipo_calculo").value;
   const SEER = Valor_SEER();
-  console.log(SEER);
 
   if (Tipo_calculo == "basico") {
-    const KW_nominal = (BTU_h / (SEER * 1000)).toFixed(3);
+    const KW_nominal = Formato_Ceros(BTU_h / (SEER * 1000));
     document.getElementById("Resultados_AA").style.display = "flex";
-    document.getElementById("potencia").innerText = KW_nominal + " KW";
+    document.getElementById("potencia").innerText = KW_nominal + " KWh";
   }
 
   if (Tipo_calculo == "avanzado") {
@@ -121,9 +171,9 @@ function Calcular_KW() {
     const T_equip = document.getElementById("Temp_equipo").value;
     const F_uso = Factor_uso(T_amb, T_equip, Tipo_equipo);
     const KW_nominal = BTU_h / (SEER * 1000);
-    const KW = (KW_nominal * F_uso).toFixed(3);
+    const KW = Formato_Ceros(KW_nominal * F_uso);
     document.getElementById("Resultados_AA").style.display = "flex";
-    document.getElementById("potencia").innerText = KW + " KW";
+    document.getElementById("potencia").innerText = KW + " KWh";
   }
 }
 
@@ -283,4 +333,8 @@ function Valor_SEER() {
     const SEER = document.getElementById("gama_premium").value;
     return SEER;
   }
+}
+
+function Formato_Ceros(num) {
+  return parseFloat(num.toFixed(2)).toString();
 }

@@ -1,9 +1,5 @@
 window.addEventListener("load", function () {
   //localStorage.clear();
-  const Moneda = localStorage.getItem("Moneda");
-  document.getElementById("costo_Kwh").placeholder =
-    "Costo Kwh (" + Moneda + ")";
-
   const tabla = document.getElementById("Tabla_cargas"); // o como se llame tu tabla
   const celdas = tabla.querySelectorAll("td");
   celdas.forEach((celda) => {
@@ -13,7 +9,108 @@ window.addEventListener("load", function () {
   });
 });
 
+document.addEventListener("DOMContentLoaded", () => {
+  const savedLang = localStorage.getItem("lang") || "es";
+  changeLanguage(savedLang);
+});
+
+function changeLanguage(Valor) {
+  let lang = "";
+
+  if (Valor) {
+    lang = Valor;
+    Placeholder(lang);
+  } else {
+    const idioma = document.getElementById("Idioma").value;
+
+    if (idioma == "es") {
+      lang = "es";
+      Placeholder(lang);
+    }
+    if (idioma == "en") {
+      lang = "en";
+      Placeholder(lang);
+    }
+  }
+
+  fetch(`idiomas/${lang}.json`)
+    .then((response) => response.json())
+    .then((translations) => {
+      document.querySelectorAll("[data-i18n]").forEach((el) => {
+        const key = el.getAttribute("data-i18n");
+        if (translations[key]) {
+          el.textContent = translations[key];
+        }
+      });
+      // Guarda el idioma en localStorage
+      localStorage.setItem("lang", lang);
+    });
+}
+
+function Page_Acerca_de() {
+  window.location.href = "Acerca_de.html";
+}
+
 //Inicio Funciones
+
+function Mostrar_menu() {
+  const menu = document.getElementById("menuLateral");
+  if (menu.style.right === "0px") {
+    menu.style.right = "-200px"; // ocultar
+  } else {
+    menu.style.right = "0px"; // mostrar
+  }
+}
+
+function Placeholder(idioma) {
+  const Moneda = localStorage.getItem("Moneda");
+  const todasLasTablas = document.querySelectorAll("table");
+
+  if (idioma === "es") {
+    document.getElementById("costo_Kwh").placeholder =
+      "Costo Kwh (" + Moneda + ")";
+
+    todasLasTablas.forEach((table) => {
+      if (table.id) {
+        if (table.id !== "tablaEquipos" && table.id !== "Tabla_cargas") {
+          let i = table.id.match(/\d+/g); // ["1", "3", "45"]
+
+          let equipo = "equipo" + i;
+          let cantidad = "cantidad" + i;
+          let tiempo = "tiempo" + i;
+          let dias = "dias" + i;
+
+          document.getElementById(equipo).placeholder = "ejemplo: Nevera";
+          document.getElementById(cantidad).placeholder = "# de equipos";
+          document.getElementById(tiempo).placeholder = "horas o min.";
+          document.getElementById(dias).placeholder = "# dias al mes";
+        }
+      }
+    });
+  } else {
+    document.getElementById("costo_Kwh").placeholder =
+      "Cost Kwh (" + Moneda + ")";
+
+    todasLasTablas.forEach((table) => {
+      if (table.id) {
+        if (table.id !== "tablaEquipos" && table.id !== "Tabla_cargas") {
+          let i = table.id.match(/\d+/g); // ["1", "3", "45"]
+
+          let equipo = "equipo" + i;
+          let cantidad = "cantidad" + i;
+          let tiempo = "tiempo" + i;
+          let dias = "dias" + i;
+
+          document.getElementById(equipo).placeholder = "example: Refrigerator";
+          document.getElementById(cantidad).placeholder = "# of equipment";
+          document.getElementById(tiempo).placeholder = "hours o min.";
+          document.getElementById(dias).placeholder = "# days a month";
+        }
+      }
+    });
+  }
+}
+
 function Unidad_potencia(Unidad) {
   if (Unidad === "KW") {
     return 1;
@@ -36,6 +133,16 @@ function Unidad_tiempo(Unidad) {
   }
 }
 
+function Mostrar_menu() {
+  const btnMenu = document.getElementById("btnMenu");
+  const menu = document.getElementById("menuLateral");
+  if (menu.style.right === "0px") {
+    menu.style.right = "-200px"; // ocultar
+  } else {
+    menu.style.right = "0px"; // mostrar
+  }
+}
+
 let contador = 1;
 
 function agregarTabla() {
@@ -50,13 +157,13 @@ function agregarTabla() {
   nuevaTabla.innerHTML = `
       <tbody>
         <tr>
-          <td>Equipo</td>
+          <td data-i18n="Equipo">Equipo</td>
           <td>
             <input type="text" class="form-control" id="equipo${contador}"placeholder="ejemplo: Nevera" />
           </td>
         </tr>
         <tr>
-          <td>Potencia</td>
+          <td data-i18n="Potencia">Potencia</td>
           <td style="display: flex">
             <input type="number" class="form-control Input_potencia_grup" id="potencia${contador}" />
             <select id="Unidad${contador}" class="form-select Select_unidad_grup">
@@ -67,38 +174,41 @@ function agregarTabla() {
           </td>
         </tr>
         <tr>
-          <td>Cantidad</td>
+          <td data-i18n="Cantidad">Cantidad</td>
           <td>
             <input type="number" class="form-control Input_potencia_grup" id="cantidad${contador}" placeholder="# de equipos" />
           </td>
         </tr>
         <tr>
-          <td>Uso diario</td>
+          <td data-i18n="Uso_diario">Uso diario</td>
           <td style="display: flex">
             <input type="number" class="form-control Input_potencia_grup" id="tiempo${contador}" placeholder="horas o min." />
             <select id="Unidad_tiempo${contador}" class="form-select Select_unidad_grup">
-              <option value="horas">horas</option>
+              <option value="horas" data-i18n="horas">horas</option>
               <option value="minutos">min.</option>
             </select>
           </td>
         </tr>
         <tr>
-          <td>Días</td>
+          <td data-i18n="dias">Días</td>
           <td>
             <input type="number" class="form-control Input_potencia_grup" id="dias${contador}" placeholder="# días al mes" />
           </td>
         </tr>
         <tr>
           <td>
-            <button style="border-radius: 5px" onclick="carga_predeterminada('Tabla${contador}')">Archivo</button>
+            <button style="border-radius: 5px; margin-top: 20px" onclick="carga_predeterminada('Tabla${contador}')" data-i18n="Archivo">Archivo</button>
           </td>  
           <td>
-            <button style="border-radius: 5px" onclick="eliminar_carga('Tabla${contador}')">Eliminar carga</button>
+            <button style="border-radius: 5px; margin-top: 20px" onclick="eliminar_carga('Tabla${contador}')" data-i18n="Eliminar_equipo">Eliminar equipo</button>
           </td>
         </tr>
       </tbody>
     `;
+
   contenedor.appendChild(nuevaTabla);
+  const savedLang = localStorage.getItem("lang") || "es";
+  changeLanguage(savedLang);
 }
 
 function carga_seleccionada(boton) {
@@ -213,49 +323,45 @@ function Calcular() {
     const suma_Costo_mes = Costo_mes.reduce((a, b) => a + b, 0);
     const suma_Costo_year = Costo_year.reduce((a, b) => a + b, 0);
 
-    document.getElementById("Total_kwh_diario").innerHTML =
-      "<strong>Consumo diario Total:" +
-      "&nbsp;" +
-      "</strong>" +
-      " " +
-      suma_KWHdiarios.toFixed(2) +
-      " Kwh";
+    const savedLang = localStorage.getItem("lang") || "es";
+
+    if (savedLang == "es") {
+      document.getElementById("Total_kwh_diario").innerHTML =
+        "<strong>Consumo diario Total:" +
+        "&nbsp;" +
+        "</strong>" +
+        " " +
+        formatearNumero(suma_KWHdiarios) +
+        " Kwh";
+    }
+
+    if (savedLang == "en") {
+      document.getElementById("Total_kwh_diario").innerHTML =
+        "<strong>Total daily consumption:" +
+        "&nbsp;" +
+        "</strong>" +
+        " " +
+        formatearNumero(suma_KWHdiarios) +
+        " Kwh";
+    }
 
     document.getElementById("Precio_hora").innerHTML =
-      " " +
-      suma_Costo_hora.toLocaleString("es-DO", {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2,
-      }) +
-      " " +
-      Moneda;
+      " " + formatearNumero(suma_Costo_hora) + " " + Moneda;
 
     document.getElementById("Precio_dia").innerHTML =
-      " " +
-      suma_Costo_dia.toLocaleString("es-DO", {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2,
-      }) +
-      " " +
-      Moneda;
+      " " + formatearNumero(suma_Costo_dia) + " " + Moneda;
     document.getElementById("Precio_mes").innerHTML =
-      " " +
-      suma_Costo_mes.toLocaleString("es-DO", {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2,
-      }) +
-      " " +
-      Moneda;
+      " " + formatearNumero(suma_Costo_mes) + " " + Moneda;
     document.getElementById("Precio_ano").innerHTML =
-      " " +
-      suma_Costo_year.toLocaleString("es-DO", {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2,
-      }) +
-      " " +
-      Moneda;
+      " " + formatearNumero(suma_Costo_year) + " " + Moneda;
     document.getElementById("modalResultado1").style.display = "flex";
   }
+}
+
+function formatearNumero(num) {
+  return Number.isInteger(num)
+    ? num.toString()
+    : parseFloat(num.toFixed(2)).toString();
 }
 
 function agregarFila(Name_equipo, Cantidad, Kwh_equipo) {
@@ -274,7 +380,8 @@ function agregarFila(Name_equipo, Cantidad, Kwh_equipo) {
 
   // Celda para el kWh diario
   const tdKwh = document.createElement("td");
-  tdKwh.textContent = Kwh_equipo.toFixed(2) + " Kwh";
+
+  tdKwh.textContent = formatearNumero(Kwh_equipo) + " Kwh";
 
   // Agregar celdas a la fila
   fila.appendChild(tdEquipo);
@@ -293,7 +400,7 @@ function agregarFila_equipos() {
 
   // Celda para el nombre del equipo
   const tdEquipo = document.createElement("td");
-  tdEquipo.textContent = "Equipo Nuevo";
+  tdEquipo.textContent = "";
   tdEquipo.className = "filas";
   tdEquipo.onclick = function () {
     eliminar_equipo(this);
@@ -405,9 +512,18 @@ function Validar_datos(
   unidad_tiempo,
   dias
 ) {
+  const idioma = localStorage.getItem("lang") || "es";
+
   if (tarifa == "") {
-    document.getElementById("warning").innerText =
-      "Debe ingresar el valor de la tarifa de sus Kwh.";
+    if (idioma == "es") {
+      document.getElementById("warning").innerText =
+        "Debe ingresar el valor de la tarifa de sus Kwh.";
+    }
+    if (idioma == "en") {
+      document.getElementById("warning").innerText =
+        "You must enter the value of your Kwh rate.";
+    }
+
     document.getElementById("modalResultado2").style.display = "flex";
     setTimeout(() => {
       document.getElementById("modalResultado2").style.display = "none";
@@ -416,8 +532,14 @@ function Validar_datos(
   }
 
   if (equipo == "") {
-    document.getElementById("warning").innerText =
-      "Debe ingresar el nombre de todos los equipos.";
+    if (idioma == "es") {
+      document.getElementById("warning").innerText =
+        "Debe ingresar el nombre de todos los equipos.";
+    }
+    if (idioma == "en") {
+      document.getElementById("warning").innerText =
+        "You must enter the name of all equipment.";
+    }
     document.getElementById("modalResultado2").style.display = "flex";
     setTimeout(() => {
       document.getElementById("modalResultado2").style.display = "none";
@@ -426,8 +548,14 @@ function Validar_datos(
   }
 
   if (potencia == "") {
-    document.getElementById("warning").innerText =
-      "Debe ingresar el valor de potencia de todos los equipos.";
+    if (idioma == "es") {
+      document.getElementById("warning").innerText =
+        "Debe ingresar el valor de potencia de todos los equipos.";
+    }
+    if (idioma == "en") {
+      document.getElementById("warning").innerText =
+        "You must enter the power value of all equipment.";
+    }
     document.getElementById("modalResultado2").style.display = "flex";
     setTimeout(() => {
       document.getElementById("modalResultado2").style.display = "none";
@@ -436,8 +564,14 @@ function Validar_datos(
   }
 
   if (cantidad == "") {
-    document.getElementById("warning").innerText =
-      "Debe ingresar las cantidades de todos los equipos.";
+    if (idioma == "es") {
+      document.getElementById("warning").innerText =
+        "Debe ingresar las cantidades de todos los equipos.";
+    }
+    if (idioma == "en") {
+      document.getElementById("warning").innerText =
+        "You must enter the quantities for all equipment.";
+    }
     document.getElementById("modalResultado2").style.display = "flex";
     setTimeout(() => {
       document.getElementById("modalResultado2").style.display = "none";
@@ -447,8 +581,14 @@ function Validar_datos(
 
   if (unidad_tiempo == "horas") {
     if (uso_diario > 24) {
-      document.getElementById("warning").innerText =
-        "Debe ingresar un valor de horas diarias de uso que no supere las 24 horas.";
+      if (idioma == "es") {
+        document.getElementById("warning").innerText =
+          "Debe ingresar un valor de horas diarias de uso que no supere las 24 horas.";
+      }
+      if (idioma == "en") {
+        document.getElementById("warning").innerText =
+          "You must enter a value for daily hours of use that does not exceed 24 hours.";
+      }
       document.getElementById("modalResultado2").style.display = "flex";
       setTimeout(() => {
         document.getElementById("modalResultado2").style.display = "none";
@@ -457,8 +597,14 @@ function Validar_datos(
     }
   } else {
     if (uso_diario > 1440) {
-      document.getElementById("warning").innerText =
-        "Debe ingresar un valor de minutos diarios de uso que no supere los 1440 minutos (24 horas).";
+      if (idioma == "es") {
+        document.getElementById("warning").innerText =
+          "Debe ingresar un valor de minutos diarios de uso que no supere los 1440 minutos (24 horas).";
+      }
+      if (idioma == "en") {
+        document.getElementById("warning").innerText =
+          "You must enter a daily minutes of usage value that does not exceed 1440 minutes (24 hours).";
+      }
       document.getElementById("modalResultado2").style.display = "flex";
       setTimeout(() => {
         document.getElementById("modalResultado2").style.display = "none";
@@ -468,8 +614,14 @@ function Validar_datos(
   }
 
   if (dias > 31) {
-    document.getElementById("warning").innerText =
-      "Debe ingresar un valor de dias de uso al mes que no supere los 31 dias.";
+    if (idioma == "es") {
+      document.getElementById("warning").innerText =
+        "Debe ingresar un valor de dias de uso al mes que no supere los 31 dias.";
+    }
+    if (idioma == "en") {
+      document.getElementById("warning").innerText =
+        "You must enter a value of days of use per month that does not exceed 31 days.";
+    }
     document.getElementById("modalResultado2").style.display = "flex";
     setTimeout(() => {
       document.getElementById("modalResultado2").style.display = "none";

@@ -8,6 +8,11 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
     <link rel="icon" href="imagenes/icono.png" type="image/png" />
     <link rel="stylesheet" href="styles.css" />
   </head>
@@ -18,30 +23,60 @@
           class="container-fluid d-flex justify-content-between align-items-center"
         >
           <img src="imagenes/icono.png" class="icono" alt="" />
-          <span class="text-white fs-5 fw-semibold text-center flex-grow-1">
+          <span
+            class="text-white fs-5 fw-semibold text-center flex-grow-1"
+            data-i18n="Detalle_cargas"
+          >
             Detalle de Cargas
           </span>
-          <button class="btn btn-navbar-icon ms-2" title="Opciones">
+          <button
+            id="btnMenu"
+            class="btn btn-navbar-icon ms-2"
+            title="Opciones"
+            onclick="Mostrar_menu()"
+          >
             <span style="font-size: 1.5rem">⋮</span>
           </button>
         </div>
       </nav>
+
+      <!-- Menú lateral -->
+      <div id="menuLateral" class="menu-lateral">
+        <ul>
+          <li>
+            <label for="Idioma" data-i18n="idioma_index">Idioma</label>
+            <select id="Idioma" class="form-select" onchange="changeLanguage()">
+              <option value="Select_lang" data-i18n="Seleccione_idioma">
+                Seleccione
+              </option>
+              <option value="es" data-i18n="espanol_index">Español</option>
+              <option value="en" data-i18n="ingles_index">English</option>
+            </select>
+          </li>
+          <li data-i18n="Acerca_index" onclick="Page_Acerca_de()">Acerca de</li>
+          <li class="disabled-link" data-i18n="Actualizar_index">Actualizar</li>
+          <!-- <li class="disabled-link" data-i18n="Otras_app">Otras Apps</li>-->
+          <li data-i18n="Cerrar" onclick="Mostrar_menu()">Cerrar</li>
+        </ul>
+      </div>
+      <!-- Fin Menú lateral -->
+
       <div class="Contenedor">
         <div id="contenedor-tablas" class="mb-4">
-          <a href="index.html" style="text-decoration: none">
-            <img src="imagenes/flecha-izquierda.png" class="icono" alt="" />
+          <img src="imagenes/flecha-izquierda.png" class="icono" alt="" />
+          <a href="index.html" style="text-decoration: none" data-i18n="Volver">
             Volver</a
           ><br /><br />
           <div style="display: flex">
             <input type="number" class="form-control w-50" id="costo_Kwh" />
-            <span style="margin-left: 10px"
+            <span style="margin-left: 10px" data-i18n="Tarifa_electrica"
               ><strong>Tarifa eléctrica</strong></span
             >
           </div>
           <table id="Tabla1" class="Tabla_elementos">
             <tbody>
               <tr>
-                <td>Equipo</td>
+                <td data-i18n="Equipo">Equipo</td>
                 <td>
                   <input
                     type="text"
@@ -52,7 +87,7 @@
                 </td>
               </tr>
               <tr>
-                <td>Potencia</td>
+                <td data-i18n="Potencia">Potencia</td>
                 <td style="display: flex">
                   <input
                     type="number"
@@ -67,7 +102,7 @@
                 </td>
               </tr>
               <tr>
-                <td>Cantidad</td>
+                <td data-i18n="Cantidad">Cantidad</td>
                 <td>
                   <input
                     type="number"
@@ -78,7 +113,7 @@
                 </td>
               </tr>
               <tr>
-                <td>Uso diario</td>
+                <td data-i18n="Uso_diario">Uso diario</td>
                 <td style="display: flex">
                   <input
                     type="number"
@@ -90,13 +125,13 @@
                     id="Unidad_tiempo1"
                     class="form-select Select_unidad_grup"
                   >
-                    <option value="horas">horas</option>
+                    <option data-i18n="horas" value="horas">horas</option>
                     <option value="minutos">min.</option>
                   </select>
                 </td>
               </tr>
               <tr>
-                <td>dias</td>
+                <td data-i18n="dias">dias</td>
                 <td>
                   <input
                     type="number"
@@ -112,8 +147,9 @@
               <tr>
                 <td>
                   <button
-                    style="border-radius: 5px"
+                    style="border-radius: 5px; margin-top: 20px"
                     onclick="carga_predeterminada('Tabla1')"
+                    data-i18n="Archivo"
                   >
                     Archivo
                   </button>
@@ -124,8 +160,9 @@
         </div>
         <button
           type="button"
-          style="border-radius: 5px; width: 40%"
+          style="border-radius: 5px; width: 50%"
           onclick="agregarTabla()"
+          data-i18n="Equipo_mas"
         >
           + Equipo +
         </button>
@@ -134,6 +171,7 @@
             onclick="Calcular()"
             type="button"
             class="btn btn-primary w-50 mt-3"
+            data-i18n="Calcular"
           >
             Calcular
           </button>
@@ -152,11 +190,21 @@
                   aria-label="Default select example"
                   onchange="accion_tabla()"
                 >
-                  <option selected>Selecciona acción</option>
-                  <option value="Editar">Editar Tabla</option>
-                  <option value="Agregar">Agregar Equipo</option>
-                  <option value="Eliminar">Eliminar Equipo</option>
-                  <option value="Recargar">Recargar Valores</option>
+                  <option selected data-i18n="Selecciona_accion">
+                    Selecciona acción
+                  </option>
+                  <option value="Editar" data-i18n="Editar_Tabla">
+                    Editar Tabla
+                  </option>
+                  <option value="Agregar" data-i18n="Agregar_Equipo">
+                    Agregar Equipo
+                  </option>
+                  <option value="Eliminar" data-i18n="Eliminar_Equipo">
+                    Eliminar Equipo
+                  </option>
+                  <option value="Recargar" data-i18n="Recargar_Valores">
+                    Recargar Valores
+                  </option>
                 </select>
 
                 <button
@@ -164,6 +212,7 @@
                   class="btn btn-success"
                   style="border-radius: 5px"
                   onclick="guardar_tabla()"
+                  data-i18n="Guardar"
                 >
                   Guardar
                 </button>
@@ -200,14 +249,14 @@
                        <table id="Tabla_cargas" class="Tabla_elementos_predefinidos">
                          <thead>
                            <tr>
-                             <th class="filas">Nombre Equipo</th>
-                             <th class="filas">Potencia (Watts)</th>
+                             <th class="filas" data-i18n="Nombre_Equipo">Nombre Equipo</th>
+                             <th class="filas"data-i18n="Potencia">Potencia (Watts)</th>
                              <th></th>
                            </tr>
                          </thead>
                          <tbody>
                            <tr>
-                             <td class="filas" onclick="eliminar_equipo(this)">
+                             <td class="filas" onclick="eliminar_equipo(this)" data-i18n="Refrigerador">
                                Refrigerador
                              </td>
                              <td class="filas" onclick="eliminar_equipo(this)">200</td>
@@ -221,7 +270,7 @@
                              </td>
                            </tr>
                            <tr>
-                             <td class="filas" onclick="eliminar_equipo(this)">
+                             <td class="filas" onclick="eliminar_equipo(this)" data-i18n="Congelador">
                                Congelador
                              </td>
                              <td class="filas" onclick="eliminar_equipo(this)">300</td>
@@ -235,8 +284,8 @@
                              </td>
                            </tr>
                            <tr>
-                             <td class="filas" onclick="eliminar_equipo(this)">
-                               Estufa eléctrica (hornilla)
+                             <td class="filas" onclick="eliminar_equipo(this)" data-i18n="Estufa_electrica">
+                               Estufa eléctrica 
                              </td>
                              <td class="filas" onclick="eliminar_equipo(this)">
                                1500
@@ -251,7 +300,7 @@
                              </td>
                            </tr>
                            <tr>
-                             <td class="filas" onclick="eliminar_equipo(this)">
+                             <td class="filas" onclick="eliminar_equipo(this)" data-i18n="Horno_electrico">
                                Horno eléctrico
                              </td>
                              <td class="filas" onclick="eliminar_equipo(this)">
@@ -267,7 +316,7 @@
                              </td>
                            </tr>
                            <tr>
-                             <td class="filas" onclick="eliminar_equipo(this)">
+                             <td class="filas" onclick="eliminar_equipo(this)" data-i18n="Microondas">
                                Microondas
                              </td>
                              <td class="filas" onclick="eliminar_equipo(this)">
@@ -283,7 +332,7 @@
                              </td>
                            </tr>
                            <tr>
-                             <td class="filas" onclick="eliminar_equipo(this)">
+                             <td class="filas" onclick="eliminar_equipo(this)" data-i18n="Cafetera_electrica">
                                Cafetera eléctrica
                              </td>
                              <td class="filas" onclick="eliminar_equipo(this)">
@@ -299,7 +348,7 @@
                              </td>
                            </tr>
                            <tr>
-                             <td class="filas" onclick="eliminar_equipo(this)">
+                             <td class="filas" onclick="eliminar_equipo(this)" data-i18n="Licuadora">
                                Licuadora
                              </td>
                              <td class="filas" onclick="eliminar_equipo(this)">500</td>
@@ -313,7 +362,7 @@
                              </td>
                            </tr>
                            <tr>
-                             <td class="filas" onclick="eliminar_equipo(this)">
+                             <td class="filas" onclick="eliminar_equipo(this)" data-i18n="Lavadora_ropa">
                                Lavadora de ropa
                              </td>
                              <td class="filas" onclick="eliminar_equipo(this)">400</td>
@@ -327,7 +376,7 @@
                              </td>
                            </tr>
                            <tr>
-                             <td class="filas" onclick="eliminar_equipo(this)">
+                             <td class="filas" onclick="eliminar_equipo(this)" data-i18n="Secadora_electrica">
                                Secadora eléctrica
                              </td>
                              <td class="filas" onclick="eliminar_equipo(this)">
@@ -343,7 +392,7 @@
                              </td>
                            </tr>
                            <tr>
-                             <td class="filas" onclick="eliminar_equipo(this)">
+                             <td class="filas" onclick="eliminar_equipo(this)" data-i18n="Ventilador_techo">
                                Ventilador de techo
                              </td>
                              <td class="filas" onclick="eliminar_equipo(this)">75</td>
@@ -357,7 +406,7 @@
                              </td>
                            </tr>
                            <tr>
-                             <td class="filas" onclick="eliminar_equipo(this)">
+                             <td class="filas" onclick="eliminar_equipo(this)" data-i18n="Plancha_electrica">
                                Plancha eléctrica
                              </td>
                              <td class="filas" onclick="eliminar_equipo(this)">
@@ -373,7 +422,7 @@
                              </td>
                            </tr>
                            <tr>
-                             <td class="filas" onclick="eliminar_equipo(this)">
+                             <td class="filas" onclick="eliminar_equipo(this)" data-i18n="Secador_pelo">
                                Secador de pelo
                              </td>
                              <td class="filas" onclick="eliminar_equipo(this)">
@@ -403,7 +452,7 @@
                              </td>
                            </tr>
                            <tr>
-                             <td class="filas" onclick="eliminar_equipo(this)">
+                             <td class="filas" onclick="eliminar_equipo(this)" data-i18n="Computadora_escritorio">
                                Computadora de escritorio
                              </td>
                              <td class="filas" onclick="eliminar_equipo(this)">200</td>
@@ -445,7 +494,7 @@
                              </td>
                            </tr>
                            <tr>
-                             <td class="filas" onclick="eliminar_equipo(this)">
+                             <td class="filas" onclick="eliminar_equipo(this)" data-i18n="Bombillo LED">
                                Bombillo LED
                              </td>
                              <td class="filas" onclick="eliminar_equipo(this)">10</td>
@@ -459,7 +508,7 @@
                              </td>
                            </tr>
                            <tr>
-                             <td class="filas" onclick="eliminar_equipo(this)">
+                             <td class="filas" onclick="eliminar_equipo(this)" data-i18n="Bomba_agua (1 HP)">
                                Bomba de agua (1 HP)
                              </td>
                              <td class="filas" onclick="eliminar_equipo(this)">745</td>
@@ -473,7 +522,7 @@
                              </td>
                            </tr>
                            <tr>
-                             <td class="filas" onclick="eliminar_equipo(this)">
+                             <td class="filas" onclick="eliminar_equipo(this)" data-i18n="Calentador_agua_electrico">
                                Calentador de agua eléctrico
                              </td>
                              <td class="filas" onclick="eliminar_equipo(this)">
@@ -489,7 +538,7 @@
                              </td>
                            </tr>
                            <tr>
-                             <td class="filas" onclick="eliminar_equipo(this)">
+                             <td class="filas" onclick="eliminar_equipo(this)" data-i18n="Horno tostador">
                                Horno tostador
                              </td>
                              <td class="filas" onclick="eliminar_equipo(this)">
@@ -509,7 +558,13 @@
                   }
                 </script>
               </div>
-              <button class="btn-cerrar" onclick="cerrarModal()">Cerrar</button>
+              <button
+                class="btn-cerrar"
+                onclick="cerrarModal()"
+                data-i18n="Cerrar"
+              >
+                Cerrar
+              </button>
               <br />
               <br />
             </center>
@@ -522,16 +577,16 @@
           <div class="modal-contenido">
             <!-- Encabezado con fondo azul -->
             <div class="modal-header">
-              <h2>Resultado del cálculo</h2>
+              <h2 data-i18n="Resultado">Resultado</h2>
             </div>
             <!-- Contenido principal -->
             <div class="modal-body">
               <table id="tablaEquipos" class="Tabla_elementos">
                 <thead>
                   <tr>
-                    <th>Equipos seleccionados</th>
+                    <th data-i18n="Equipos">Equipos</th>
                     <th>Cant.</th>
-                    <th>Consumo diario</th>
+                    <th data-i18n="Consumo_diario">Consumo diario</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -544,31 +599,43 @@
                 <table class="Tabla_elementos">
                   <tbody>
                     <tr>
-                      <td>
+                      <td data-i18n="Costo_hora">
                         <strong> Costo por hora &nbsp;&nbsp;</strong>
                       </td>
                       <td>-----></td>
                       <td id="Precio_hora"></td>
                     </tr>
                     <tr>
-                      <td><strong> Costo por dia &nbsp;&nbsp;</strong></td>
+                      <td data-i18n="Costo_dia">
+                        <strong> Costo por dia &nbsp;&nbsp;</strong>
+                      </td>
                       <td>-----></td>
                       <td id="Precio_dia"></td>
                     </tr>
                     <tr>
-                      <td><strong> Costo por mes &nbsp;&nbsp;</strong></td>
+                      <td data-i18n="Costo_mes">
+                        <strong> Costo por mes &nbsp;&nbsp;</strong>
+                      </td>
                       <td>-----></td>
                       <td id="Precio_mes"></td>
                     </tr>
                     <tr>
-                      <td><strong> Costo por año &nbsp;&nbsp;</strong></td>
+                      <td data-i18n="Costo_ano">
+                        <strong> Costo por año &nbsp;&nbsp;</strong>
+                      </td>
                       <td>-----></td>
                       <td id="Precio_ano"></td>
                     </tr>
                   </tbody>
                 </table>
               </center>
-              <button class="btn-cerrar" onclick="cerrarModal()">Cerrar</button>
+              <button
+                class="btn-cerrar"
+                onclick="cerrarModal()"
+                data-i18n="Cerrar"
+              >
+                Cerrar
+              </button>
             </div>
           </div>
         </div>
@@ -583,12 +650,7 @@
             </div>
             <!-- Contenido principal -->
             <div class="modal-body">
-              <div
-                id="warning"
-                class="alert alert-warning"
-                style="flex: 1"
-                role="alert"
-              ></div>
+              <div id="warning" style="flex: 1" role="alert"></div>
             </div>
           </div>
         </div>

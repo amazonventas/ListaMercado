@@ -18,18 +18,43 @@
           class="container-fluid d-flex justify-content-between align-items-center"
         >
           <img src="imagenes/icono.png" class="icono" alt="" />
-          <span class="text-white fs-5 fw-semibold text-center flex-grow-1">
+          <span
+            class="text-white fs-5 fw-semibold text-center flex-grow-1"
+            data-i18n="Consumo_A/A"
+          >
             Consumo de mi A/A
           </span>
           <button class="btn btn-navbar-icon ms-2" title="Opciones">
-            <span style="font-size: 1.5rem">⋮</span>
+            <span style="font-size: 1.5rem" onclick="Mostrar_menu()">⋮</span>
           </button>
         </div>
       </nav>
+
+      <!-- Menú lateral -->
+      <div id="menuLateral" class="menu-lateral">
+        <ul>
+          <li>
+            <label for="Idioma" data-i18n="idioma_index">Idioma</label>
+            <select id="Idioma" class="form-select" onchange="changeLanguage()">
+              <option value="Select_lang" data-i18n="Seleccione_idioma">
+                Seleccione
+              </option>
+              <option value="es" data-i18n="espanol_index">Español</option>
+              <option value="en" data-i18n="ingles_index">English</option>
+            </select>
+          </li>
+          <li data-i18n="Acerca_index" onclick="Page_Acerca_de()">Acerca de</li>
+          <li class="disabled-link" data-i18n="Actualizar_index">Actualizar</li>
+          <!-- <li class="disabled-link" data-i18n="Otras_app">Otras Apps</li>-->
+          <li data-i18n="Cerrar" onclick="Mostrar_menu()">Cerrar</li>
+        </ul>
+      </div>
+      <!-- Fin Menú lateral -->
+
       <div class="Contenedor">
         <div id="contenedor-tablas" class="mb-4">
-          <a href="index.html" style="text-decoration: none">
-            <img src="imagenes/flecha-izquierda.png" class="icono" alt="" />
+          <img src="imagenes/flecha-izquierda.png" class="icono" alt="" />
+          <a href="index.html" style="text-decoration: none" data-i18n="Volver">
             Volver</a
           ><br />
           <br />
@@ -37,21 +62,32 @@
             id="Contenedor_tipo_equipo"
             style="display: flex; margin-bottom: 10px; justify-content: right"
           >
-            <label for="Tipo_equipo" style="padding-right: 10px"
-              >Tipo equipo</label
+            <label
+              for="TEquipo"
+              style="padding-right: 10px"
+              data-i18n="Tipo_equipo"
+              >Equipo</label
             >
             <select
               id="Tipo_equipo"
               class="form-select w-75"
               onchange="Tipo_equipo()"
             >
-              <option value="Convencional">Convencional</option>
-              <option value="Inverter_media">Inverter Gama media</option>
-              <option value="Inverter_alta">Inverter Gama alta</option>
-              <option value="Inverter_premium">Eficiencia premium</option>
+              <option value="Convencional" data-i18n="Convencional">
+                Convencional
+              </option>
+              <option value="Inverter_media" data-i18n="Inverter_Gama_media">
+                Inverter Gama media
+              </option>
+              <option value="Inverter_alta" data-i18n="Inverter_Gama_alta">
+                Inverter Gama alta
+              </option>
+              <option value="Inverter_premium" data-i18n="Eficiencia_premium">
+                Eficiencia premium
+              </option>
             </select>
           </div>
-          <span>Capacidad equipo:</span>
+          <span data-i18n="Capacidad_equipo:">Capacidad equipo:</span>
           <div style="display: flex">
             <div class="mb-4 w-75">
               <select id="BTU" class="form-select">
@@ -83,7 +119,7 @@
             </div>
           </div>
 
-          <span>SEER del equipo</span>
+          <span data-i18n="SEER_equipo">SEER del equipo</span>
           <select id="convencional" class="form-select w-65">
             <option value="8">8</option>
             <option value="9">9</option>
@@ -128,22 +164,26 @@
             <option value="35">35</option>
           </select>
         </div>
-        <span>Tipo de Cálculo:</span>
+        <span data-i18n="Tipo_Calculo:">Tipo de Cálculo:</span>
         <div class="mb-4">
           <select
             id="Tipo_calculo"
             class="form-select"
             onchange="Tipo_calculo()"
           >
-            <option value="basico">Estimación rápida (solo SEER)</option>
-            <option value="avanzado">
+            <option value="basico" data-i18n="Estimacion_rapida">
+              Estimación rápida (solo SEER)
+            </option>
+            <option value="avanzado" data-i18n="Calculo_preciso">
               Cálculo preciso (Con temp. ambiente)
             </option>
           </select>
         </div>
         <div id="Contenedor_temperaturas" style="display: none">
           <div class="mb-4">
-            <span>Temperatura ambiente (°C)</span>
+            <span data-i18n="Temperatura_ambiente"
+              >Temperatura ambiente (°C)</span
+            >
             <select id="Temp_amb" class="form-select">
               <option value="40">40</option>
               <option value="38">38</option>
@@ -159,7 +199,9 @@
             </select>
           </div>
           <div class="mb-4">
-            <span>Temperatura ajustada en equipo (°C)</span>
+            <span data-i18n="Temperatura_ajustada_equipo"
+              >Temperatura ajustada en equipo (°C)</span
+            >
             <select id="Temp_equipo" class="form-select">
               <option value="30">30</option>
               <option value="29">29</option>
@@ -183,6 +225,7 @@
             type="button"
             class="btn btn-primary w-50"
             onclick="Calcular_KW()"
+            data-i18n="Calcular_AA"
           >
             Cálcular
           </button>
@@ -200,7 +243,7 @@
               >
                 X</button
               ><br />
-              <center><h4>Potencia</h4></center>
+              <center><h4 data-i18n="Potencia">Potencia</h4></center>
             </div>
             <!-- Contenido principal -->
             <div class="modal-body">
@@ -220,8 +263,13 @@
                 style="flex: 1; font-size: 20px"
                 role="alert"
               ></div>
-              <div id="mensaje" style="flex: 1; font-size: 15px" role="alert">
-                Potencia eléctrica promedio consumida.
+              <div
+                id="mensaje"
+                style="flex: 1; font-size: 15px"
+                role="alert"
+                data-i18n="Potencia_promedio"
+              >
+                Potencia eléctrica promedio consumida en 1 hora.
               </div>
             </div>
           </div>

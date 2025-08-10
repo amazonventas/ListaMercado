@@ -18,23 +18,55 @@
           class="container-fluid d-flex justify-content-between align-items-center"
         >
           <img src="imagenes/icono.png" class="icono" alt="" />
-          <span class="text-white fs-5 fw-semibold text-center flex-grow-1">
+          <span
+            data-i18n="titulo_index"
+            class="text-white fs-5 fw-semibold text-center flex-grow-1"
+          >
             Mi Consumo Eléctrico
           </span>
           <button class="btn btn-navbar-icon ms-2" title="Opciones">
-            <span style="font-size: 1.5rem">⋮</span>
+            <span style="font-size: 1.5rem" onclick="Mostrar_menu()">⋮</span>
           </button>
         </div>
       </nav>
+
+      <!-- Menú lateral -->
+      <div id="menuLateral" class="menu-lateral">
+        <ul>
+          <li>
+            <label for="Idioma" data-i18n="idioma_index">Idioma</label>
+            <select id="Idioma" class="form-select" onchange="changeLanguage()">
+              <option value="Select_lang" data-i18n="Seleccione_idioma">
+                Seleccione
+              </option>
+              <option value="es" data-i18n="espanol_index">Español</option>
+              <option value="en" data-i18n="ingles_index">English</option>
+            </select>
+          </li>
+          <li data-i18n="Acerca_index" onclick="Page_Acerca_de()">Acerca de</li>
+          <li class="disabled-link" data-i18n="Actualizar_index">Actualizar</li>
+          <!-- <li class="disabled-link" data-i18n="Otras_app">Otras Apps</li>-->
+          <li data-i18n="Cerrar" onclick="Mostrar_menu()">Cerrar</li>
+        </ul>
+      </div>
+      <!-- Fin Menú lateral -->
+
       <br />
       <div class="Contenedor">
         <div class="mb-4">
-          <label class="form-label fw-semibold"
+          <label class="form-label fw-semibold" data-i18n="calculo_index"
             >Selecciona el tipo de cálculo:</label
           >
           <select id="modo" class="form-select" onchange="cargar_imagen()">
-            <option value="Grupal">Consumo Total (KWh)</option>
-            <option value="A/A">KW Aire Acondicionado</option>
+            <option value="Grupal" data-i18n="Consumo_index">
+              Consumo Total (KWh)
+            </option>
+            <option value="A/A" data-i18n="AA_index">
+              KW Aire Acondicionado
+            </option>
+            <option value="Btu/h" data-i18n="Btu/h">
+              Cálculo Aire Acondicionado BTU/h
+            </option>
           </select>
         </div>
 
@@ -51,21 +83,33 @@
           </div>
         </div>
         <div>
-          <label class="form-label fw-semibold Separacion_Moneda"
+          <label
+            class="form-label fw-semibold Separacion_Moneda"
+            data-i18n="moneda_local"
             >Moneda Local</label
           >
           <select id="moneda" class="form-select">
-            <option value="$">Dólar estadounidense (USD)</option>
-            <option value="C$">Dólar canadiense (CAD)</option>
-            <option value="$">Peso mexicano (MXN)</option>
-            <option value="R$">Real brasileño (BRL)</option>
-            <option value="$">Peso argentino (ARS)</option>
-            <option value="$">Peso Chileno (CLP)</option>
-            <option value="$">Peso Colombiano (COP)</option>
-            <option value="S/">Sol peruano (PEN)</option>
-            <option value="RD$">Peso dominicano (DOP)</option>
-            <option value="Bs.">Bolívar digital (VEN)</option>
-            <option value="Є">Euro (Є)</option>
+            <option data-i18n="Dolar_USA" value="$">
+              Dólar estadounidense (USD)
+            </option>
+            <option data-i18n="Dolar_CAD" value="C$">
+              Dólar canadiense (CAD)
+            </option>
+            <option data-i18n="Peso_mex" value="$">Peso mexicano (MXN)</option>
+            <option data-i18n="Real" value="R$">Real brasileño (BRL)</option>
+            <option data-i18n="Peso_arg" value="$">Peso argentino (ARS)</option>
+            <option data-i18n="Peso_chi" value="$">Peso Chileno (CLP)</option>
+            <option data-i18n="Peso_col" value="$">
+              Peso Colombiano (COP)
+            </option>
+            <option data-i18n="Sol_per" value="S/">Sol peruano (PEN)</option>
+            <option data-i18n="Peso_dom" value="RD$">
+              Peso dominicano (DOP)
+            </option>
+            <option data-i18n="Bolivar" value="Bs.">
+              Bolívar digital (VEN)
+            </option>
+            <option data-i18n="Euro" value="Є">Euro (Є)</option>
           </select>
         </div>
         <br /><br />
@@ -73,6 +117,7 @@
           <button
             class="btn btn-primary w-75 mt-3"
             onclick="Seleccion_calculo()"
+            data-i18n="configurar_index"
           >
             Configurar Cálculo
           </button>
@@ -80,6 +125,52 @@
       </div>
     </div>
     <script>
+      // Cargar idioma guardado al iniciar
+      document.addEventListener("DOMContentLoaded", () => {
+        const savedLang = localStorage.getItem("lang") || "es";
+        changeLanguage(savedLang);
+      });
+
+      function changeLanguage(Valor) {
+        let lang = "";
+
+        if (Valor) {
+          lang = Valor;
+          console.log(lang);
+        } else {
+          const idioma = document.getElementById("Idioma").value;
+
+          if (idioma == "es") {
+            lang = "es";
+          }
+          if (idioma == "en") {
+            lang = "en";
+          }
+        }
+        fetch(`idiomas/${lang}.json`)
+          .then((response) => response.json())
+          .then((translations) => {
+            document.querySelectorAll("[data-i18n]").forEach((el) => {
+              const key = el.getAttribute("data-i18n");
+              if (translations[key]) {
+                el.textContent = translations[key];
+              }
+            });
+            // Guarda el idioma en localStorage
+            localStorage.setItem("lang", lang);
+          });
+      }
+
+      function Mostrar_menu() {
+        const btnMenu = document.getElementById("btnMenu");
+        const menu = document.getElementById("menuLateral");
+        if (menu.style.right === "0px") {
+          menu.style.right = "-200px"; // ocultar
+        } else {
+          menu.style.right = "0px"; // mostrar
+        }
+      }
+
       function Seleccion_calculo() {
         const modo = document.getElementById("modo").value;
         const moneda = document.getElementById("moneda").value;
@@ -92,6 +183,10 @@
         if (modo === "A/A") {
           window.location.href = "Aire_acond.html";
         }
+
+        if (modo === "Btu/h") {
+          window.location.href = "Calculo_btu.html";
+        }
       }
 
       function cargar_imagen() {
@@ -100,11 +195,22 @@
         if (Tipo_calculo == "Grupal") {
           document.getElementById("imagen").src = "imagenes/icono_grupal.png";
           document.getElementById("imagen").className = "imagen_portada";
-        } else {
+        }
+
+        if (Tipo_calculo == "A/A") {
           document.getElementById("imagen").src =
             "imagenes/aire-acondicionado.png";
           document.getElementById("imagen").className = "imagen_AA";
         }
+
+        if (Tipo_calculo == "Btu/h") {
+          document.getElementById("imagen").src = "imagenes/Calculo_aire.png";
+          document.getElementById("imagen").className = "imagen_portada";
+        }
+      }
+
+      function Page_Acerca_de() {
+        window.location.href = "Acerca_de.html";
       }
     </script>
   </body>

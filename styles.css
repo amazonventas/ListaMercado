@@ -151,13 +151,13 @@ label {
 }
 
 .modal-contenido-warning {
-  background-color: #fff;
+  background-color: lightcyan;
   margin: 30% auto;
   padding: 0;
   border-radius: 12px;
   width: 90%;
   max-width: 400px;
-  height: 32%;
+  height: 25%;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   overflow: auto;
 }
@@ -168,7 +168,7 @@ label {
   padding: 0;
   border-radius: 12px;
   width: 60%;
-  max-width: 400px;
+  max-width: 500px;
   height: 50%;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   overflow: auto;
@@ -248,6 +248,48 @@ label {
   100% {
     transform: translateX(0);
   }
+}
+
+.menu-lateral {
+  position: fixed;
+  top: 65px;
+  right: -200px; /* oculto fuera de la pantalla */
+  width: 200px;
+  height: 45%;
+  background-color: lightsteelblue;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
+  transition: right 0.3s ease-in-out;
+  padding: 20px;
+  z-index: 9998;
+}
+
+.menu-lateral ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu-lateral ul li {
+  padding: 10px 0;
+  border-bottom: 1px solid #ccc;
+}
+
+ul li i {
+  margin-right: 8px;
+  color: #3ddc84; /* color Android */
+  font-size: 18px;
+}
+
+.Imagen_acerca_de {
+  width: 30%;
+  height: 30%;
+}
+
+.disabled-link {
+  color: gray;
+  pointer-events: none; /* Evita clics si hay eventos JS */
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 @media (max-width: 1024px) and (min-width: 600px) {
