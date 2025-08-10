@@ -245,8 +245,42 @@
                       };
                     });
                   } else {
+                    function changeLanguage(Valor) {
+                      let lang = "";
+
+                      if (Valor) {
+                        lang = Valor;
+                      } else {
+                        const idioma = document.getElementById("Idioma").value;
+                        if (idioma == "es") {
+                          lang = "es";
+                        }
+                        if (idioma == "en") {
+                          lang = "en";
+                        }
+                      }
+
+                      fetch(`idiomas/${lang}.json`)
+                        .then((response) => response.json())
+                        .then((translations) => {
+                          document
+                            .querySelectorAll("[data-i18n]")
+                            .forEach((el) => {
+                              const key = el.getAttribute("data-i18n");
+                              if (translations[key]) {
+                                el.textContent = translations[key];
+                              }
+                            });
+                          // Guarda el idioma en localStorage
+                          localStorage.setItem("lang", lang);
+                        });
+                    }
+
+                    const savedLang = localStorage.getItem("lang") || "es";
+                    changeLanguage(savedLang);
+
                     contenedor.innerHTML = `
-                       <table id="Tabla_cargas" class="Tabla_elementos_predefinidos">
+                      <table id="Tabla_cargas" class="Tabla_elementos_predefinidos">
                          <thead>
                            <tr>
                              <th class="filas" data-i18n="Nombre_Equipo">Nombre Equipo</th>
@@ -644,13 +678,13 @@
         <!-- Ventana MODAL Advertencia -->
         <div id="modalResultado2" class="modal">
           <div class="modal-contenido-warning">
-            <!-- Encabezado con fondo azul -->
-            <div class="modal-header">
-              <h2>Advertencia</h2>
+            <div>
+              <br />
+              <center><h4>Advertencia</h4></center>
             </div>
             <!-- Contenido principal -->
             <div class="modal-body">
-              <div id="warning" style="flex: 1" role="alert"></div>
+              <div id="warning" style="flex: 1"></div>
             </div>
           </div>
         </div>
