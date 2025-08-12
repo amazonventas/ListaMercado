@@ -1,5 +1,5 @@
 {
-  "titulo_index": "My Electricity Consumption",
+  "titulo_index": "Home Energy Cost",
   "titulo_menu": "ELECTRICITY CONSUMPTION (KWh)",
   "espanol_index": "Spanish",
   "ingles_index": "English",
@@ -80,7 +80,7 @@
   "Otras_app": "Others Apps",
   "Pagina-desarrollador": "Developer page",
   "derechos_reservados": "2025-All rights reserved",
-  "Btu/h": "Air Conditioning Calculation BTU/h ",
+  "Btu/h": "Calculation BTU/h ",
   "Informacion_area": "Information Area to Cool",
   "Altura": "Height",
   "Tipo_Ambiente": "Thermal Condition",
@@ -115,5 +115,17 @@
   "Costo_hora": "Cost per hour",
   "Costo_dia": "Cost per day",
   "Costo_mes": "Cost per month",
-  "Costo_ano": "Cost per year"
+  "Costo_ano": "Cost per year",
+  "Tipo_equipo": "Equipment",
+  "espanol": "Spanish",
+  "ingles": "English",
+  "idioma": "Language",
+  "Actualizar": "Update",
+  "Acerca": "about",
+  "Ocultar": "Hide",
+  "inicio": "Home",
+  "fuera_rango": "Values out of range",
+  "Titulo_BTU": "Calculated Capacity",
+  "Capacidad_Comercial": "Recommended Commercial Capacity",
+  "ninguno": "none"
 }

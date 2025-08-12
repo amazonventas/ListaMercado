@@ -1,5 +1,5 @@
 {
-  "titulo_index": "Mi Consumo Eléctrico",
+  "titulo_index": "Costo Energía Hogar",
   "titulo_menu": "CONSUMO ELECTRICO (KWh)",
   "espanol_index": "Español",
   "ingles_index": "Ingles",
@@ -80,7 +80,7 @@
   "Acerca de": "Acerca de",
   "Pagina-desarrollador": "Página del desarrollador",
   "derechos_reservados": "2025-Todos los derechos reservados",
-  "Btu/h": "Cálculo Aire Acondicionado BTU/h",
+  "Btu/h": "Cálculo BTU/h",
   "Informacion_area": "Información Area a Enfriar",
   "Altura": "Altura",
   "Tipo_Ambiente": "Condición Térmica",
@@ -115,5 +115,17 @@
   "Costo_hora": "Costo por hora",
   "Costo_dia": "Costo por dia",
   "Costo_mes": "Costo por mes",
-  "Costo_ano": "Costo por año"
+  "Costo_ano": "Costo por año",
+  "Tipo_equipo": "Equipo",
+  "espanol": "Español",
+  "ingles": "Ingles",
+  "idioma": "Idioma",
+  "Actualizar": "Update",
+  "Acerca": "Acerca de",
+  "Ocultar": "Ocultar",
+  "inicio": "Inicio",
+  "fuera_rango": "Valores fuera de rango",
+  "Titulo_BTU": "Capacidad Cálculada",
+  "Capacidad_Comercial": "Capacidad Comercial Recomendada",
+  "ninguno": "ninguno"
 }
