@@ -255,7 +255,7 @@ label {
   top: 65px;
   right: -200px; /* oculto fuera de la pantalla */
   width: 200px;
-  height: 45%;
+  height: 48%;
   background-color: lightsteelblue;
   box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
   transition: right 0.3s ease-in-out;
@@ -290,6 +290,13 @@ ul li i {
   pointer-events: none; /* Evita clics si hay eventos JS */
   opacity: 0.6;
   cursor: not-allowed;
+}
+
+.link_disabled {
+  pointer-events: none; /* No permite clics */
+  color: gray; /* Color típico de deshabilitado */
+  opacity: 0.6; /* Hace que parezca desactivado */
+  cursor: not-allowed; /* Cambia el cursor */
 }
 
 @media (max-width: 1024px) and (min-width: 600px) {

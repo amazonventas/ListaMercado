@@ -97,7 +97,6 @@ function Calcular_BTU() {
       Nro_personas(Npersonas) +
       Nro_electro(Nelectrodo) +
       BTUcocinas);
-  document.getElementById("Titulo_BTU").textContent = "Capacidad Cálculada";
   document.getElementById("BTU").textContent =
     Formato_Ceros(Btu_totales) + " BTU/h";
 
@@ -105,8 +104,6 @@ function Calcular_BTU() {
   document.getElementById("ninguno").style.display = "none";
   document.getElementById("Fuera_rango").style.display = "none";
 
-  document.getElementById("Titulo_comercial").textContent =
-    "Capacidad Comercial Recomendada";
   document.getElementById("Valor_comercial").textContent =
     AA_Comercial(Btu_totales);
 
@@ -233,7 +230,7 @@ function AA_Comercial(Valor) {
   CAP[14] = 120000;
 
   for (let i = 1; i < CAP.length; i++) {
-    if (CAP[i] > Valor) {
+    if (CAP[i] >= Valor) {
       return CAP[i] + " BTU/h";
     }
   }

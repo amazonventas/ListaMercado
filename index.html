@@ -22,7 +22,7 @@
             data-i18n="titulo_index"
             class="text-white fs-5 fw-semibold text-center flex-grow-1"
           >
-            Mi Consumo Eléctrico
+            Costo Energía Hogar
           </span>
           <button class="btn btn-navbar-icon ms-2" title="Opciones">
             <span style="font-size: 1.5rem" onclick="Mostrar_menu()">⋮</span>
@@ -34,19 +34,46 @@
       <div id="menuLateral" class="menu-lateral">
         <ul>
           <li>
-            <label for="Idioma" data-i18n="idioma_index">Idioma</label>
+            <a href="index.html" style="text-decoration: none; color: black">
+              <img src="imagenes/flecha-izquierda.png" class="icono" /><span
+                data-i18n="inicio"
+                >Inicio</span
+              >
+            </a>
+          </li>
+          <li>
+            <img src="imagenes/idioma.png" class="icono" /><label for="Idioma"
+              ><span data-i18n="idioma">Idioma</span></label
+            >
             <select id="Idioma" class="form-select" onchange="changeLanguage()">
               <option value="Select_lang" data-i18n="Seleccione_idioma">
                 Seleccione
               </option>
-              <option value="es" data-i18n="espanol_index">Español</option>
-              <option value="en" data-i18n="ingles_index">English</option>
+              <option value="es" data-i18n="espanol">Español</option>
+              <option value="en" data-i18n="ingles">English</option>
             </select>
           </li>
-          <li data-i18n="Acerca_index" onclick="Page_Acerca_de()">Acerca de</li>
-          <li class="disabled-link" data-i18n="Actualizar_index">Actualizar</li>
+          <li onclick="Page_Acerca_de()">
+            <img src="imagenes/acerca.png" class="icono" /><span
+              data-i18n="Acerca"
+              >Acerca de</span
+            >
+          </li>
+          <li class="link_disabled">
+            <img src="imagenes/actualizar.png" class="icono" /><span
+              data-i18n="Actualizar"
+            >
+              Actualizar</span
+            >
+          </li>
           <!-- <li class="disabled-link" data-i18n="Otras_app">Otras Apps</li>-->
-          <li data-i18n="Cerrar" onclick="Mostrar_menu()">Cerrar</li>
+          <li onclick="Mostrar_menu()">
+            <img src="imagenes/cerrar.png" class="icono" /><span
+              data-i18n="Ocultar"
+            >
+              Ocultar</span
+            >
+          </li>
         </ul>
       </div>
       <!-- Fin Menú lateral -->
