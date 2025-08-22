@@ -84,17 +84,51 @@
           <label class="form-label fw-semibold" data-i18n="calculo_index"
             >Selecciona el tipo de cálculo:</label
           >
-          <select id="modo" class="form-select" onchange="cargar_imagen()">
-            <option value="Grupal" data-i18n="Consumo_index">
-              Consumo Total (KWh)
-            </option>
-            <option value="A/A" data-i18n="AA_index">
-              KW Aire Acondicionado
-            </option>
-            <option value="Btu/h" data-i18n="Btu/h">
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              value=""
+              id="Consumo_total"
+              checked
+              onclick="cargar_imagen1()"
+            />
+            <label
+              class="form-check-label"
+              for="Consumo_total"
+              data-i18n="Consumo_index"
+            >
+              Consumo Total Hogar (KWh)
+            </label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              value=""
+              id="Consumo_Aire"
+              onclick="cargar_imagen2()"
+            />
+            <label
+              class="form-check-label"
+              for="Consumo_Aire"
+              data-i18n="AA_index"
+            >
+              KW promedio Aire Acondicionado
+            </label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              value=""
+              id="Calculo_btu"
+              onclick="cargar_imagen3()"
+            />
+            <label class="form-check-label" for="Calculo_btu" data-i18n="Btu/h">
               Cálculo Aire Acondicionado BTU/h
-            </option>
-          </select>
+            </label>
+          </div>
         </div>
 
         <div>
@@ -198,41 +232,52 @@
       }
 
       function Seleccion_calculo() {
-        const modo = document.getElementById("modo").value;
         const moneda = document.getElementById("moneda").value;
         localStorage.setItem("Moneda", moneda);
 
-        if (modo === "Grupal") {
+        const Consumo_total = document.getElementById("Consumo_total").checked;
+        const Consumo_Aire = document.getElementById("Consumo_Aire").checked;
+        const Calculo_btu = document.getElementById("Calculo_btu").checked;
+
+        if (Consumo_total) {
           window.location.href = "Grupal.html";
         }
 
-        if (modo === "A/A") {
+        if (Consumo_Aire) {
           window.location.href = "Aire_acond.html";
         }
 
-        if (modo === "Btu/h") {
+        if (Calculo_btu) {
           window.location.href = "Calculo_btu.html";
         }
       }
 
-      function cargar_imagen() {
-        const Tipo_calculo = document.getElementById("modo").value;
+      function cargar_imagen1() {
+        document.getElementById("Consumo_total").checked = true;
+        document.getElementById("Consumo_Aire").checked = false;
+        document.getElementById("Calculo_btu").checked = false;
 
-        if (Tipo_calculo == "Grupal") {
-          document.getElementById("imagen").src = "imagenes/icono_grupal.png";
-          document.getElementById("imagen").className = "imagen_portada";
-        }
+        document.getElementById("imagen").src = "imagenes/icono_grupal.png";
+        document.getElementById("imagen").className = "imagen_portada";
+      }
 
-        if (Tipo_calculo == "A/A") {
-          document.getElementById("imagen").src =
-            "imagenes/aire-acondicionado.png";
-          document.getElementById("imagen").className = "imagen_AA";
-        }
+      function cargar_imagen2() {
+        document.getElementById("Consumo_total").checked = false;
+        document.getElementById("Consumo_Aire").checked = true;
+        document.getElementById("Calculo_btu").checked = false;
 
-        if (Tipo_calculo == "Btu/h") {
-          document.getElementById("imagen").src = "imagenes/Calculo_aire.png";
-          document.getElementById("imagen").className = "imagen_portada";
-        }
+        document.getElementById("imagen").src =
+          "imagenes/aire-acondicionado.png";
+        document.getElementById("imagen").className = "imagen_AA";
+      }
+
+      function cargar_imagen3() {
+        document.getElementById("Consumo_total").checked = false;
+        document.getElementById("Consumo_Aire").checked = false;
+        document.getElementById("Calculo_btu").checked = true;
+
+        document.getElementById("imagen").src = "imagenes/Calculo_aire.png";
+        document.getElementById("imagen").className = "imagen_portada";
       }
 
       function Page_Acerca_de() {

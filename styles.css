@@ -150,6 +150,17 @@ label {
   overflow: auto;
 }
 
+.modal-contenido-btu {
+  background-color: #fff;
+  margin: 30% auto;
+  padding: 0;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  overflow: auto;
+}
+
 .modal-contenido-warning {
   background-color: lightcyan;
   margin: 30% auto;
